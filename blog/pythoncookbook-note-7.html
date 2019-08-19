@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="PythonCookbook笔记(7)- 函数
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="PythonCookbook, posts, " />
+
+<meta property="og:title" content="PythonCookbook笔记(7)- 函数 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/pythoncookbook-note-7.html" />
+<meta property="og:description" content="PythonCookbook笔记(7)- 函数" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2019-06-23T00:00:00+08:00" />
+<meta name="twitter:title" content="PythonCookbook笔记(7)- 函数 ">
+<meta name="twitter:description" content="PythonCookbook笔记(7)- 函数">
+
+        <title>PythonCookbook笔记(7)- 函数  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/pythoncookbook-note-7.html"> PythonCookbook笔记(7)- 函数  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python CookBook 学习笔记</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#第七章-函数" data-toc-modified-id="第七章-函数-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>第七章 函数</a></span><ul class="toc-item"><li><span><a href="#7.1-可接受任意数量参数的函数" data-toc-modified-id="7.1-可接受任意数量参数的函数-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>7.1 可接受任意数量参数的函数</a></span></li><li><span><a href="#7.2-只接受关键字参数的函数" data-toc-modified-id="7.2-只接受关键字参数的函数-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>7.2 只接受关键字参数的函数</a></span></li><li><span><a href="#7.3-给函数参数增加元信息" data-toc-modified-id="7.3-给函数参数增加元信息-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>7.3 给函数参数增加元信息</a></span></li><li><span><a href="#7.4-返回多个值的函数" data-toc-modified-id="7.4-返回多个值的函数-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>7.4 返回多个值的函数</a></span></li><li><span><a href="#7.5-定义有默认参数的函数" data-toc-modified-id="7.5-定义有默认参数的函数-1.5"><span class="toc-item-num">1.5&nbsp;&nbsp;</span>7.5 定义有默认参数的函数</a></span></li><li><span><a href="#7.6-定义匿名或内联函数" data-toc-modified-id="7.6-定义匿名或内联函数-1.6"><span class="toc-item-num">1.6&nbsp;&nbsp;</span>7.6 定义匿名或内联函数</a></span></li><li><span><a href="#7.7-匿名函数捕获变量值" data-toc-modified-id="7.7-匿名函数捕获变量值-1.7"><span class="toc-item-num">1.7&nbsp;&nbsp;</span>7.7 匿名函数捕获变量值</a></span></li><li><span><a href="#7.8-减少可调用对象的参数个数" data-toc-modified-id="7.8-减少可调用对象的参数个数-1.8"><span class="toc-item-num">1.8&nbsp;&nbsp;</span>7.8 减少可调用对象的参数个数</a></span></li><li><span><a href="#7.9-将单方法的类转换为函数" data-toc-modified-id="7.9-将单方法的类转换为函数-1.9"><span class="toc-item-num">1.9&nbsp;&nbsp;</span>7.9 将单方法的类转换为函数</a></span></li><li><span><a href="#7.10-带额外状态信息的回调函数" data-toc-modified-id="7.10-带额外状态信息的回调函数-1.10"><span class="toc-item-num">1.10&nbsp;&nbsp;</span>7.10 带额外状态信息的回调函数</a></span></li><li><span><a href="#7.11-内联回调函数" data-toc-modified-id="7.11-内联回调函数-1.11"><span class="toc-item-num">1.11&nbsp;&nbsp;</span>7.11 内联回调函数</a></span></li><li><span><a href="#7.12-访问闭包中定义的变量" data-toc-modified-id="7.12-访问闭包中定义的变量-1.12"><span class="toc-item-num">1.12&nbsp;&nbsp;</span>7.12 访问闭包中定义的变量</a></span></li></ul></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#31532;&#19971;&#31456;-&#20989;&#25968;">&#31532;&#19971;&#31456; &#20989;&#25968;<a class="anchor-link" href="#&#31532;&#19971;&#31456;-&#20989;&#25968;">&#182;</a></h1><p>使用 def 语句定义函数是所有程序的基础。本章的目标是讲解一些更加高级和不常见的函数定义与使用模式。涉及到的内容包括默认参数、任意数量参数、强制关键字参数、注解和闭包。另外，一些高级的控制流和利用回调函数传递数据的技术在这里也会讲解到。</p>
+<h2 id="7.1-&#21487;&#25509;&#21463;&#20219;&#24847;&#25968;&#37327;&#21442;&#25968;&#30340;&#20989;&#25968;">7.1 &#21487;&#25509;&#21463;&#20219;&#24847;&#25968;&#37327;&#21442;&#25968;&#30340;&#20989;&#25968;<a class="anchor-link" href="#7.1-&#21487;&#25509;&#21463;&#20219;&#24847;&#25968;&#37327;&#21442;&#25968;&#30340;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>需要构造一个可接受任意数量参数的函数。</p>
+<p><strong>解决方案</strong></p>
+<p>使用*参数。</p>
+<p>要接受任意数量的关键字参数，使用以**开头的参数。</p>
+<p>如果希望函数能同时接受任意数量的位置参数和关键字参数，可以同时使用<code>*</code>和<code>**</code></p>
+<p><strong>讨论</strong></p>
+<p>一个<code>*</code>参数只能出现在函数定义中最后一个位置参数后面，而 <code>**</code>参数只能是最后一个参数。 要注意的是，在<code>*</code>参数后面仍可以定义其他参数。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>这种参数就是<strong>强制关键字参数</strong>。</p>
+<h2 id="7.2-&#21482;&#25509;&#21463;&#20851;&#38190;&#23383;&#21442;&#25968;&#30340;&#20989;&#25968;">7.2 &#21482;&#25509;&#21463;&#20851;&#38190;&#23383;&#21442;&#25968;&#30340;&#20989;&#25968;<a class="anchor-link" href="#7.2-&#21482;&#25509;&#21463;&#20851;&#38190;&#23383;&#21442;&#25968;&#30340;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你希望函数的某些参数强制使用关键字参数传递</p>
+<p><strong>解决方案</strong></p>
+<p>将强制关键字参数放到某个<code>*</code>参数或者单个<code>*</code>后面就能达到这种效果。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="n">maxsize</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
+    <span class="s1">&#39;Receives a message&#39;</span>
+    <span class="k">pass</span>
+
+<span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span> <span class="c1"># TypeError</span>
+<span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># Ok</span>
+</pre></div>
+<h2 id="7.3-&#32473;&#20989;&#25968;&#21442;&#25968;&#22686;&#21152;&#20803;&#20449;&#24687;">7.3 &#32473;&#20989;&#25968;&#21442;&#25968;&#22686;&#21152;&#20803;&#20449;&#24687;<a class="anchor-link" href="#7.3-&#32473;&#20989;&#25968;&#21442;&#25968;&#22686;&#21152;&#20803;&#20449;&#24687;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>想为这个函数的参数增加一些额外的信息，使得其他使用者知道这个函数应该怎么使用。</p>
+<p><strong>解决方案</strong></p>
+<p>使用函数参数注解</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+<p>python解释器不会对这些注解添加任何的语义，但第三方工具和框架可能会对这些注解添加语义。</p>
+<p><strong>讨论</strong></p>
+<p>函数注解只存储在函数的<strong>annotations</strong> 属性中</p>
+<h2 id="7.4-&#36820;&#22238;&#22810;&#20010;&#20540;&#30340;&#20989;&#25968;">7.4 &#36820;&#22238;&#22810;&#20010;&#20540;&#30340;&#20989;&#25968;<a class="anchor-link" href="#7.4-&#36820;&#22238;&#22810;&#20010;&#20540;&#30340;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你希望构造一个可以返回多个值的函数</p>
+<p><strong>解决方案</strong>
+函数直接返回一个元组就行了</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">myfun</span><span class="p">():</span>
+<span class="o">...</span> <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">myfun</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
+<span class="mi">3</span>
+</pre></div>
+<p><strong>讨论</strong></p>
+<p>很多时候序列的构造和解包都是自动完成的</p>
+<p>比如可以这样</p>
+<div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">a</span><span class="p">,</span>
+</pre></div>
+<p>来返回一个只有一个元素的元组</p>
+<h2 id="7.5-&#23450;&#20041;&#26377;&#40664;&#35748;&#21442;&#25968;&#30340;&#20989;&#25968;">7.5 &#23450;&#20041;&#26377;&#40664;&#35748;&#21442;&#25968;&#30340;&#20989;&#25968;<a class="anchor-link" href="#7.5-&#23450;&#20041;&#26377;&#40664;&#35748;&#21442;&#25968;&#30340;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你想定义一个函数或者方法，它的一个或多个参数是可选的并且有一个默认值。</p>
+<p><strong>解决方案</strong></p>
+<p>定义一个有可选参数的函数是非常简单的，直接在函数定义中给参数指定一个默认值，并放到参数列表最后就行了。</p>
+<p><strong>我的理解</strong></p>
+<p>此处所说的参数列表最后有些不够清楚，我想这样的情况可以分为两种，第一是带默认值的位置参数，第二是带默认值的强制关键字参数。比如</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">func2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>总之无论如何 **kw 都必须在所有参数的最后</p>
+<p><strong>讨论</strong></p>
+<p>默认参数的值仅仅在函数定义的时候赋值一次其后对默认参数的修改是没有作用的</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">x</span><span class="p">):</span>
+<span class="o">...</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">spam</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">23</span> <span class="c1"># Has no effect</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">spam</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">42</span>
+</pre></div>
+<p>其次默认参数的值应该是不可变的对象，比如None、True、False、数字或字符串。不要把参数默认值设为 [].</p>
+<p>在测试 None 值时使用 is 操作符是很重要的，也是这种方案的关键点。 有时候大家会犯下下面这样的错误</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">b</span><span class="p">:</span> <span class="c1"># NO! Use &#39;b is None&#39; instead</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+<p>另外还有一个比较微妙的问题，就是测试某个可选参数是否被用户传递进来的时候，仅仅通过 None 0 或者 False 来测试是远远不够的。
+一般来说可以创造一个特有的值来进行测试，比如这样</p>
+<div class="highlight"><pre><span></span><span class="n">_no_value</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">_no_value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="n">_no_value</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;No b value supplied&#39;</span><span class="p">)</span>
+</pre></div>
+<h2 id="7.6-&#23450;&#20041;&#21311;&#21517;&#25110;&#20869;&#32852;&#20989;&#25968;">7.6 &#23450;&#20041;&#21311;&#21517;&#25110;&#20869;&#32852;&#20989;&#25968;<a class="anchor-link" href="#7.6-&#23450;&#20041;&#21311;&#21517;&#25110;&#20869;&#32852;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你想为 sort() 操作创建一个很短的回调函数，但又不想用 def 去写一个单行函数， 而是希望通过某个快捷方式以内联方式来创建这个函数。</p>
+<p><strong>解决方案</strong></p>
+<p>可以使用lambda表达式来代替。lambda表达式典型的使用场景是排序或数据reduce等：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;David Beazley&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian Jones&#39;</span><span class="p">,</span>
+<span class="o">...</span>         <span class="s1">&#39;Raymond Hettinger&#39;</span><span class="p">,</span> <span class="s1">&#39;Ned Batchelder&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+</pre></div>
+<p><strong>讨论</strong></p>
+<p>尽管lambda表达式允许你定义简单函数，但是它的使用是有限制的。 你只能指定单个表达式，它的值就是最后的返回值。你不能使用复杂的条件语句，迭代以及异常等</p>
+<h2 id="7.7-&#21311;&#21517;&#20989;&#25968;&#25429;&#33719;&#21464;&#37327;&#20540;">7.7 &#21311;&#21517;&#20989;&#25968;&#25429;&#33719;&#21464;&#37327;&#20540;<a class="anchor-link" href="#7.7-&#21311;&#21517;&#20989;&#25968;&#25429;&#33719;&#21464;&#37327;&#20540;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你用lambda定义了一个匿名函数，并想在定义时捕获到某些变量的值。</p>
+<p><strong>解决方案</strong></p>
+<p>先看下下面代码的效果：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">30</span>  <span class="c1"># 不是 20</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">30</span>
+</pre></div>
+<p>这其中的奥妙在于lambda表达式中的 x 是一个自由变量， <strong>在运行时绑定值，而不是定义时就绑定，这跟函数的默认值参数定义是不同的</strong>。 因此，在调用这个lambda表达式的时候，<strong>x的值是执行时的值</strong>。</p>
+<p>如果你想让某个匿名函数在定义时就捕获到值，<strong>可以将那个参数值定义成默认参数</strong>，就像下面这样：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">20</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">30</span>
+</pre></div>
+<p><strong>讨论</strong></p>
+<p>有些新手可能会不恰当的使用lambda表达式。 比如，通过在一个循环或列表推导中创建一个lambda表达式列表，并期望函数能在定义时就记住每次的迭代值。例如：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+<span class="o">...</span> <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="o">...</span>
+<span class="mi">4</span>
+<span class="mi">4</span>
+<span class="mi">4</span>
+<span class="mi">4</span>
+<span class="mi">4</span>
+</pre></div>
+<p>但是实际效果是运行是n的值为迭代的最后一个值。
+通过使用函数默认值参数形式，lambda函数在定义时就能绑定到值。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="o">...</span>
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+</pre></div>
+<h2 id="7.8-&#20943;&#23569;&#21487;&#35843;&#29992;&#23545;&#35937;&#30340;&#21442;&#25968;&#20010;&#25968;">7.8 &#20943;&#23569;&#21487;&#35843;&#29992;&#23545;&#35937;&#30340;&#21442;&#25968;&#20010;&#25968;<a class="anchor-link" href="#7.8-&#20943;&#23569;&#21487;&#35843;&#29992;&#23545;&#35937;&#30340;&#21442;&#25968;&#20010;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你有一个被其他python代码使用的callable对象，可能是一个回调函数或者是一个处理器， 但是它的参数太多了，导致调用时出错。</p>
+<p><strong>解决方案</strong></p>
+<p>如果需要减少某个函数的参数个数，你可以使用 functools.partial() 。 partial() 函数允许你给一个或多个参数设置固定的值，减少接下来被调用时的参数个数。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+<p>使用 partial() 函数来固定某些参数值：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">spam</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># a = 1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s1</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">spam</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># d = 42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s2</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="mi">4</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">spam</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># a = 1, b = 2, d = 42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s3</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">42</span>
+</pre></div>
+<p>可以看出 partial() 固定某些参数并返回一个新的callable对象。这个新的callable接受未赋值的参数， 然后跟之前已经赋值过的参数合并起来，最后将所有参数传递给原始函数。</p>
+<p><strong>讨论</strong></p>
+<p>本节要解决的问题是让原本不兼容的代码可以一起工作。</p>
+<p>partial() 通常被用来微调其他库函数所使用的回调函数的参数。</p>
+<p>例如，下面是一段代码，使用 multiprocessing 来异步计算一个结果值， 然后这个值被传递给一个接受一个result值和一个可选logging参数的回调函数：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">output_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">log</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Got: </span><span class="si">%r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># A sample function</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">logging</span>
+    <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+    <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">output_result</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+<p>当给 apply_async() 提供回调函数时，通过使用 partial() 传递额外的 logging 参数。 而 multiprocessing 对这些一无所知——它仅仅只是使用单个值来调用回调函数。</p>
+<p>很多时候 partial() 能实现的效果，lambda表达式也能实现。只是稍显臃肿</p>
+<div class="highlight"><pre><span></span><span class="n">points</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">distance</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="k">lambda</span> <span class="n">result</span><span class="p">:</span> <span class="n">output_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">log</span><span class="p">))</span>
+<span class="n">serv</span> <span class="o">=</span> <span class="n">TCPServer</span><span class="p">((</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">15000</span><span class="p">),</span>
+<span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">EchoHandler</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">ack</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;RECEIVED:&#39;</span><span class="p">,</span><span class="err">␣</span>
+<span class="p">,</span><span class="err">!</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+</pre></div>
+<h2 id="7.9-&#23558;&#21333;&#26041;&#27861;&#30340;&#31867;&#36716;&#25442;&#20026;&#20989;&#25968;">7.9 &#23558;&#21333;&#26041;&#27861;&#30340;&#31867;&#36716;&#25442;&#20026;&#20989;&#25968;<a class="anchor-link" href="#7.9-&#23558;&#21333;&#26041;&#27861;&#30340;&#31867;&#36716;&#25442;&#20026;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你有一个除 <strong>init</strong>() 方法外只定义了一个方法的类。为了简化代码，你想将它转换成一个函数。</p>
+<p><strong>解决方案</strong></p>
+<p>大多数情况下，可以使用闭包来将单个方法的类转换成函数。 举个例子，下面示例中的类允许使用者根据某个模板方案来获取到URL链接地址。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="k">class</span> <span class="nc">UrlTemplate</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span>
+
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">urlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+
+<span class="c1"># Example use. Download stock data from yahoo</span>
+<span class="n">yahoo</span> <span class="o">=</span> <span class="n">UrlTemplate</span><span class="p">(</span><span class="s1">&#39;http://finance.yahoo.com/d/quotes.csv?s={names}&amp;f={fields}&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">yahoo</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="s1">&#39;IBM,AAPL,FB&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;sl1c1v&#39;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+<p>这个类可以被一个更简单的函数来代替：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">urltemplate</span><span class="p">(</span><span class="n">template</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">opener</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">opener</span>
+
+<span class="c1"># Example use</span>
+<span class="n">yahoo</span> <span class="o">=</span> <span class="n">urltemplate</span><span class="p">(</span><span class="s1">&#39;http://finance.yahoo.com/d/quotes.csv?s={names}&amp;f={fields}&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">yahoo</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="s1">&#39;IBM,AAPL,FB&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;sl1c1v&#39;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+<p><strong>讨论</strong></p>
+<p>大部分情况下，你拥有一个单方法类的原因是需要存储某些额外的状态来给方法使用。</p>
+<p>使用一个内部函数或者闭包的方案通常会更优雅一些。简单来讲，一个闭包就是一个函数， 只不过在函数内部带上了一个额外的变量环境。闭包关键特点就是<strong>它会记住自己被定义时的环境</strong></p>
+<h2 id="7.10-&#24102;&#39069;&#22806;&#29366;&#24577;&#20449;&#24687;&#30340;&#22238;&#35843;&#20989;&#25968;">7.10 &#24102;&#39069;&#22806;&#29366;&#24577;&#20449;&#24687;&#30340;&#22238;&#35843;&#20989;&#25968;<a class="anchor-link" href="#7.10-&#24102;&#39069;&#22806;&#29366;&#24577;&#20449;&#24687;&#30340;&#22238;&#35843;&#20989;&#25968;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你的代码中需要依赖到回调函数的使用(比如事件处理器、等待后台任务完成后的回调等)， 并且你还需要让回调函数拥有额外的状态值，以便在它的内部使用到。</p>
+<p><strong>解决方案</strong></p>
+<p>这一小节主要讨论的是那些出现在很多函数库和框架中的回调函数的使用——特别是跟异步处理有关的。</p>
+<p>为了让回调函数访问外部信息</p>
+<p>第一种方法是使用一个绑定方法来代替一个简单函数。 比如，下面这个类会保存一个内部序列号，每次接收到一个 result 的时候序列号加1：</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ResultHandler</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;[{}] Got: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+</pre></div>
+<p>使用</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ResultHandler</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">handler</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Got</span><span class="p">:</span> <span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">handler</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">Got</span><span class="p">:</span> <span class="n">helloworld</span>
+</pre></div>
+<p>第二种方式，使用闭包</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_handler</span><span class="p">():</span>
+    <span class="n">sequence</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">nonlocal</span> <span class="n">sequence</span>
+        <span class="n">sequence</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;[{}] Got: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">handler</span>
+</pre></div>
+<p>使用</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">handler</span> <span class="o">=</span> <span class="n">make_handler</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">handler</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Got</span><span class="p">:</span> <span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">handler</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">Got</span><span class="p">:</span> <span class="n">helloworld</span>
+</pre></div>
+<p>第三种方法，一种更加高级的方法，使用协程</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_handler</span><span class="p">():</span>
+    <span class="n">sequence</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">yield</span>
+        <span class="n">sequence</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;[{}] Got: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+</pre></div>
+<p><strong>记住要使用协程的 send() 方法作为回调函数</strong></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">handler</span> <span class="o">=</span> <span class="n">make_handler</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span> <span class="c1"># Advance to the yield</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">handler</span><span class="o">.</span><span class="n">send</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Got</span><span class="p">:</span> <span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">apply_async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="n">handler</span><span class="o">.</span><span class="n">send</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">Got</span><span class="p">:</span> <span class="n">helloworld</span>
+</pre></div>
+<h2 id="7.11-&#20869;&#32852;&#22238;&#35843;&#20989;&#25968;">7.11 &#20869;&#32852;&#22238;&#35843;&#20989;&#25968;<a class="anchor-link" href="#7.11-&#20869;&#32852;&#22238;&#35843;&#20989;&#25968;">&#182;</a></h2><p>本节需要认真理解</p>
+<p><strong>问题</strong></p>
+<p>当你编写使用回调函数的代码的时候，担心很多小函数的扩张可能会弄乱程序控制流。你希望找到某个方法来让代码看上去更像是一个普通的执行序列。</p>
+<p><strong>解决方案</strong></p>
+<p>通过使用生成器和协程可以使得回调函数内联在某个函数中。</p>
+<p>假设有需求</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+    <span class="c1"># Compute the result</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="c1"># Invoke the callback with the result</span>
+    <span class="n">callback</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>下面的代码，包含了一个 Async 类和一个 inlined_async 装饰器：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">class</span> <span class="nc">Async</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+
+<span class="k">def</span> <span class="nf">inlined_async</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">result_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+        <span class="n">result_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="n">apply_async</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">result_queue</span><span class="o">.</span><span class="n">put</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div>
+<p>这两个代码片段允许你使用 yield 语句内联回调步骤。比如：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="nd">@inlined_async</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">Async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">Async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">Async</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Goodbye&#39;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">test</span><span class="p">()</span>
+<span class="mi">5</span>
+<span class="n">helloworld</span>
+<span class="mi">0</span>
+<span class="mi">2468</span>
+<span class="mi">10</span>
+<span class="mi">12</span>
+<span class="mi">14</span>
+<span class="mi">16</span>
+<span class="mi">18</span>
+<span class="n">Goodbye</span>
+</pre></div>
+<p>首先，在需要使用到回调的代码中，关键点在于当前计算工作会挂起并在将来的某个时候重启(比如异步执行)。当计算重启时，回调函数被调用来继续处理结果。 apply_async() 函数演示了执行回调的实际逻辑，尽管实际情况中它可能会更加复杂(包括线程、进程、事件处理器等等)。计算的暂停与重启思路跟生成器函数的执行模型不谋而合。</p>
+<p>具体来讲，yield 操作会使一个生成器函数产生一个值并暂停。接下来调用生成器的 <strong>next</strong>() 或 send() 方法又会让它从暂停处继续执行。根据这个思路，这一小节的核心就在inline_async() 装饰器函数中了。</p>
+<p>关键点就是，装饰器会逐步遍历生成器函数的所有yield 语句，每一次一个。为了这样做，刚开始的时候创建了一个result 队列并向里面放入一个None 值。然后开始一个循环操作，从队列中取出结果值并发送给生成器，它会持续到下一个yield 语句，在这里一个Async 的实例被接受到。然后循环开始检查函数和参数，并开始进行异步计算 apply_async() 。然而，这个计算有个最诡异部分是它并没有使用一个普通的回调函数，而是用队列的put() 方法来回调。这时候，是时候详细解释下到底发生了什么了。主循环立即返回顶部并在队列上执行get() 操作。如果数据存在，它一定是put() 回调存放的结果。如果没有数据，那么先暂停操作并等待结果的到来。这个具体怎样实现是由apply_async() 函数来决定的</p>
+<h2 id="7.12-&#35775;&#38382;&#38381;&#21253;&#20013;&#23450;&#20041;&#30340;&#21464;&#37327;">7.12 &#35775;&#38382;&#38381;&#21253;&#20013;&#23450;&#20041;&#30340;&#21464;&#37327;<a class="anchor-link" href="#7.12-&#35775;&#38382;&#38381;&#21253;&#20013;&#23450;&#20041;&#30340;&#21464;&#37327;">&#182;</a></h2><p><strong>问题</strong></p>
+<p>你想要扩展函数中的某个闭包，允许它能访问和修改函数的内部变量。</p>
+<p><strong>解决方案</strong></p>
+<p>通常来讲，闭包的内部变量对于外界来讲是完全隐藏的。但是，你可以通过编写访问函数并将其作为函数属性绑定到闭包上来实现这个目的</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample</span><span class="p">():</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Closure function</span>
+    <span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;n=&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># Accessor methods for n</span>
+    <span class="k">def</span> <span class="nf">get_n</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">n</span>
+
+    <span class="k">def</span> <span class="nf">set_n</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="n">nonlocal</span> <span class="n">n</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="c1"># Attach as function attributes</span>
+    <span class="n">func</span><span class="o">.</span><span class="n">get_n</span> <span class="o">=</span> <span class="n">get_n</span>
+    <span class="n">func</span><span class="o">.</span><span class="n">set_n</span> <span class="o">=</span> <span class="n">set_n</span>
+    <span class="k">return</span> <span class="n">func</span>
+</pre></div>
+<p>使用</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">sample</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">()</span>
+<span class="n">n</span><span class="o">=</span> <span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">set_n</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">()</span>
+<span class="n">n</span><span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">get_n</span><span class="p">()</span>
+<span class="mi">10</span>
+</pre></div>
+<p><strong>讨论</strong></p>
+<p>首先，nonlocal 声明可以让我们编写函数来修改内部变量的值。
+其次，函数属性允许我们用一种很简单的方式将访问方法绑定到闭包函数上，这个跟实例方法很像(尽管并没有定义任何类)。</p>
+<p>还可以进一步的扩展，让闭包模拟类的实例。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">ClosureInstance</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">locals</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">locals</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="nb">locals</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
+
+        <span class="c1"># Update instance dictionary with callables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">locals</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">)</span>
+    <span class="c1"># Redirect special methods</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;__len__&#39;</span><span class="p">]()</span>
+
+<span class="c1"># Example use</span>
+<span class="k">def</span> <span class="nf">Stack</span><span class="p">():</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">():</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ClosureInstance</span><span class="p">()</span>
+</pre></div>
+<p>代码中的 sys._getframe(1).f_locals 是获得当前栈中上一层函数的方法。也可以指定 flocals 关键字参数。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span>
+<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">ClosureInstance</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10069ed10</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="s1">&#39;Hello&#39;</span>
+</pre></div>
+<p>上面代码的作用和类其实已经很像了，但是经过测试这样的代码会比类要快一些，大概是因为不会涉及到额外的 self 变量</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/pythoncookbook-note-6.html" title="Previous: PythonCookbook笔记(6)-数据编码和处理">PythonCookbook笔记(6)-数据编码和处理</a></li>
+                <li class="next-article"><a href="//zodiac911.github.io/blog/pythoncookbook-note-8.html" title="Next: PythonCookbook笔记(8)-类与对象">PythonCookbook笔记(8)-类与对象</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2019-06-23T00:00:00+08:00">Jun 23, 2019</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#pythoncookbook-ref">PythonCookbook
+                    <span>10</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>

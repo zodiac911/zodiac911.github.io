@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="本文介绍如何用Pelican+GitHubPages搭建个人博客
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Blog, Pelican, Jupyter Notebook, posts, " />
+
+<meta property="og:title" content="Pelican+GitHubPages搭建个人博客 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/static-blog.html" />
+<meta property="og:description" content="本文介绍如何用Pelican+GitHubPages搭建个人博客" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2018-10-03T09:20:00+08:00" />
+<meta name="twitter:title" content="Pelican+GitHubPages搭建个人博客 ">
+<meta name="twitter:description" content="本文介绍如何用Pelican+GitHubPages搭建个人博客">
+
+        <title>Pelican+GitHubPages搭建个人博客  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/static-blog.html"> Pelican+GitHubPages搭建个人博客  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><div align="center">  <img src="http://image-bed-zodiac.oss-cn-qingdao.aliyuncs.com/2018101904.png" width="1000"/> </div><br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>我曾多次萌生过写博客的想法，后来都不了了之。有时因为害怕无法坚持；有时是因为不想在诸如简书或CSDN之类的网站上写博客，不喜欢喧嚣的网站氛围，同时公共网站的风格也不可控，想拥有一个自己的个人博客站，但又觉得搭建博客太过麻烦。就一直没做成这件事。</p>
+<p>后来我想，万事开头难，写博客这件事一定要去尝试的，于是便有了这个博客，本文就主要介绍一下我搭建这个博客的过程，即如何利用Pelican和GitHub Pages从零开始搭建博客。</p>
+<p><a href="https://github.com/getpelican/pelican">Pelican</a>是一款Python编写的静态网站生成工具，用以将Markdown，Jupyter Notebook等文件转换为完整的Html页面，并将提供这些页面需要的css等组件，构成一个完整的静态网站。通过将生成的静态博客提交到GitHub，利用GitHub上一种叫做GitHub Pages的功能，在互联网公开发布个人博客。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#系统要求" data-toc-modified-id="系统要求-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>系统要求</a></span></li><li><span><a href="#安装Pelican与必要依赖" data-toc-modified-id="安装Pelican与必要依赖-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>安装Pelican与必要依赖</a></span></li><li><span><a href="#新建Pelican项目" data-toc-modified-id="新建Pelican项目-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>新建Pelican项目</a></span></li><li><span><a href="#安装ipynb插件" data-toc-modified-id="安装ipynb插件-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>安装ipynb插件</a></span></li><li><span><a href="#写第一篇博客" data-toc-modified-id="写第一篇博客-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>写第一篇博客</a></span></li><li><span><a href="#生成Html文件" data-toc-modified-id="生成Html文件-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>生成Html文件</a></span></li><li><span><a href="#GitHub-Pages" data-toc-modified-id="GitHub-Pages-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>GitHub Pages</a></span><ul class="toc-item"><li><span><a href="#提交文件" data-toc-modified-id="提交文件-7.1"><span class="toc-item-num">7.1&nbsp;&nbsp;</span>提交文件</a></span></li></ul></li><li><span><a href="#更换主题" data-toc-modified-id="更换主题-8"><span class="toc-item-num">8&nbsp;&nbsp;</span>更换主题</a></span><ul class="toc-item"><li><span><a href="#elegant主题补充设置" data-toc-modified-id="elegant主题补充设置-8.1"><span class="toc-item-num">8.1&nbsp;&nbsp;</span>elegant主题补充设置</a></span></li></ul></li><li><span><a href="#日常维护" data-toc-modified-id="日常维护-9"><span class="toc-item-num">9&nbsp;&nbsp;</span>日常维护</a></span></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#31995;&#32479;&#35201;&#27714;">&#31995;&#32479;&#35201;&#27714;<a class="anchor-link" href="#&#31995;&#32479;&#35201;&#27714;">&#182;</a></h2><ul>
+<li>Python环境(最好anaconda)</li>
+<li>Git</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23433;&#35013;Pelican&#19982;&#24517;&#35201;&#20381;&#36182;">&#23433;&#35013;Pelican&#19982;&#24517;&#35201;&#20381;&#36182;<a class="anchor-link" href="#&#23433;&#35013;Pelican&#19982;&#24517;&#35201;&#20381;&#36182;">&#182;</a></h2><p>新建一个虚拟环境专门用于博客搭建，由于我使用 anaconda，所以直接新建 anaconda 环境，如果是纯 Python 可以使用 virtualenv 新建环境。</p>
+<p>当然如果不担心包版本之间的冲突，也可不新建虚拟环境。</p>
+<div class="highlight"><pre><span></span>conda create --name pelican <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
+</pre></div>
+<p>之后的操作如无说明都在 pelican 这一环境下执行的</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> activate pelican
+</pre></div>
+<p>安装 pelican 和必要的依赖</p>
+<div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+<p><code>requirements.txt</code> 文件内容如下</p>
+<div class="highlight"><pre><span></span><span class="nv">pelican</span><span class="o">==</span><span class="m">3</span>.6.3
+<span class="nv">Markdown</span><span class="o">==</span><span class="m">2</span>.6.6
+jupyter&gt;<span class="o">=</span><span class="m">1</span>.0
+ipython&gt;<span class="o">=</span><span class="m">4</span>.0
+nbconvert&gt;<span class="o">=</span><span class="m">4</span>.0
+beautifulsoup4
+matplotlib
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26032;&#24314;Pelican&#39033;&#30446;">&#26032;&#24314;Pelican&#39033;&#30446;<a class="anchor-link" href="#&#26032;&#24314;Pelican&#39033;&#30446;">&#182;</a></h2><p>新建一个文件夹，比如就叫 <code>Blog</code>吧，用于存放博客文件</p>
+<p>在文件夹内执行<code>pelican-quickstart</code>命令，根据提示回答几个问题，基本上只要一直回车就可以了</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> Blog
+
+pelican-quickstart
+</pre></div>
+<p><div align="center">  <img src="http://image-bed-zodiac.oss-cn-qingdao.aliyuncs.com/18-10-24/71586374.jpg" width="1000"/> </div><br></p>
+<p>现在 Blog 文件夹内应该是如下结构</p>
+<div class="highlight"><pre><span></span>.
+├── content
+├── develop_server.sh
+├── fabfile.py
+├── Makefile
+├── output
+├── pelicanconf.py
+└── publishconf.py
+</pre></div>
+<p>其中 <code>pelicanconf.py</code> 和 <code>publishconf.py</code> 是主要的配置文件，其中<code>publishconf.py</code> 只在特殊指定时才有效如执行如下语句时</p>
+<div class="highlight"><pre><span></span>pelican content -s publishconf.py
+</pre></div>
+<p>而 <code>pelicanconf.py</code> 为核心配置文件始终有效</p>
+<p>两个文件默认内容分别如下</p>
+<p><code>pelicanconf.py</code></p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*- #</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s1">&#39;zodiac wang&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="s1">&#39;zodiac wang&#39;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span>
+
+<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;Asia/Shanghai&#39;</span>
+
+<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
+
+<span class="c1"># Feed generation is usually not desired when developing</span>
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">AUTHOR_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1"># Blogroll</span>
+<span class="n">LINKS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;Pelican&#39;</span><span class="p">,</span> <span class="s1">&#39;http://getpelican.com/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;Python.org&#39;</span><span class="p">,</span> <span class="s1">&#39;http://python.org/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;Jinja2&#39;</span><span class="p">,</span> <span class="s1">&#39;http://jinja.pocoo.org/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;You can modify those links in your config file&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">),)</span>
+
+<span class="c1"># Social widget</span>
+<span class="n">SOCIAL</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;You can add links in your config file&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">),</span>
+          <span class="p">(</span><span class="s1">&#39;Another social link&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">),)</span>
+
+<span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Uncomment following line if you want document-relative URLs when developing</span>
+<span class="c1">#RELATIVE_URLS = True</span>
+</pre></div>
+<p><code>publishconf.py</code></p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*- #</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="c1"># This file is only used if you use `make publish` or</span>
+<span class="c1"># explicitly specify it as your config file.</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feeds/all.atom.xml&#39;</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feeds/</span><span class="si">%s</span><span class="s1">.atom.xml&#39;</span>
+
+<span class="n">DELETE_OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># Following items are often useful when publishing</span>
+
+<span class="c1">#DISQUS_SITENAME = &quot;&quot;</span>
+<span class="c1">#GOOGLE_ANALYTICS = &quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23433;&#35013;ipynb&#25554;&#20214;">&#23433;&#35013;ipynb&#25554;&#20214;<a class="anchor-link" href="#&#23433;&#35013;ipynb&#25554;&#20214;">&#182;</a></h2><p>pelican默认支持 markdown 文件作为博客文章的源文件，如果使用 markdown 写博客则可以跳过这一步。</p>
+<p>而我希望可以直接将 Jupyter Notebook 文件作为源文件而不做转换，因为我的 Notebook 中有很多代码及其生成的结果。但 Pelican 默认不支持ipynb文件，所以需要安装<a href="https://github.com/danielfrg/pelican-ipynb">pelican-ipynb插件</a></p>
+<p>新建 plugins 文件夹，将插件文件下载到 plugins 文件夹内</p>
+<div class="highlight"><pre><span></span>mkdir plugins
+<span class="nb">cd</span> plugins
+git clone https://github.com/danielfrg/pelican-ipynb
+</pre></div>
+<p>修改 pelicanconf.py 文件，在最下边添加几行代码，激活插件</p>
+<div class="highlight"><pre><span></span><span class="n">MARKUP</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;md&#39;</span><span class="p">,</span> <span class="s1">&#39;ipynb&#39;</span><span class="p">)</span>
+
+<span class="n">PLUGIN_PATH</span> <span class="o">=</span> <span class="s1">&#39;./plugins&#39;</span>
+<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pelican-ipynb.markup&#39;</span><span class="p">]</span> <span class="c1">#pelican-ipynb 为添加的submodule文件夹名</span>
+<span class="n">IGNORE_FILES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">]</span> <span class="c1"># 如果有ipynb_checkpoints文件添加这一行以忽略</span>
+</pre></div>
+<p>pelican-ipynb 插件具体配置方法有好几种，详见<a href="https://github.com/danielfrg/pelican-ipynb/blob/master/README.md">项目Readme</a>，我使用的是推荐配置方法。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20889;&#31532;&#19968;&#31687;&#21338;&#23458;">&#20889;&#31532;&#19968;&#31687;&#21338;&#23458;<a class="anchor-link" href="#&#20889;&#31532;&#19968;&#31687;&#21338;&#23458;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>是时候写第一篇博客了。</p>
+<p>将<code>用Pelican+GitHubPages搭建静态博客.ipynb</code>复制到content文件夹，并新建一个同名<code>nbdata</code>文件，用于保存额外的文章信息，内容如下</p>
+
+<pre><code>Title: 用Pelican+GitHubPages搭建静态博客
+Slug: static-blog
+Date: 2018-10-03 09:20
+Category: posts
+Tags: blog,pelican,ipynb
+Author: Zodiac Wang
+Summary: 本文介绍如何搭建静态博客</code></pre>
+<p>相应字段的含义：</p>
+<ul>
+<li>Title——文章标题</li>
+<li>Slug——文章在服务器上的路径，如 slug 是 first-post，而博客地址是 jupyter-blog.com, 则文章地址为 <a href="http://www.jupyter-blog.com/first-post">http://www.jupyter-blog.com/first-post</a></li>
+<li>Date——文章发布日期</li>
+<li>Category——文章的类别——可以是任何东西</li>
+<li>Tags——文章的标签</li>
+<li>Author——作者名字</li>
+<li>Summary——文章摘要</li>
+</ul>
+<p>现在Blog文件夹下结构应该是这个样子</p>
+
+<pre><code>.
+├── content
+│   ├── 用Pelican+GitHubPages搭建静态博客.ipynb
+│   └── 用Pelican+GitHubPages搭建静态博客.nbdata
+├── develop_server.sh
+├── fabfile.py
+├── Makefile
+├── output
+├── pelicanconf.py
+├── plugins
+│   └── pelican-ipynb
+│       ├── core.py
+│       ├── __init__.py
+│       ├── ipynb.py
+│       ├── LICENSE
+│       ├── liquid.py
+│       ├── markup.py
+│       ├── README.md
+│       ├── requirements.txt
+│       └── tests
+└── publishconf.py</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#29983;&#25104;Html&#25991;&#20214;">&#29983;&#25104;Html&#25991;&#20214;<a class="anchor-link" href="#&#29983;&#25104;Html&#25991;&#20214;">&#182;</a></h2><p>切换到Blog文件夹下，生成Html文件</p>
+<div class="highlight"><pre><span></span>pelican content -s publishconf.py
+</pre></div>
+<p>切换到output文件夹下，开启本地服务器</p>
+<div class="highlight"><pre><span></span>python -m pelican.server <span class="o">[</span>port<span class="o">]</span>
+</pre></div>
+<p>在浏览器输入<code>localhost:[port]</code>预览博客，默认端口为 8000</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="GitHub-Pages">GitHub Pages<a class="anchor-link" href="#GitHub-Pages">&#182;</a></h2><p>以上只是在本地生成了一个网页服务，要想让博客出现在互联网上，有两类方法</p>
+<ul>
+<li>自己租 VPS 并申请域名，让后将博客放到 VPS 上自己搭建的网页服务上并绑定申请的域名</li>
+<li>利用 GitHub Pages 或者其他类似服务，将静态网站托管到上面</li>
+</ul>
+<p>我选择将博客托管到 GitHub 上。</p>
+<p>首先在 GitHub 上新建一个名为<code>zodiac911.github.io</code>的仓库，GitHub 就会自动在 <a href="https://zodiac911.github.io">https://zodiac911.github.io</a> 展示仓库内的静态页面，<code>zodiac911</code>替换为自己的用户名。</p>
+<h3 id="&#25552;&#20132;&#25991;&#20214;">&#25552;&#20132;&#25991;&#20214;<a class="anchor-link" href="#&#25552;&#20132;&#25991;&#20214;">&#182;</a></h3><p>在<code>output</code>文件夹新建<code>Git</code>仓库,并绑定远程GitHub仓库地址。</p>
+<p>如果Blog文件也需要管理，可以将output仓库作为子摸块添加到上层仓库中</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> output
+git init
+git remote add origin https://github.com/zodiac911/zodiac911.github.io
+</pre></div>
+<p>提交文件并push到远端</p>
+<div class="highlight"><pre><span></span>git add -A
+git commit /
+git push origin master <span class="c1">#提交文件</span>
+</pre></div>
+<p><strong>这里很多人会推荐使用一个叫作<code>ghp-import</code>的包，用于将output文件夹的内容提交到Blog文件夹内仓库的master分支，但我是直接将output作为一个仓库绑定到zodiac911.github.io仓库，并将这一仓库添加为Blog文件夹下仓库的子模块</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26356;&#25442;&#20027;&#39064;">&#26356;&#25442;&#20027;&#39064;<a class="anchor-link" href="#&#26356;&#25442;&#20027;&#39064;">&#182;</a></h2><p>经过以上设置，就可以在<code>https://zodiac911.github.io</code>看到自己的博客了，不过主题为 Pelican 的默认主题，个人觉得不是很好看，所以换了一个。</p>
+<p>从 <a href="https://github.com/getpelican/pelican-themes">pelican-themes</a> 找一个主题下载到<code>themes</code>文件夹并在设置文件中指出主题的路径，我选择的是 <a href="https://github.com/talha131/pelican-elegant">pelican-elegant</a></p>
+<div class="highlight"><pre><span></span>mkdir themes
+<span class="nb">cd</span> themes
+git clone https://github.com/talha131/pelican-elegant
+</pre></div>
+<p>为使新主题生效，在pelicanconf.py 文件，添加一行代码:</p>
+<div class="highlight"><pre><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;themes/pelican-elegant&quot;</span>
+</pre></div>
+<h3 id="elegant&#20027;&#39064;&#34917;&#20805;&#35774;&#32622;">elegant&#20027;&#39064;&#34917;&#20805;&#35774;&#32622;<a class="anchor-link" href="#elegant&#20027;&#39064;&#34917;&#20805;&#35774;&#32622;">&#182;</a></h3><p>为了获取完全体的 elegant 体验，需要额外安装几个插件，安装方法即直接 git clone 对应的仓库到 plugins 文件夹</p>
+<p>这些特性主要包括</p>
+<ul>
+<li>sitemap</li>
+<li>tipue_search</li>
+<li>extract_toc</li>
+<li>neighbors</li>
+</ul>
+<p>默认启用不需要额外插件的特性大致如下</p>
+<ul>
+<li>Disqus</li>
+<li>Google Analytics</li>
+<li>MailChimp Integration.</li>
+<li>Custom 404 Page.</li>
+<li>Collapsible Comments</li>
+<li>Page and Article Subtitle.</li>
+</ul>
+<p>修改 pelicanconf.py 中相应参数，以激活插件</p>
+<div class="highlight"><pre><span></span><span class="nv">PLUGINS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;pelican-ipynb.markup&#39;</span>, <span class="s1">&#39;sitemap&#39;</span>, <span class="s1">&#39;tipue_search&#39;</span>, <span class="s1">&#39;extract_toc&#39;</span><span class="o">]</span>
+</pre></div>
+<p>一些可选的额外设置</p>
+<div class="highlight"><pre><span></span>RECENT_ARTICLES_COUNT <span class="o">(</span>integer<span class="o">)</span>  
+COMMENTS_INTRO <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+SITE_LICENSE <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+SITE_DESCRIPTION <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+EMAIL_SUBSCRIPTION_LABEL <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+EMAIL_FIELD_PLACEHOLDER <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+SUBSCRIBE_BUTTON_TITLE <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+MAILCHIMP_FORM_ACTION <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+SITESUBTITLE <span class="o">(</span><span class="s1">&#39;string&#39;</span><span class="o">)</span>
+LANDING_PAGE_ABOUT <span class="o">({})</span>
+PROJECTS <span class="o">([{}</span>,...<span class="o">])</span>
+</pre></div>
+<p>文章 metadata 中的额外设置项</p>
+<div class="highlight"><pre><span></span>subtitle
+summary
+disqus_identifier
+modified
+keywords
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26085;&#24120;&#32500;&#25252;">&#26085;&#24120;&#32500;&#25252;<a class="anchor-link" href="#&#26085;&#24120;&#32500;&#25252;">&#182;</a></h2><p>每次写了新博客之后，只需要执行以下命令</p>
+<div class="highlight"><pre><span></span>pelican content -s publishconf.py
+<span class="nb">cd</span> output
+git add -A
+git commit -m /
+git push origin master
+</pre></div>
+<p>可以写个脚本执行以上步骤</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>最后是成果</p>
+<ul>
+<li><a href="https://zodiac911.github.io/">我的博客</a></li>
+<li><a href="https://github.com/zodiac911/Pelican-Blog">我的博客仓库</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>References:</strong></p>
+<blockquote><ul>
+<li><a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">Building a Data Science Portfolio: Setting Up a Blog</a></li>
+<li><a href="https://github.com/getpelican/pelican-themes">pelican-themes</a></li>
+<li><a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a></li>
+<li><a href="http://archerimagine.com/articles/pelican/customizing-pelican-blog-with-plugin-and-themes.html">Customizing Pelican blog with the help of Plugin and themes</a> 博客还有几篇处理 elegant theme 小问题的博文也非常不错</li>
+<li><a href="http://oncrashreboot.com/elegant-best-pelican-theme-features#elegant-technical-nitty-gritty">Elegant - Technical Nitty-Gritty</a> 官方文档设置项</li>
+<li><a href="https://github.com/talha131/onCrashReboot">onCrashReboot</a> 官方参考Repo</li>
+</ul>
+</blockquote>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="next-article"><a href="//zodiac911.github.io/blog/mnist-analysis.html" title="Next: MNIST数据集分析">MNIST数据集分析</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2018-10-03T09:20:00+08:00">Oct 3, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#blog-ref">Blog
+                    <span>2</span>
+</a></li>
+                <li><a href="//zodiac911.github.io/blog/tags#jupyter-notebook-ref">Jupyter Notebook
+                    <span>4</span>
+</a></li>
+                <li><a href="//zodiac911.github.io/blog/tags#pelican-ref">Pelican
+                    <span>2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>

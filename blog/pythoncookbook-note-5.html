@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="PythonCookbook笔记(5)-文件与IO
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="PythonCookbook, posts, " />
+
+<meta property="og:title" content="PythonCookbook笔记(5)-文件与IO "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/pythoncookbook-note-5.html" />
+<meta property="og:description" content="PythonCookbook笔记(5)-文件与IO" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2019-06-21T00:00:00+08:00" />
+<meta name="twitter:title" content="PythonCookbook笔记(5)-文件与IO ">
+<meta name="twitter:description" content="PythonCookbook笔记(5)-文件与IO">
+
+        <title>PythonCookbook笔记(5)-文件与IO  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/pythoncookbook-note-5.html"> PythonCookbook笔记(5)-文件与IO  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python CookBook 学习笔记</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#第五章-文件与IO" data-toc-modified-id="第五章-文件与IO-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>第五章 文件与IO</a></span><ul class="toc-item"><li><span><a href="#5.1-读写文本数据" data-toc-modified-id="5.1-读写文本数据-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>5.1 读写文本数据</a></span></li><li><span><a href="#5.2-打印输出至文件中" data-toc-modified-id="5.2-打印输出至文件中-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>5.2 打印输出至文件中</a></span></li><li><span><a href="#5.3-使用其他分隔符或行终止符打印" data-toc-modified-id="5.3-使用其他分隔符或行终止符打印-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>5.3 使用其他分隔符或行终止符打印</a></span></li><li><span><a href="#5.4-读写字节数据" data-toc-modified-id="5.4-读写字节数据-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>5.4 读写字节数据</a></span></li><li><span><a href="#5.5-文件不存在才能写入" data-toc-modified-id="5.5-文件不存在才能写入-1.5"><span class="toc-item-num">1.5&nbsp;&nbsp;</span>5.5 文件不存在才能写入</a></span></li><li><span><a href="#5.6-字符串的I-O操作" data-toc-modified-id="5.6-字符串的I-O操作-1.6"><span class="toc-item-num">1.6&nbsp;&nbsp;</span>5.6 字符串的I-O操作</a></span></li><li><span><a href="#5.7-读写压缩文件" data-toc-modified-id="5.7-读写压缩文件-1.7"><span class="toc-item-num">1.7&nbsp;&nbsp;</span>5.7 读写压缩文件</a></span></li><li><span><a href="#5.8-固定大小记录的文件迭代" data-toc-modified-id="5.8-固定大小记录的文件迭代-1.8"><span class="toc-item-num">1.8&nbsp;&nbsp;</span>5.8 固定大小记录的文件迭代</a></span></li><li><span><a href="#5.9-读取二进制数据到可变缓冲区中" data-toc-modified-id="5.9-读取二进制数据到可变缓冲区中-1.9"><span class="toc-item-num">1.9&nbsp;&nbsp;</span>5.9 读取二进制数据到可变缓冲区中</a></span></li><li><span><a href="#5.10-内存映射的二进制文件" data-toc-modified-id="5.10-内存映射的二进制文件-1.10"><span class="toc-item-num">1.10&nbsp;&nbsp;</span>5.10 内存映射的二进制文件</a></span></li><li><span><a href="#5.11-文件路径名的操作" data-toc-modified-id="5.11-文件路径名的操作-1.11"><span class="toc-item-num">1.11&nbsp;&nbsp;</span>5.11 文件路径名的操作</a></span></li><li><span><a href="#5.12-测试文件是否存在" data-toc-modified-id="5.12-测试文件是否存在-1.12"><span class="toc-item-num">1.12&nbsp;&nbsp;</span>5.12 测试文件是否存在</a></span></li><li><span><a href="#5.13-获取文件夹中的文件列表" data-toc-modified-id="5.13-获取文件夹中的文件列表-1.13"><span class="toc-item-num">1.13&nbsp;&nbsp;</span>5.13 获取文件夹中的文件列表</a></span></li><li><span><a href="#5.14-忽略文件名编码" data-toc-modified-id="5.14-忽略文件名编码-1.14"><span class="toc-item-num">1.14&nbsp;&nbsp;</span>5.14 忽略文件名编码</a></span></li><li><span><a href="#5.15-打印不合法的文件名" data-toc-modified-id="5.15-打印不合法的文件名-1.15"><span class="toc-item-num">1.15&nbsp;&nbsp;</span>5.15 打印不合法的文件名</a></span></li><li><span><a href="#5.16-增加或改变已打开文件的编码" data-toc-modified-id="5.16-增加或改变已打开文件的编码-1.16"><span class="toc-item-num">1.16&nbsp;&nbsp;</span>5.16 增加或改变已打开文件的编码</a></span></li><li><span><a href="#5.17-将字节写入文本文件" data-toc-modified-id="5.17-将字节写入文本文件-1.17"><span class="toc-item-num">1.17&nbsp;&nbsp;</span>5.17 将字节写入文本文件</a></span></li><li><span><a href="#5.18-将文件描述符包装成文件对象" data-toc-modified-id="5.18-将文件描述符包装成文件对象-1.18"><span class="toc-item-num">1.18&nbsp;&nbsp;</span>5.18 将文件描述符包装成文件对象</a></span></li><li><span><a href="#5.19-创建临时文件和文件夹" data-toc-modified-id="5.19-创建临时文件和文件夹-1.19"><span class="toc-item-num">1.19&nbsp;&nbsp;</span>5.19 创建临时文件和文件夹</a></span></li><li><span><a href="#5.20-与串行端口的数据通信" data-toc-modified-id="5.20-与串行端口的数据通信-1.20"><span class="toc-item-num">1.20&nbsp;&nbsp;</span>5.20 与串行端口的数据通信</a></span></li><li><span><a href="#5.21-序列化Python对象" data-toc-modified-id="5.21-序列化Python对象-1.21"><span class="toc-item-num">1.21&nbsp;&nbsp;</span>5.21 序列化Python对象</a></span></li></ul></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#31532;&#20116;&#31456;-&#25991;&#20214;&#19982;IO">&#31532;&#20116;&#31456; &#25991;&#20214;&#19982;IO<a class="anchor-link" href="#&#31532;&#20116;&#31456;-&#25991;&#20214;&#19982;IO">&#182;</a></h1><p>所有程序都要处理输入和输出。这一章将涵盖处理不同类型的文件，包括文本和二进制文件，文件编码和其他相关的内容。对文件名和目录的操作也会涉及到。</p>
+<h2 id="5.1-&#35835;&#20889;&#25991;&#26412;&#25968;&#25454;">5.1 &#35835;&#20889;&#25991;&#26412;&#25968;&#25454;<a class="anchor-link" href="#5.1-&#35835;&#20889;&#25991;&#26412;&#25968;&#25454;">&#182;</a></h2><p>问题：需要读写各种不同编码的文本数据，比如ASCII，UTF-8或UTF-16编码等。</p>
+<p>解决方案：使用带有 rt 模式的 open() 函数读取文本文件。</p>
+<p>类似的，为了写入一个文本文件，使用带有 wt 模式的 open() 函数。文件中已有的内容会被删除。如果是在已存在文件中添加内容，使用模式为 at 的 open() 函数。</p>
+<p>文件的读写操作默认使用系统编码，可以通过调用 sys.getdefaultencoding() 来得到。大多数机器上面都是 utf-8 编码。可以通过 encoding 参数指定编码方式。</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somefile.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+<p>讨论：关于换行符的识别问题，在 Unix 和 Windows 中是不一样的(分别是<code>\n</code>和<code>\r\n</code>)。 默认情况下，Python 会以统一模式处理换行符。这种模式下，在读取文本的时候，Python 可以识别所有的普通换行符并将其转换为单个 \n 字符。 类似的，在输出时会将换行符 \n 转换为系统默认的换行符。可以通过 newline 参数指定换行符</p>
+<div class="highlight"><pre><span></span><span class="c1"># Read with disabled newline translation</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somefile.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+<p>编码错误存在的话，你可以给 open() 函数传递一个可选的 errors 参数来处理这些错误。 下面是一些处理常见错误的方法：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Replace bad chars with Unicode U+fffd replacement char</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="s1">&#39;Spicy Jalape?o!&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Ignore bad chars entirely</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">g</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="s1">&#39;Spicy Jalapeo!&#39;</span>
+</pre></div>
+<h2 id="5.2-&#25171;&#21360;&#36755;&#20986;&#33267;&#25991;&#20214;&#20013;">5.2 &#25171;&#21360;&#36755;&#20986;&#33267;&#25991;&#20214;&#20013;<a class="anchor-link" href="#5.2-&#25171;&#21360;&#36755;&#20986;&#33267;&#25991;&#20214;&#20013;">&#182;</a></h2><p>问题：你想将 print() 函数的输出重定向到一个文件中去。</p>
+<p>解决方案：</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;d:/work/test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+<p>另外也可以 f.write 但是这种方法只接受字符串</p>
+<h2 id="5.3-&#20351;&#29992;&#20854;&#20182;&#20998;&#38548;&#31526;&#25110;&#34892;&#32456;&#27490;&#31526;&#25171;&#21360;">5.3 &#20351;&#29992;&#20854;&#20182;&#20998;&#38548;&#31526;&#25110;&#34892;&#32456;&#27490;&#31526;&#25171;&#21360;<a class="anchor-link" href="#5.3-&#20351;&#29992;&#20854;&#20182;&#20998;&#38548;&#31526;&#25110;&#34892;&#32456;&#27490;&#31526;&#25171;&#21360;">&#182;</a></h2><p>问题：你想使用 print() 函数输出数据，但是想改变默认的分隔符或者行尾符。</p>
+<p>解决方案：可以使用在 print() 函数中使用 sep 和 end 关键字参数，以你想要的方式输出。比如：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;ACME&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="n">ACME</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mf">91.5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;ACME&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;!!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ACME</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mf">91.5</span><span class="err">!!</span>
+</pre></div>
+<p>讨论：str.join() 的问题在于它仅仅适用于字符串。这意味着你通常需要执行另外一些转换才能让它正常工作。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ACME&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+    <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">sequence</span> <span class="n">item</span> <span class="mi">1</span><span class="p">:</span> <span class="n">expected</span> <span class="nb">str</span> <span class="n">instance</span><span class="p">,</span> <span class="nb">int</span> <span class="n">found</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">))</span>
+<span class="n">ACME</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mf">91.5</span>
+</pre></div>
+<p>这样写就比较方便了</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="n">ACME</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mf">91.5</span>
+</pre></div>
+<h2 id="5.4-&#35835;&#20889;&#23383;&#33410;&#25968;&#25454;">5.4 &#35835;&#20889;&#23383;&#33410;&#25968;&#25454;<a class="anchor-link" href="#5.4-&#35835;&#20889;&#23383;&#33410;&#25968;&#25454;">&#182;</a></h2><p>问题：你想读写二进制文件，比如图片，声音文件等等。</p>
+<p>解决方案：使用模式为 rb 或 wb 的 open() 函数来读取或写入二进制数据。</p>
+<p>讨论：特别需要注意的是，索引和迭代动作返回的是字节的值而不是字节字符串。</p>
+<p>如果你想从二进制模式的文件中读取或写入文本数据，必须确保要进行解码和编码操作。</p>
+<p>二进制 I/O 还有一个鲜为人知的特性就是数组和 C 结构体类型能直接被写入，而不需要中间转换为自己对象。比如：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">array</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.bin&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+<p>这个适用于任何实现了被称之为”缓冲接口”的对象，这种对象会直接暴露其底层的内存缓冲区给能处理它的操作。 二进制数据的写入就是这类操作之一。很多对象还允许通过使用文件对象的 readinto() 方法直接读取二进制数据到其底层的内存中去。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">array</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">readinto</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mi">16</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="n">array</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+<p>但是使用这种技术的时候需要格外小心，因为它通常具有平台相关性，并且可能会依赖字长和字节顺序(高位优先和低位优先)。</p>
+<h2 id="5.5-&#25991;&#20214;&#19981;&#23384;&#22312;&#25165;&#33021;&#20889;&#20837;">5.5 &#25991;&#20214;&#19981;&#23384;&#22312;&#25165;&#33021;&#20889;&#20837;<a class="anchor-link" href="#5.5-&#25991;&#20214;&#19981;&#23384;&#22312;&#25165;&#33021;&#20889;&#20837;">&#182;</a></h2><p>问题：想向一个文件中写入数据，但是前提必须是这个文件在文件系统上不存在。 也就是不允许覆盖已存在的文件内容。</p>
+<p>解决方案：可以在 open() 函数中使用 x 模式来代替 w 模式的方法来解决这个问题。</p>
+<p>如果文件是二进制的，使用 xb 来代替 xt</p>
+<p>讨论：一个替代方案是先测试这个文件是否存在。显而易见，使用 x 文件模式更加简单。</p>
+<p>要注意的是 x 模式是一个 Python3 对 open() 函数特有的扩展。 在 Python 的旧版本或者是 Python 实现的底层 C 函数库中都是没有这个模式的。</p>
+<h2 id="5.6-&#23383;&#31526;&#20018;&#30340;I-O&#25805;&#20316;">5.6 &#23383;&#31526;&#20018;&#30340;I-O&#25805;&#20316;<a class="anchor-link" href="#5.6-&#23383;&#31526;&#20018;&#30340;I-O&#25805;&#20316;">&#182;</a></h2><p>问题：想使用操作类文件对象的程序来操作文本或二进制字符串。</p>
+<p>解决方案：使用 io.StringIO() 和 io.BytesIO() 类来创建类文件对象操作字符串数据。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Hello World</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="mi">12</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;This is a test&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="mi">15</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Get all of the data written so far</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="s1">&#39;Hello World</span><span class="se">\n</span><span class="s1">This is a test</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Wrap a file interface around an existing string</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="s1">&#39;Hello</span><span class="se">\n</span><span class="s1">World</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="s1">&#39;Hell&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="s1">&#39;o</span><span class="se">\n</span><span class="s1">World</span><span class="se">\n</span><span class="s1">&#39;</span>
+</pre></div>
+<p><strong>io.StringIO 只能用于文本。如果你要操作二进制数据，要使用 io.BytesIO 类来代替</strong>。</p>
+<p>讨论： StringIO 和 BytesIO 可以用来模拟文件，比如在单元测试中，使用 StringIO 创建包含测试数据的类文件对象，这个对象可以被传给某个参数为普通文件对象的函数。</p>
+<p>需要注意的是， StringIO 和 BytesIO 实例并没有正确的整数类型的文件描述符。 因此，它们不能在那些需要使用真实的系统级文件如文件，管道或者是套接字的程序中使用。</p>
+<h2 id="5.7-&#35835;&#20889;&#21387;&#32553;&#25991;&#20214;">5.7 &#35835;&#20889;&#21387;&#32553;&#25991;&#20214;<a class="anchor-link" href="#5.7-&#35835;&#20889;&#21387;&#32553;&#25991;&#20214;">&#182;</a></h2><p>问题：想读写一个 gzip 或 bz2 格式的压缩文件。</p>
+<p>解决方案：gzip 和 bz2 模块可以很容易的处理这些文件。两个模块都为 open() 函数提供了另外的实现</p>
+<div class="highlight"><pre><span></span><span class="c1"># gzip compression</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;somefile.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># bz2 compression</span>
+<span class="kn">import</span> <span class="nn">bz2</span>
+<span class="k">with</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;somefile.bz2&#39;</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+<p>写入压缩数据，可以这样做：</p>
+<div class="highlight"><pre><span></span><span class="c1"># gzip compression</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;somefile.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># bz2 compression</span>
+<span class="kn">import</span> <span class="nn">bz2</span>
+<span class="k">with</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;somefile.bz2&#39;</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+<p>所有的 I/O 操作都使用文本模式并执行 Unicode 的编码/解码。使用 rb 或者 wb 文件模式操作二进制数据。</p>
+<p>讨论：gzip.open() 和 bz2.open() 接受跟内置的 open() 函数一样的参数， 包括 encoding，errors，newline 等等。当写入压缩数据时，可以使用 compresslevel 这个可选的关键字参数来指定一个压缩级别。</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;somefile.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">,</span> <span class="n">compresslevel</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+<p>默认的等级是 9，也是最高的压缩等级。等级越低性能越好，但是数据压缩程度也越低。</p>
+<p><strong>gzip.open() 和 bz2.open() 还有一个很少被知道的特性，可以作用在一个已存在并以二进制模式打开的文件上</strong>。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gzip</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somefile.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+<p>这样就允许 gzip 和 bz2 模块可以工作在许多类文件对象上，比如套接字，管道和内存中文件等。</p>
+<h2 id="5.8-&#22266;&#23450;&#22823;&#23567;&#35760;&#24405;&#30340;&#25991;&#20214;&#36845;&#20195;">5.8 &#22266;&#23450;&#22823;&#23567;&#35760;&#24405;&#30340;&#25991;&#20214;&#36845;&#20195;<a class="anchor-link" href="#5.8-&#22266;&#23450;&#22823;&#23567;&#35760;&#24405;&#30340;&#25991;&#20214;&#36845;&#20195;">&#182;</a></h2><p>问题：想在一个固定长度记录或者数据块的集合上迭代，而不是在一个文件中一行一行的迭代。</p>
+<p>解决方案：通过下面这个小技巧使用 iter 和 functools.partial() 函数：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="n">RECORD_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somefile.data&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">records</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="n">RECORD_SIZE</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+<p>records 对象是一个可迭代对象，它会不断的产生固定大小的数据块，直到文件末尾。 要注意的是如果总记录大小不是块大小的整数倍的话，最后一个返回元素的字节数会比期望值少。</p>
+<p>讨论：<strong>iter() 函数有一个鲜为人知的特性，如果你给它传递一个可调用对象和一个标记值，它会创建一个迭代器。这个迭代器会一直调用传入的可调用对象直到它返回标记值为止</strong></p>
+<p>在例子中， functools.partial 用来创建一个每次被调用时从文件中读取固定数目字节的可调用对象。 标记值 b'' 就是当到达文件结尾时的返回值。上面的例子中的文件时以二进制模式打开的。而对于文本文件，一行一行的读取(默认的迭代行为)更普遍点。</p>
+<h2 id="5.9-&#35835;&#21462;&#20108;&#36827;&#21046;&#25968;&#25454;&#21040;&#21487;&#21464;&#32531;&#20914;&#21306;&#20013;">5.9 &#35835;&#21462;&#20108;&#36827;&#21046;&#25968;&#25454;&#21040;&#21487;&#21464;&#32531;&#20914;&#21306;&#20013;<a class="anchor-link" href="#5.9-&#35835;&#21462;&#20108;&#36827;&#21046;&#25968;&#25454;&#21040;&#21487;&#21464;&#32531;&#20914;&#21306;&#20013;">&#182;</a></h2><p>问题：你想直接读取二进制数据到一个可变缓冲区中，而不需要做任何的中间复制操作。或者你想原地修改数据并将它写回到一个文件中去。</p>
+<p>解决方案：为了读取数据到一个可变数组中，使用文件对象的 readinto() 方法。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="k">def</span> <span class="nf">read_into_buffer</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span> <span class="c1"># 获取文件大小 字节数</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">readinto</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Write a sample file</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sample.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">buf</span> <span class="o">=</span> <span class="n">read_into_buffer</span><span class="p">(</span><span class="s1">&#39;sample.bin&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">buf</span>
+<span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hallo&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">buf</span>
+<span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hallo World&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;newsample.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mi">11</span>
+</pre></div>
+<p>讨论：<strong>文件对象的 readinto() 方法能被用来为预先分配内存的数组填充数据，甚至包括由 array 模块或 numpy 库创建的数组</strong>。可以用来避免大量的内存分配操作。</p>
+<p><strong>另外有一个有趣特性就是 memoryview ， 它可以通过零复制的方式对已存在的缓冲区执行切片操作，还能修改它的内容</strong></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">buf</span>
+<span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">memoryview</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">m1</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m2</span>
+<span class="o">&lt;</span><span class="n">memory</span> <span class="n">at</span> <span class="mh">0x100681390</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m2</span><span class="p">[:]</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;WORLD&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">buf</span>
+<span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello WORLD&#39;</span><span class="p">)</span>
+</pre></div>
+<p><strong>使用 f.readinto() 时需要注意的是，你必须检查它的返回值，也就是实际读取的字节数</strong>。如果字节数小于缓冲区大小，表明数据被截断或者被破坏了(比如你期望每次读取指定数量的字节)。最后，留心观察其他函数库和模块中与 into 相关的函数(比如 recv_into() ， pack_into() 等)。 Python 的很多其他部分已经能支持直接的 I/O 或数据访问操作，这些操作可被用来填充或修改数组和缓冲区内容。</p>
+<h2 id="5.10-&#20869;&#23384;&#26144;&#23556;&#30340;&#20108;&#36827;&#21046;&#25991;&#20214;">5.10 &#20869;&#23384;&#26144;&#23556;&#30340;&#20108;&#36827;&#21046;&#25991;&#20214;<a class="anchor-link" href="#5.10-&#20869;&#23384;&#26144;&#23556;&#30340;&#20108;&#36827;&#21046;&#25991;&#20214;">&#182;</a></h2><p>问题：你想内存映射一个二进制文件到一个可变字节数组中，目的可能是为了随机访问它的内容或者是原地做些修改。</p>
+<p>解决方案：使用 mmap 模块来内存映射文件。</p>
+<p>一个内存映射工厂函数</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">mmap</span>
+
+<span class="k">def</span> <span class="nf">memory_map</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="n">mmap</span><span class="o">.</span><span class="n">ACCESS_WRITE</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_RDWR</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mmap</span><span class="o">.</span><span class="n">mmap</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="n">access</span><span class="p">)</span>
+</pre></div>
+<p><strong>初始创建一个文件并将其内容扩充到指定大小</strong></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">memory_map</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="mi">1000000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Reassign a slice</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hello World&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Verify that changes were made</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span> <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+<span class="o">...</span>
+<span class="sa">b</span><span class="s1">&#39;Hello World&#39;</span>
+</pre></div>
+<p>mmap() 返回的 mmap 对象同样也可以作为一个上下文管理器来使用，这时候底层的文件会被自动关闭。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="n">memory_map</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">m</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<span class="o">...</span>
+<span class="mi">1000000</span>
+<span class="sa">b</span><span class="s1">&#39;Hello World&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">closed</span>
+<span class="bp">True</span>
+</pre></div>
+<p>默认情况下， memeory_map() 函数打开的文件同时支持读和写操作。任何的修改内容都会复制回原来的文件中。如果需要只读的访问模式，可以给参数 access 赋值为 mmap.ACCESS_READ 。如果不想将修改写回到原始文件中，可以使用 mmap.ACCESS_COPY</p>
+<p>讨论：为了随机访问文件的内容，使用 mmap 将文件映射到内存中是一个高效和优雅的方法。例如，你无需打开一个文件并执行大量的 seek() ， read() ， write() 调用， 只需要简单的映射文件并使用切片操作访问数据即可。</p>
+<p>一般来讲， mmap() 所暴露的内存看上去就是一个二进制数组对象。 但是，你可以使用一个内存视图来解析其中的数据。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">memory_map</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Memoryview of unsigned integers</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">memoryview</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x07\x00\x00\x00</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x07\x01\x00\x00</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">263</span>
+</pre></div>
+<p><strong>内存映射一个文件并不会导致整个文件被读取到内存中，操作系统仅仅为文件内容保留了一段虚拟内存。 当你访问文件的不同区域时，这些区域的内容才根据需要被读取并映射到内存区域中。 而那些从没被访问到的部分还是留在磁盘上</strong>。</p>
+<p>如果多个 Python 解释器内存映射同一个文件，得到的 mmap 对象能够被用来在解释器直接交换数据，所有解释器都能同时读写数据，并且其中一个解释器所做的修改会自动呈现在其他解释器中，这里需要考虑同步的问题。但是这种方法有时候可以用来在管道或套接字间传递数据。使用 mmap() 函数时会在底层有一些平台的差异性。</p>
+<h2 id="5.11-&#25991;&#20214;&#36335;&#24452;&#21517;&#30340;&#25805;&#20316;">5.11 &#25991;&#20214;&#36335;&#24452;&#21517;&#30340;&#25805;&#20316;<a class="anchor-link" href="#5.11-&#25991;&#20214;&#36335;&#24452;&#21517;&#30340;&#25805;&#20316;">&#182;</a></h2><p>问题：需要使用路径名来获取文件名，目录名，绝对路径等等。</p>
+<p>解决方案：使用 os.path 模块中的函数来操作路径名。</p>
+<p>os.path.basename(path)  # Get the last component of the path
+os.path.dirname(path)   # Get the directory name
+os.path.join('tmp', 'data', os.path.basename(path)) # Join path components together
+os.path.expanduser(path)  # Expand the user's home directory
+os.path.splitext(path)   # Split the file extension</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/beazley/Data/data.csv&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Get the last component of the path</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="s1">&#39;data.csv&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Get the directory name</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="s1">&#39;/Users/beazley/Data&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Join path components together</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+<span class="s1">&#39;tmp/data/data.csv&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Expand the user&#39;s home directory</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;~/Data/data.csv&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="s1">&#39;/Users/beazley/Data/data.csv&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Split the file extension</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;~/Data/data&#39;</span><span class="p">,</span> <span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+</pre></div>
+<p>讨论：对于任何的文件名的操作，你都应该使用 os.path 模块，而不是使用标准字符串操作来构造自己的代码。特别是为了可移植性考虑的时候更应如此，因为 os.path 模块知道Unix和Windows系统之间的差异</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.12-&#27979;&#35797;&#25991;&#20214;&#26159;&#21542;&#23384;&#22312;">5.12 &#27979;&#35797;&#25991;&#20214;&#26159;&#21542;&#23384;&#22312;<a class="anchor-link" href="#5.12-&#27979;&#35797;&#25991;&#20214;&#26159;&#21542;&#23384;&#22312;">&#182;</a></h2><p>测试一个文件或目录是否存在。</p>
+<p>使用 os.path.exists()</p>
+<p>还能进一步测试这个文件是什么类型的，如果测试的文件不存在，返回False</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Is a regular file</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Is a directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Is a symbolic link</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="s1">&#39;/usr/local/bin/python3&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the file linked to</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;E:\\_工作学习\\Basics\\Python\\Python-CookBook&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>os 模块还提供获取元数据(比如文件大小或者是修改日期)的方法</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span> <span class="c1">#文件大小</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-5-c69bb275c6bd&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>os<span class="ansi-yellow-intense-fg ansi-bold">.</span>path<span class="ansi-yellow-intense-fg ansi-bold">.</span>getsize<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#39;/etc/passwd&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-red-intense-fg ansi-bold">#文件大小</span>
+
+<span class="ansi-green-intense-fg ansi-bold">c:\users\twang\appdata\local\conda\conda\envs\py36\lib\genericpath.py</span> in <span class="ansi-cyan-fg">getsize</span><span class="ansi-blue-intense-fg ansi-bold">(filename)</span>
+<span class="ansi-green-fg">     48</span> <span class="ansi-green-intense-fg ansi-bold">def</span> getsize<span class="ansi-yellow-intense-fg ansi-bold">(</span>filename<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     49</span>     <span class="ansi-blue-intense-fg ansi-bold">&#34;&#34;&#34;Return the size of a file, reported by os.stat().&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 50</span><span class="ansi-yellow-intense-fg ansi-bold">     </span><span class="ansi-green-intense-fg ansi-bold">return</span> os<span class="ansi-yellow-intense-fg ansi-bold">.</span>stat<span class="ansi-yellow-intense-fg ansi-bold">(</span>filename<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>st_size
+<span class="ansi-green-fg">     51</span> 
+<span class="ansi-green-fg">     52</span> 
+
+<span class="ansi-red-intense-fg ansi-bold">FileNotFoundError</span>: [WinError 3] 系统找不到指定的路径。: &#39;/etc/passwd&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span> <span class="c1"># 修改时间</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 转换为人类时间</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>唯一需要注意的就是考虑文件权限的问题，特别是在获取元数据时候</p>
+<p>实际上，路径可以转换为 Path 对象，之后通过对象的方法实现上述功能</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+
+<span class="n">my_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">)</span>
+
+<span class="n">my_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_file</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.13-&#33719;&#21462;&#25991;&#20214;&#22841;&#20013;&#30340;&#25991;&#20214;&#21015;&#34920;">5.13 &#33719;&#21462;&#25991;&#20214;&#22841;&#20013;&#30340;&#25991;&#20214;&#21015;&#34920;<a class="anchor-link" href="#5.13-&#33719;&#21462;&#25991;&#20214;&#22841;&#20013;&#30340;&#25991;&#20214;&#21015;&#34920;">&#182;</a></h2><p>问题：你想获取文件系统中某个目录下的所有文件列表。</p>
+<p>解决方案：使用 os.listdir() 函数来获取某个目录中的文件列表。</p>
+<p>如果你需要通过某种方式过滤数据，可以考虑结合 os.path 库中的一些函数来使用列表推导。<strong>对于文件名匹配，可以使用 glob 或 fnmatch 模块</strong>。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="n">pyfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;somedir/*.py&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">fnmatch</span> <span class="kn">import</span> <span class="n">fnmatch</span>
+<span class="n">pyfiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;somedir&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fnmatch</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;*.py&#39;</span><span class="p">)]</span>
+</pre></div>
+<p>讨论：如果你还想获取其他的元信息，比如文件大小，修改时间等等， 你或许还需要使用到 os.path 模块中的函数或着 os.stat() 函数来收集数据。比如：</p>
+<div class="highlight"><pre><span></span><span class="c1"># Alternative: Get file metadata</span>
+<span class="n">file_metadata</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">pyfiles</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">meta</span> <span class="ow">in</span> <span class="n">file_metadata</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">st_size</span><span class="p">,</span> <span class="n">meta</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">)</span>
+</pre></div>
+<p>最后还有一点要注意的就是，有时候在处理文件名编码问题时候可能会出现一些问题。 通常来讲，函数 os.listdir() 返回的实体列表会根据系统默认的文件名编码来解码。但是有时候也会碰到一些不能正常解码的文件名。</p>
+<h2 id="5.14-&#24573;&#30053;&#25991;&#20214;&#21517;&#32534;&#30721;">5.14 &#24573;&#30053;&#25991;&#20214;&#21517;&#32534;&#30721;<a class="anchor-link" href="#5.14-&#24573;&#30053;&#25991;&#20214;&#21517;&#32534;&#30721;">&#182;</a></h2><p>问题：你想使用原始文件名执行文件的I/O操作，也就是说文件名并没有经过系统默认编码去解码或编码过。</p>
+<p>解决方案：默认情况下，所有的文件名都会根据 sys.getfilesystemencoding() 返回的文本编码来编码或解码。如果因为某种原因你想忽略这种编码，可以使用一个原始字节字符串来指定一个文件名即可。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Wrte a file using a unicode filename</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;jalape</span><span class="se">\xf1</span><span class="s1">o.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Spicy!&#39;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Directory listing (decoded)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;jalapeño.txt&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Directory listing (raw)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="c1"># Note: byte string</span>
+<span class="p">[</span><span class="sa">b</span><span class="s1">&#39;jalapen</span><span class="se">\xcc\x83</span><span class="s1">o.txt&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Open file with raw filename</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;jalapen</span><span class="se">\xcc\x83</span><span class="s1">o.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="o">...</span>
+</pre></div>
+<p>Spicy!
+讨论：有些操作系统允许用户通过偶然或恶意方式去创建名字不符合默认编码的文件。读取目录并通过原始未解码方式处理文件名可以有效的避免这样的问题，尽管这样会带来一定的编程难度。</p>
+<h2 id="5.15-&#25171;&#21360;&#19981;&#21512;&#27861;&#30340;&#25991;&#20214;&#21517;">5.15 &#25171;&#21360;&#19981;&#21512;&#27861;&#30340;&#25991;&#20214;&#21517;<a class="anchor-link" href="#5.15-&#25171;&#21360;&#19981;&#21512;&#27861;&#30340;&#25991;&#20214;&#21517;">&#182;</a></h2><p>问题：你的程序获取了一个目录中的文件名列表，但是当它试着去打印文件名的时候程序崩溃，出现了 UnicodeEncodeError 异常和一条奇怪的消息 surrogates not allowed 。</p>
+<p>解决方案：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bad_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">bad_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+</pre></div>
+<p>讨论：当执行类似 os.listdir() 这样的函数时，不合规范的文件名会让Python陷入困境。 一方面，它不能仅仅只是丢弃这些不合格的名字。而另一方面，它又不能将这些文件名转换为正确的文本字符串。Python 对这个问题的解决方案是从文件名中获取未解码的字节值比如 <code>\xhh</code> 并将它映射成Unicode字符 <code>\udchh</code> 表示的所谓的”代理编码”。可以使用一些技术来处理这个问题，但一般不会需要这样的技术。</p>
+
+<pre><code>surrogateescape:
+这种是Python在绝大部分面向OS的API中所使用的错误处理器，
+它能以一种优雅的方式处理由操作系统提供的数据的编码问题。
+在解码出错时会将出错字节存储到一个很少被使用到的Unicode编码范围内。
+在编码时将那些隐藏值又还原回原先解码失败的字节序列。
+它不仅对于OS API非常有用，也能很容易的处理其他情况下的编码错误。
+
+</code></pre>
+<h2 id="5.16-&#22686;&#21152;&#25110;&#25913;&#21464;&#24050;&#25171;&#24320;&#25991;&#20214;&#30340;&#32534;&#30721;">5.16 &#22686;&#21152;&#25110;&#25913;&#21464;&#24050;&#25171;&#24320;&#25991;&#20214;&#30340;&#32534;&#30721;<a class="anchor-link" href="#5.16-&#22686;&#21152;&#25110;&#25913;&#21464;&#24050;&#25171;&#24320;&#25991;&#20214;&#30340;&#32534;&#30721;">&#182;</a></h2><p>问题：你想在不关闭一个已打开的文件前提下增加或改变它的 Unicode 编码。</p>
+<p>解决方案：如果你想给一个以二进制模式打开的文件添加 Unicode 编码/解码方式，可以使用 io.TextIOWrapper() 对象包装它。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://www.python.org&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+<p><strong>如果你想修改一个已经打开的文本模式的文件的编码方式，可以先使用 detach() 方法移除掉已存在的文本编码层，并使用新的编码方式代替</strong>。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span>
+<span class="s1">&#39;UTF-8&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span>
+<span class="s1">&#39;latin-1&#39;</span>
+</pre></div>
+<p>讨论：I/O系统由一系列的层次构建而成。</p>
+<p>io.TextIOWrapper 是一个编码和解码 Unicode 的文本处理层，io.BufferedWriter 是一个处理二进制数据的带缓冲的 I/O 层， io.FileIO 是一个表示操作系统底层文件描述符的原始文件。增加或改变文本编码会涉及增加或改变最上面的 io.TextIOWrapper 层。试试看层次结构</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">TextIOWrapper</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">buffer</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">BufferedWriter</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">raw</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">FileIO</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wb&#39;</span><span class="o">&gt;</span>
+</pre></div>
+<p><strong>像上面例子这样通过访问属性值来直接操作不同的层是很不安全的</strong>。 例如，如果你试着使用下面这样的技术改变编码看看会发生什么：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">TextIOWrapper</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">TextIOWrapper</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+    <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">operation</span> <span class="n">on</span> <span class="n">closed</span> <span class="nb">file</span><span class="o">.</span>
+</pre></div>
+<p>结果出错了，因为 f 的原始值已经被破坏了并关闭了底层的文件。</p>
+<p>detach() 方法会断开文件的最顶层并返回第二层，之后最顶层就没什么用了。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">TextIOWrapper</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+<span class="o">&lt;</span><span class="n">_io</span><span class="o">.</span><span class="n">BufferedWriter</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample.txt&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+    <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">underlying</span> <span class="nb">buffer</span> <span class="n">has</span> <span class="n">been</span> <span class="n">detached</span>
+</pre></div>
+<p>一旦断开最顶层后，你就可以给返回结果添加一个新的最顶层。比如：</p>
+<blockquote><blockquote><blockquote><p>f = io.TextIOWrapper(b, encoding='latin-1')</p>
+</blockquote>
+</blockquote>
+<p>你还可以利用这种技术来改变文件行处理、错误机制以及文件处理的其他方面。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span>
+<span class="o">...</span>                             <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;xmlcharrefreplace&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Jalape</span><span class="se">\u00f1</span><span class="s1">o&#39;</span><span class="p">)</span>
+<span class="n">Jalape</span><span class="o">&amp;</span><span class="c1">#241;o</span>
+</pre></div>
+<h2 id="5.17-&#23558;&#23383;&#33410;&#20889;&#20837;&#25991;&#26412;&#25991;&#20214;">5.17 &#23558;&#23383;&#33410;&#20889;&#20837;&#25991;&#26412;&#25991;&#20214;<a class="anchor-link" href="#5.17-&#23558;&#23383;&#33410;&#20889;&#20837;&#25991;&#26412;&#25991;&#20214;">&#182;</a></h2><p>问题：想在文本模式打开的文件中写入原始的字节数据</p>
+<p>解决方案：将字节数据直接写入文件的缓冲区即可</p>
+<p>直接写入会要求 str 类型的变量，但是可以将字节数据写入缓冲区</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+    <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">must</span> <span class="n">be</span> <span class="nb">str</span><span class="p">,</span> <span class="ow">not</span> <span class="nb">bytes</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+<p>类似的，<strong>能够通过读取文本文件的 buffer 属性来读取二进制数据</strong>。</p>
+<p>讨论：<strong>I/O 系统以层级结构的形式构建而成。 文本文件是通过在一个拥有缓冲的二进制模式文件上增加一个 Unicode编码/解码层来创建。buffer 属性指向对应的底层文件，如果你直接访问它的话就会绕过文本编码/解码层</strong>。sys.stdout 默认以文本模式打开。</p>
+<h2 id="5.18-&#23558;&#25991;&#20214;&#25551;&#36848;&#31526;&#21253;&#35013;&#25104;&#25991;&#20214;&#23545;&#35937;">5.18 &#23558;&#25991;&#20214;&#25551;&#36848;&#31526;&#21253;&#35013;&#25104;&#25991;&#20214;&#23545;&#35937;<a class="anchor-link" href="#5.18-&#23558;&#25991;&#20214;&#25551;&#36848;&#31526;&#21253;&#35013;&#25104;&#25991;&#20214;&#23545;&#35937;">&#182;</a></h2><p>问题：你有一个对应于操作系统上一个已打开的 I/O 通道(比如文件、管道、套接字等)的整型文件描述符，你想将它包装成一个更高层的 Python 文件对象。</p>
+<p>解决方案：一个文件描述符和一个打开的普通文件是不一样的。 文件描述符仅仅是一个由操作系统指定的整数，用来指代某个系统的 I/O 通道。可以通过使用 open() 函数来将其包装为一个 Python 的文件对象。</p>
+<div class="highlight"><pre><span></span><span class="c1"># Open a low-level file descriptor</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;somefile.txt&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_WRONLY</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_CREAT</span><span class="p">)</span>
+
+<span class="c1"># Turn into a proper file</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello world</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<p>当高层的文件对象被关闭或者破坏的时候，底层的文件描述符也会被关闭。可以通过可选参数 colsefd=False 取消这一特性</p>
+<div class="highlight"><pre><span></span><span class="c1"># Create a file object, but don&#39;t close underlying fd when done</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">,</span> <span class="n">closefd</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+<p>讨论：在 Unix 系统中，这种包装文件描述符的技术可以很方便的将一个类文件接口作用于一个以不同方式打开的 I/O 通道上， 如管道、套接字等。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="n">socket</span><span class="p">,</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span>
+
+<span class="k">def</span> <span class="nf">echo_client</span><span class="p">(</span><span class="n">client_sock</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Got connection from&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+
+    <span class="c1"># Make text-mode file wrappers for socket reading/writing</span>
+    <span class="n">client_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">client_sock</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="s1">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">,</span>
+                <span class="n">closefd</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">client_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">client_sock</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="s1">&#39;wt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">,</span>
+                <span class="n">closefd</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="c1"># Echo lines back to the client using file I/O</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">client_in</span><span class="p">:</span>
+        <span class="n">client_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">client_out</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="n">client_sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">echo_server</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">client</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="n">echo_client</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+</pre></div>
+<p>上面的例子仅仅是为了演示内置的 open() 函数的一个特性，并且也只适用于基于 Unix 的系统。 如果你想将一个类文件接口作用在一个套接字并希望你的代码可以跨平台，请使用套接字对象的 makefile() 方法。但是如果不考虑可移植性的话，那上面的解决方案会比使用 makefile() 性能更好一点。你也可以使用这种技术来构造一个别名，允许以不同于第一次打开文件的方式使用它。演示如何创建一个文件对象，它允许你<strong>输出二进制数据到标准输出</strong>(通常以文本模式打开)：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="c1"># Create a binary-mode file for stdout</span>
+<span class="n">bstdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="s1">&#39;wb&#39;</span><span class="p">,</span> <span class="n">closefd</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">bstdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello World</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">bstdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</pre></div>
+<p>尽管可以将一个已存在的文件描述符包装成一个正常的文件对象， 但是要注意的是并不是所有的文件模式都被支持，并且某些类型的文件描述符可能会有副作用 (特别是涉及到错误处理、文件结尾条件等等的时候)。 在不同的操作系统上这种行为也是不一样，特别的，<strong>上面的例子都不能在非 Unix 系统上运行</strong>。</p>
+<h2 id="5.19-&#21019;&#24314;&#20020;&#26102;&#25991;&#20214;&#21644;&#25991;&#20214;&#22841;">5.19 &#21019;&#24314;&#20020;&#26102;&#25991;&#20214;&#21644;&#25991;&#20214;&#22841;<a class="anchor-link" href="#5.19-&#21019;&#24314;&#20020;&#26102;&#25991;&#20214;&#21644;&#25991;&#20214;&#22841;">&#182;</a></h2><p>问题：你需要在程序执行时创建一个临时文件或目录，并希望使用完之后可以自动销毁掉。</p>
+<p>解决方案：tempfile 模块中有很多的函数可以完成这任务。可以使用 tempfile.TemporaryFile</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryFile</span>
+
+<span class="k">with</span> <span class="n">TemporaryFile</span><span class="p">(</span><span class="s1">&#39;w+t&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># Read/write to the file</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Hello World</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Testing</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Seek back to beginning and read the data</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># Temporary file is destroyed</span>
+</pre></div>
+<p>TemporaryFile() 的第一个参数是文件模式，通常来讲文本模式使用 w+t ，二进制模式使用 w+b 。 这个模式同时支持读和写操作 TemporaryFile() 另外还支持跟内置的 open() 函数一样的参数。</p>
+<p>在大多数Unix系统上，通过 TemporaryFile() 创建的文件都是匿名的，甚至连目录都没有，可以使用 NamedTemporaryFile() 来创建具名的临时文件。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+
+<span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="s1">&#39;w+t&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;filename is:&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="o">...</span>
+
+<span class="c1"># File automatically destroyed</span>
+</pre></div>
+<p>这里，被打开文件的 f.name 属性包含了该临时文件的文件名。 当你需要将文件名传递给其他代码来打开这个文件的时候，这个就很有用了。 和 TemporaryFile() 一样，结果文件关闭时会被自动删除掉。可以通过关键字参数 delte=False 取消这一特性。</p>
+<p>使用 tempfile.TemporaryDirectory() 创建临时目录</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">dirname</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;dirname is:&#39;</span><span class="p">,</span> <span class="n">dirname</span><span class="p">)</span>
+    <span class="c1"># Use the directory</span>
+    <span class="o">...</span>
+<span class="c1"># Directory and all contents destroyed</span>
+</pre></div>
+<p>讨论
+TemporaryFile() 、NamedTemporaryFile() 和 TemporaryDirectory() 函数 应该是处理临时文件目录的最简单的方式了，因为它们会自动处理所有的创建和清理步骤。
+在一个更低的级别，你可以使用 mkstemp() 和 mkdtemp() 来创建临时文件和目录。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;/var/folders/7W/7WZl5sfZEF0pljrEB1UMWE+++TI/-Tmp-/tmp7fefhv&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="s1">&#39;/var/folders/7W/7WZl5sfZEF0pljrEB1UMWE+++TI/-Tmp-/tmp5wvcv6&#39;</span>
+</pre></div>
+<p>但是，这些函数并不会做进一步的管理了。函数 mkstemp() 仅仅就返回一个原始的OS文件描述符，你需要自己将它转换为一个真正的文件对象。要自己清理这些文件。</p>
+<p>使用 tempfile.gettempdir() 函数获取真实的位置</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+<span class="s1">&#39;/var/folders/7W/7WZl5sfZEF0pljrEB1UMWE+++TI/-Tmp-&#39;</span>
+</pre></div>
+<p>所有和临时文件相关的函数都允许你通过使用关键字参数 prefix 、suffix 和 dir 来自定义目录以及命名规则。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;mytemp&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;/tmp&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+<span class="s1">&#39;/tmp/mytemp8ee899.txt&#39;</span>
+</pre></div>
+<h2 id="5.20-&#19982;&#20018;&#34892;&#31471;&#21475;&#30340;&#25968;&#25454;&#36890;&#20449;">5.20 &#19982;&#20018;&#34892;&#31471;&#21475;&#30340;&#25968;&#25454;&#36890;&#20449;<a class="anchor-link" href="#5.20-&#19982;&#20018;&#34892;&#31471;&#21475;&#30340;&#25968;&#25454;&#36890;&#20449;">&#182;</a></h2><p>问题：你想通过串行端口读写数据，典型场景就是和一些硬件设备打交道(比如一个机器人或传感器)。</p>
+<p>解决方案：尽管你可以通过使用Python内置的I/O模块来完成这个任务，但对于串行通信最好的选择是使用 pySerial包。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">serial</span>
+<span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s1">&#39;/dev/tty.usbmodem641&#39;</span><span class="p">,</span> <span class="c1"># Device name varies</span>
+                    <span class="n">baudrate</span><span class="o">=</span><span class="mi">9600</span><span class="p">,</span>
+                    <span class="n">bytesize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                    <span class="n">parity</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span>
+                    <span class="n">stopbits</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<p>在Windows系统上，你可以使用 0, 1 等表示的一个设备来打开通信端口 ”COM0” 和 ”COM1”。 一旦端口打开，那就可以使用 read()，readline() 和 write() 函数读写数据了。还有一些其他参数，缓冲区等待时间之类的参考文档。</p>
+<div class="highlight"><pre><span></span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;G1 X50 Y50</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</pre></div>
+<p>讨论：推荐你使用第三方包如 pySerial 的一个原因是它提供了对高级特性的支持 (比如超时，控制流，缓冲区刷新，握手协议等等)。举个例子，如果你想启用 RTS-CTS 握手协议， 你只需要给 Serial() 传递一个 rtscts=True 的参数即可。时刻记住所有涉及到串口的I/O都是二进制模式的。因此，确保你的代码使用的是字节而不是文本 (或有时候执行文本的编码/解码操作)。 另外当你需要创建二进制编码的指令或数据包的时候，struct 模块也是非常有用的。</p>
+<h2 id="5.21-&#24207;&#21015;&#21270;Python&#23545;&#35937;">5.21 &#24207;&#21015;&#21270;Python&#23545;&#35937;<a class="anchor-link" href="#5.21-&#24207;&#21015;&#21270;Python&#23545;&#35937;">&#182;</a></h2><p>问题：需要将一个Python对象序列化为一个字节流，以便将它保存到一个文件、存储到数据库或者通过网络传输它。</p>
+<p>解决方案：对于序列化最普遍的做法就是使用 pickle 模块。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Some Python object</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somefile&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+<p>为了将一个对象转储为一个字符串，可以使用 pickle.dumps() ：</p>
+<div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+<p>为了从字节流中恢复一个对象，使用 picle.load() 或 pickle.loads() 函数。</p>
+<div class="highlight"><pre><span></span><span class="c1"># Restore from a file</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somefile&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Restore from a string</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+<p>讨论：pickle 是一种 Python 特有的自描述的数据编码。通过自描述，被序列化后的数据包含每个对象开始和结束以及它的类型信息。因此，你无需担心对象记录的定义，它总是能工作。</p>
+<p>处理多个对象</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somedata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;Apple&#39;</span><span class="p">,</span> <span class="s1">&#39;Pear&#39;</span><span class="p">,</span> <span class="s1">&#39;Banana&#39;</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;somedata&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="s1">&#39;hello&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;Apple&#39;</span><span class="p">,</span> <span class="s1">&#39;Pear&#39;</span><span class="p">,</span> <span class="s1">&#39;Banana&#39;</span><span class="p">}</span>
+</pre></div>
+<p>你还能序列化函数，类，还有接口，但是结果数据仅仅将它们的名称编码成对应的代码对象。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pickle.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x80\x03</span><span class="s1">cmath</span><span class="se">\n</span><span class="s1">cos</span><span class="se">\n</span><span class="s1">q</span><span class="se">\x00</span><span class="s1">.&#39;</span>
+</pre></div>
+<p>当数据反序列化回来的时候，会先假定所有的源数据是可用的。模块、类和函数会自动按需导入进来。对于 Python 数据被不同机器上的解析器所共享的应用程序而言，数据的保存可能会有问题，因为所有的机器都必须访问同一个源代码。</p>
+
+<pre><code>千万不要对不信任的数据使用pickle.load()。
+pickle在加载时有一个副作用就是它会自动加载相应模块并构造实例对象。
+但是某个坏人如果知道pickle的工作原理，
+他就可以创建一个恶意的数据导致Python执行随意指定的系统命令。
+因此，一定要保证pickle只在相互之间可以认证对方的解析器的内部使用。
+
+</code></pre>
+<p>有些类型的对象是不能被序列化的。这些通常是那些依赖外部系统状态的对象，比如打开的文件，网络连接，线程，进程，栈帧等等。 用户自定义类可以通过提供 <code>__getstate__()</code> 和<code>__setstate__()</code> 方法来绕过这些限制。 如果定义了这两个方法，pickle.dump() 就会调用 <code>__getstate__()</code> 获取序列化的对象。 类似的，<code>__setstate__()</code> 在反序列化时被调用。</p>
+<div class="highlight"><pre><span></span><span class="c1"># countdown.py</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">Countdown</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thr</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thr</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;T-minus&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+
+    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+<p>pickle 对于大型的数据结构比如使用 array 或 numpy 模块创建的二进制数组效率并不是一个高效的编码方式。 如果你需要移动大量的数组数据，你最好是先在一个文件中将其保存为数组数据块或使用更高级的标准编码方式如 HDF5 (需要第三方库的支持)。由于 pickle 是 Python 特有的并且附着在源码上，所有如果需要长期存储数据的时候不应该选用它。对于在数据库和存档文件中存储数据时，你最好使用更加标准的数据编码格式如 XML，CSV 或 JSON。这些编码格式更标准，可以被不同的语言支持，并且也能很好的适应源码变更。最后一点要注意的是 <strong>pickle 有大量的配置选项和一些棘手的问题</strong>。</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/pythoncookbook-note-4.html" title="Previous: PythonCookbook笔记(4)-迭代器与生成器">PythonCookbook笔记(4)-迭代器与生成器</a></li>
+                <li class="next-article"><a href="//zodiac911.github.io/blog/pythoncookbook-note-6.html" title="Next: PythonCookbook笔记(6)-数据编码和处理">PythonCookbook笔记(6)-数据编码和处理</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2019-06-21T00:00:00+08:00">Jun 21, 2019</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#pythoncookbook-ref">PythonCookbook
+                    <span>10</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>

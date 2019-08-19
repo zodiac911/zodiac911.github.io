@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="PythonCookbook笔记(3)-日期和时间
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="PythonCookbook, posts, " />
+
+<meta property="og:title" content="PythonCookbook笔记(3)-日期和时间 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/pythoncookbook-note-3.html" />
+<meta property="og:description" content="PythonCookbook笔记(3)-日期和时间" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2019-06-19T00:00:00+08:00" />
+<meta name="twitter:title" content="PythonCookbook笔记(3)-日期和时间 ">
+<meta name="twitter:description" content="PythonCookbook笔记(3)-日期和时间">
+
+        <title>PythonCookbook笔记(3)-日期和时间  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/pythoncookbook-note-3.html"> PythonCookbook笔记(3)-日期和时间  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python CookBook 学习笔记</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#第三章-数字日期和时间" data-toc-modified-id="第三章-数字日期和时间-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>第三章 数字日期和时间</a></span><ul class="toc-item"><li><span><a href="#3.1-数字的四舍五入" data-toc-modified-id="3.1-数字的四舍五入-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>3.1 数字的四舍五入</a></span></li><li><span><a href="#3.2-执行精确的浮点数运算" data-toc-modified-id="3.2-执行精确的浮点数运算-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>3.2 执行精确的浮点数运算</a></span></li><li><span><a href="#3.3-数字的格式化输出" data-toc-modified-id="3.3-数字的格式化输出-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>3.3 数字的格式化输出</a></span></li><li><span><a href="#3.4-二八十六进制整数" data-toc-modified-id="3.4-二八十六进制整数-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>3.4 二八十六进制整数</a></span></li><li><span><a href="#3.5-字节到大整数的打包与解包" data-toc-modified-id="3.5-字节到大整数的打包与解包-1.5"><span class="toc-item-num">1.5&nbsp;&nbsp;</span>3.5 字节到大整数的打包与解包</a></span></li><li><span><a href="#3.6-复数的数学运算" data-toc-modified-id="3.6-复数的数学运算-1.6"><span class="toc-item-num">1.6&nbsp;&nbsp;</span>3.6 复数的数学运算</a></span></li><li><span><a href="#3.7-无穷大与NaN" data-toc-modified-id="3.7-无穷大与NaN-1.7"><span class="toc-item-num">1.7&nbsp;&nbsp;</span>3.7 无穷大与NaN</a></span></li><li><span><a href="#3.8-分数运算" data-toc-modified-id="3.8-分数运算-1.8"><span class="toc-item-num">1.8&nbsp;&nbsp;</span>3.8 分数运算</a></span></li><li><span><a href="#3.9-大型数组运算" data-toc-modified-id="3.9-大型数组运算-1.9"><span class="toc-item-num">1.9&nbsp;&nbsp;</span>3.9 大型数组运算</a></span></li><li><span><a href="#3.10-矩阵与线性代数运算" data-toc-modified-id="3.10-矩阵与线性代数运算-1.10"><span class="toc-item-num">1.10&nbsp;&nbsp;</span>3.10 矩阵与线性代数运算</a></span></li><li><span><a href="#3.11-随机选择" data-toc-modified-id="3.11-随机选择-1.11"><span class="toc-item-num">1.11&nbsp;&nbsp;</span>3.11 随机选择</a></span></li><li><span><a href="#3.12-基本的日期与时间转换" data-toc-modified-id="3.12-基本的日期与时间转换-1.12"><span class="toc-item-num">1.12&nbsp;&nbsp;</span>3.12 基本的日期与时间转换</a></span></li><li><span><a href="#3.13-计算最后一个周五的日期" data-toc-modified-id="3.13-计算最后一个周五的日期-1.13"><span class="toc-item-num">1.13&nbsp;&nbsp;</span>3.13 计算最后一个周五的日期</a></span></li><li><span><a href="#3.14-计算当前月份的日期范围" data-toc-modified-id="3.14-计算当前月份的日期范围-1.14"><span class="toc-item-num">1.14&nbsp;&nbsp;</span>3.14 计算当前月份的日期范围</a></span></li><li><span><a href="#3.15-字符串转换为日期" data-toc-modified-id="3.15-字符串转换为日期-1.15"><span class="toc-item-num">1.15&nbsp;&nbsp;</span>3.15 字符串转换为日期</a></span></li><li><span><a href="#3.16-结合时区的日期操作" data-toc-modified-id="3.16-结合时区的日期操作-1.16"><span class="toc-item-num">1.16&nbsp;&nbsp;</span>3.16 结合时区的日期操作</a></span></li></ul></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#31532;&#19977;&#31456;-&#25968;&#23383;&#26085;&#26399;&#21644;&#26102;&#38388;">&#31532;&#19977;&#31456; &#25968;&#23383;&#26085;&#26399;&#21644;&#26102;&#38388;<a class="anchor-link" href="#&#31532;&#19977;&#31456;-&#25968;&#23383;&#26085;&#26399;&#21644;&#26102;&#38388;">&#182;</a></h1><h2 id="3.1-&#25968;&#23383;&#30340;&#22235;&#33293;&#20116;&#20837;">3.1 &#25968;&#23383;&#30340;&#22235;&#33293;&#20116;&#20837;<a class="anchor-link" href="#3.1-&#25968;&#23383;&#30340;&#22235;&#33293;&#20116;&#20837;">&#182;</a></h2><p>实际上好像四舍五不一定入</p>
+<p>问题：你想对浮点数执行指定精度的舍入运算。</p>
+<p>解决方案：对于简单的舍入运算，使用内置的 round(value, ndigits) 函数即可。比如：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.23</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mf">1.2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.27</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mf">1.3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="mf">1.27</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">1.3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.25361</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="mf">1.254</span>
+</pre></div>
+<p><strong>当一个值刚好在两个边界的中间的时候， round 函数返回离它最近的偶数。 也就是说，对1.5或者2.5的舍入运算都会得到2</strong>。传给 round() 函数的 ndigits 参数可以是负数，这种情况下， 舍入运算会作用在十位、百位、千位等上面。比如：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1627731</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">1627730</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">1627700</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">1628000</span>
+</pre></div>
+<p>讨论：不要将舍入和格式化输出搞混淆了。如果需要输出一定宽度的数，你不需要使用 round() 函数。只需要在格式化的时候指定精度。同样，不要试着去舍入浮点值来”修正”表面上看起来正确的问题。比如，你可能倾向于这样做：Dont't do this</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">2.1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">4.2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
+<span class="mf">6.300000000000001</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># &quot;Fix&quot; result (???)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
+<span class="mf">6.3</span>
+</pre></div>
+<p>对于大多数使用到浮点的程序，没有必要也不推荐这样做。 尽管在计算的时候会有一点点小的误差，但是这些小的误差是能被理解与容忍的。 如果不能允许这样的小误差(比如涉及到金融领域)，那么就得考虑使用 decimal 模块了</p>
+<h2 id="3.2-&#25191;&#34892;&#31934;&#30830;&#30340;&#28014;&#28857;&#25968;&#36816;&#31639;">3.2 &#25191;&#34892;&#31934;&#30830;&#30340;&#28014;&#28857;&#25968;&#36816;&#31639;<a class="anchor-link" href="#3.2-&#25191;&#34892;&#31934;&#30830;&#30340;&#28014;&#28857;&#25968;&#36816;&#31639;">&#182;</a></h2><p>问题：你需要对浮点数执行精确的计算操作，并且不希望有任何小误差的出现。</p>
+<p>解决方案：浮点数的一个普遍问题是它们并不能精确的表示十进制数。并且，即使是最简单的数学运算也会产生小的误差。这些错误是由底层 CPU 和 IEEE 754 标准通过浮点单位去执行算术时的特征。由于 Python 的浮点数据类型使用底层表示存储数据，因此没办法去避免这样的误差。如果需要更加精确(并能容忍一定的性能损耗)，你可以使用 decimal 模块：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;4.2&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2.1&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;6.3&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="mf">6.3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;6.3&#39;</span><span class="p">)</span>
+<span class="bp">True</span>
+</pre></div>
+<p>Decimal 对象会像普通浮点数一样的工作，用起来跟普通数字没什么两样。decimal 模块的一个主要特征是允许你控制计算的每一方面，包括数字位数和四舍五入运算。先得创建一个本地上下文并更改它的设置。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">localcontext</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.3&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.7&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<span class="mf">0.7647058823529411764705882353</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="n">localcontext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">ctx</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mf">0.765</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="n">localcontext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">ctx</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mf">0.76470588235294117647058823529411764705882352941176</span>
+</pre></div>
+<p>讨论：decimal 模块实现了 IBM 的”通用小数运算规范”。</p>
+<p>Python 新手会倾向于使用 decimal 模块来处理浮点数的精确运算。然而，先理解你的应用程序目的是非常重要的。如果你是在做科学计算或工程领域的计算、电脑绘图，或者是科学领域的大多数运算， 那么使用普通的浮点类型是比较普遍的做法。</p>
+<ul>
+<li>在真实世界中很少会要求精确到普通浮点数能提供的17位精度。 因此，计算过程中的那么一点点的误差是被允许的。</li>
+<li>第二点，原生的浮点数计算要快的多，有时候你在执行大量运算的时候速度也是非常重要的。</li>
+</ul>
+<p>注意下 减法删除 以及 大数和小数 的加法运算所带来的影响。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.23e+18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.23e+18</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="c1"># Notice how 1 disappears</span>
+<span class="mf">0.0</span>
+</pre></div>
+<p>上面的错误可以利用 math.fsum() 所提供的更精确计算能力来解决：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">fsum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="mf">1.0</span>
+</pre></div>
+<p>总的来说， decimal 模块主要用在涉及到金融的领域，平时不太可能需要。</p>
+<h2 id="3.3-&#25968;&#23383;&#30340;&#26684;&#24335;&#21270;&#36755;&#20986;">3.3 &#25968;&#23383;&#30340;&#26684;&#24335;&#21270;&#36755;&#20986;<a class="anchor-link" href="#3.3-&#25968;&#23383;&#30340;&#26684;&#24335;&#21270;&#36755;&#20986;">&#182;</a></h2><p>问题：你需要将数字格式化后输出，并控制数字的位数、对齐、千位分隔符和其他的细节。</p>
+<p>解决方案：格式化输出单个数字的时候，可以使用内置的 format() 函数。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">1234.56789</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;0,.1f&#39;</span><span class="p">)</span>
+<span class="s1">&#39;1,234.6&#39;</span>
+</pre></div>
+<p>如果你想使用指数记法，将f改成e或者E(取决于指数输出的大小写形式)。比如：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
+<span class="s1">&#39;1.234568e+03&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;0.2E&#39;</span><span class="p">)</span>
+<span class="s1">&#39;1.23E+03&#39;</span>
+</pre></div>
+<p><strong>指定宽度和精度的一般形式是 '[&lt;&gt;^]?width[,]?(.digits)?'</strong>， 其中 width 和 digits 为整数，？代表可选部分。 同样的格式也被用在字符串的 format() 方法中。比如：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;The value is {:0,.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="s1">&#39;The value is 1,234.57&#39;</span>
+</pre></div>
+<p>讨论：数字格式化输出通常是比较简单的。上面演示的技术同时适用于浮点数和 decimal 模块中的 Decimal 数字对象。当指定数字的位数后，结果值会根据 round() 函数同样的规则进行四舍五入后返回。包含千位符的格式化跟本地化没有关系。 如果你需要根据地区来显示千位符，你需要自己去调查下 locale 模块中的函数了。 你同样也可以使用字符串的 translate() 方法来交换千位符。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">swap_separators</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span><span class="s1">&#39;.&#39;</span> <span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">swap_separators</span><span class="p">)</span>
+<span class="s1">&#39;1.234,56789&#39;</span>
+</pre></div>
+<p>不要使用 % 格式化输出</p>
+<h2 id="3.4-&#20108;&#20843;&#21313;&#20845;&#36827;&#21046;&#25972;&#25968;">3.4 &#20108;&#20843;&#21313;&#20845;&#36827;&#21046;&#25972;&#25968;<a class="anchor-link" href="#3.4-&#20108;&#20843;&#21313;&#20845;&#36827;&#21046;&#25972;&#25968;">&#182;</a></h2><p>问题：二进制、八进制、十六进制的相互转换</p>
+<p>解决方案：为了将整数转换为二进制、八进制或十六进制的文本串， 可以分别使用 bin() , oct() 或 hex() 函数。另外，如果你不想输出 0b , 0o 或者 0x 的前缀的话，可以使用 format() 函数。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="s1">&#39;10011010010&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="s1">&#39;2322&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="s1">&#39;4d2&#39;</span>
+</pre></div>
+<p>整数是有符号的，所以如果你在处理负数的话，输出结果会包含一个负号。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1234</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="s1">&#39;-10011010010&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="s1">&#39;-4d2&#39;</span>
+</pre></div>
+<p>复数转换的二进制码并不是计算机中实际存储的补码，<strong>如果要转换为补码，需要增加一个指示最大位长度的值</strong>。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1234</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="s1">&#39;11111111111111111111101100101110&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="s1">&#39;fffffb2e&#39;</span>
+</pre></div>
+<p>为了以不同的进制转换整数字符串，使用带有进制的 int() 函数即可。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;4d2&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="mi">1234</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;10011010010&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">1234</span>
+</pre></div>
+<p>讨论：使用八进制的程序员有一点需要注意下。 Python 指定八进制数的语法跟其他语言稍有不同。需确保八进制数的前缀是 0o</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="s1">&#39;script.py&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="n">o755</span><span class="p">)</span>
+</pre></div>
+<h2 id="3.5-&#23383;&#33410;&#21040;&#22823;&#25972;&#25968;&#30340;&#25171;&#21253;&#19982;&#35299;&#21253;">3.5 &#23383;&#33410;&#21040;&#22823;&#25972;&#25968;&#30340;&#25171;&#21253;&#19982;&#35299;&#21253;<a class="anchor-link" href="#3.5-&#23383;&#33410;&#21040;&#22823;&#25972;&#25968;&#30340;&#25171;&#21253;&#19982;&#35299;&#21253;">&#182;</a></h2><p>问题：你有一个字节字符串并想将它解压成一个整数。或者，你需要将一个大整数转换为一个字节字符串。</p>
+<p>解决方案：为了将 bytes 解析为整数，使用 int.from_bytes() 方法，并像下面这样指定字节顺序：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="mi">16</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+<span class="mi">69120565665751139577663547927094891008</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+<span class="mi">94522842520747284487117727783387188</span>
+</pre></div>
+<p>为了将一个大整数转换为一个字节字符串，使用 int.to_bytes() 方法，</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">94522842520747284487117727783387188</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00\x12</span><span class="s1">4V</span><span class="se">\x00</span><span class="s1">x</span><span class="se">\x90\xab\x00\xcd\xef\x01\x00</span><span class="s1">#</span><span class="se">\x00</span><span class="s1">4&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;4</span><span class="se">\x00</span><span class="s1">#</span><span class="se">\x00\x01\xef\xcd\x00\xab\x90</span><span class="s1">x</span><span class="se">\x00</span><span class="s1">V4</span><span class="se">\x12\x00</span><span class="s1">&#39;</span>
+</pre></div>
+<p>讨论：作为一种替代方案，你可能想使用 6.11 小节中所介绍的 struct 模块来解压字节。 这样也行得通，不过<strong>利用 struct 模块来解压对于整数的大小是有限制的</strong>。 因此，你可能想解压多个字节串并将结果合并为最终的结果，就像下面这样：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">data</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00\x12</span><span class="s1">4V</span><span class="se">\x00</span><span class="s1">x</span><span class="se">\x90\xab\x00\xcd\xef\x01\x00</span><span class="s1">#</span><span class="se">\x00</span><span class="s1">4&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">struct</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">hi</span><span class="p">,</span> <span class="n">lo</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;QQ&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">hi</span> <span class="o">&lt;&lt;</span> <span class="mi">64</span><span class="p">)</span> <span class="o">+</span> <span class="n">lo</span>
+<span class="mi">94522842520747284487117727783387188</span>
+</pre></div>
+<p>字节顺序规则 (little, big) 仅仅指定了构建整数时的字节的低位高位排列方式。 我们从下面精心构造的 16进制数的表示中可以很容易的看出来：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mh">0x01020304</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x01\x02\x03\x04</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x04\x03\x02\x01</span><span class="s1">&#39;</span>
+</pre></div>
+<p><strong>使用 int.bit_length() 方法来决定需要多少字节位来存储这个值</strong></p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">523</span> <span class="o">**</span> <span class="mi">23</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="mi">335381300113661875107536852714019056160355655333978849017944067</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">OverflowError</span><span class="p">:</span> <span class="nb">int</span> <span class="n">too</span> <span class="n">big</span> <span class="n">to</span> <span class="n">convert</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span>
+<span class="mi">208</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">rem</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">bit_length</span><span class="p">(),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">rem</span><span class="p">:</span>
+<span class="o">...</span> <span class="n">nbytes</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x03</span><span class="s1">X</span><span class="se">\xf1\x82</span><span class="s1">iT</span><span class="se">\x96\xac\xc7</span><span class="s1">c</span><span class="se">\x16\xf3\xb9\xcf</span><span class="s1">...</span><span class="se">\xd0</span><span class="s1">&#39;</span>
+</pre></div>
+<h2 id="3.6-&#22797;&#25968;&#30340;&#25968;&#23398;&#36816;&#31639;">3.6 &#22797;&#25968;&#30340;&#25968;&#23398;&#36816;&#31639;<a class="anchor-link" href="#3.6-&#22797;&#25968;&#30340;&#25968;&#23398;&#36816;&#31639;">&#182;</a></h2><p>问题：需要使用复数来执行一些计算操作</p>
+<p>解决方案：使用函数 complex(real, imag) 或者是带有后缀 j 的浮点数来指定。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">5j</span>
+</pre></div>
+<p>获取实部、虚部和共轭复数 <code>a.real</code>, <code>a.imag</code>, <code>a.conjugate()</code>, 常见的数学运算和实数无异，如果要执行其他的复数函数比如正弦、余弦或平方根，使用 cmath 模块：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">cmath</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">24.83130584894638</span><span class="o">-</span><span class="mf">11.356612711218174j</span><span class="p">)</span>
+</pre></div>
+<p>讨论：Python 中大部分与数学相关的模块都能处理复数，比如 NumPy 可以很容易的构造一个复数数组并在这个数组上执行各种操作。Python 的标准数学函数确实不能产生复数值，如果想使用复数必须使用 cmath 或其他支持复数的库。</p>
+<h2 id="3.7-&#26080;&#31351;&#22823;&#19982;NaN">3.7 &#26080;&#31351;&#22823;&#19982;NaN<a class="anchor-link" href="#3.7-&#26080;&#31351;&#22823;&#19982;NaN">&#182;</a></h2><p>问题：你想创建或测试正无穷、负无穷或NaN(非数字)的浮点数。</p>
+<p>解决方案：可以使用 float() 来创建它们。<code>a = float('inf')</code> 使用 math.isinf() 和 math.isnan() 函数进行测试</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="bp">True</span>
+</pre></div>
+<p>讨论：无穷大数在执行数学计算的时候会传播，有些操作是未定义的并会返回一个NaN结果。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">/</span><span class="n">a</span>
+<span class="n">nan</span>
+</pre></div>
+<p>NaN值会在所有操作中传播，而不会产生异常。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">23</span>
+<span class="n">nan</span>
+</pre></div>
+<p><strong>NaN 值的一个特别的地方时它们之间的比较操作总是返回 False。所以只能用 math.isnan() 测试是否为 NaN</strong> 有时候程序员想改变 Python 默认行为，在返回无穷大或 NaN 结果的操作中抛出异常。fpectl 模块可以用来改变这种行为，但是它在标准的Python构建中并没有被启用，它是平台相关的， 并且针对的是专家级程序员。</p>
+<h2 id="3.8-&#20998;&#25968;&#36816;&#31639;">3.8 &#20998;&#25968;&#36816;&#31639;<a class="anchor-link" href="#3.8-&#20998;&#25968;&#36816;&#31639;">&#182;</a></h2><p>问题：需要进行分数计算</p>
+<p>解决方案：fractions 模块可以被用来执行包含分数的数学运算。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="mi">27</span><span class="o">/</span><span class="mi">16</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Getting numerator/denominator</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">numerator</span>
+<span class="mi">35</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">denominator</span>
+<span class="mi">64</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Converting to a float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="mf">0.546875</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Limiting the denominator of a value</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="mi">4</span><span class="o">/</span><span class="mi">7</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Converting a float to a fraction</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">3.75</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">as_integer_ratio</span><span class="p">())</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span>
+<span class="n">Fraction</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+<h2 id="3.9-&#22823;&#22411;&#25968;&#32452;&#36816;&#31639;">3.9 &#22823;&#22411;&#25968;&#32452;&#36816;&#31639;<a class="anchor-link" href="#3.9-&#22823;&#22411;&#25968;&#32452;&#36816;&#31639;">&#182;</a></h2><p>问题：你需要在大数据集(比如数组或网格)上面执行计算。</p>
+<p>解决方案：涉及到数组的重量级运算操作，可以使用 NumPy 库。NumPy 的一个主要特征是它会给 Python 提供一个数组对象，相比标准的 Python 列表而已更适合用来做数学运算。NumPy 中的标量运算(比如 ax * 2 或 ax + 10 )会作用在每一个元素上。另外，当两个操作数都是数组的时候执行元素对等位置计算，并最终生成一个新的数组。对整个数组中所有元素同时执行数学运算可以使得作用在整个数组上的函数运算简单而又快速。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="o">...</span> <span class="k">return</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">47</span><span class="p">])</span>
+</pre></div>
+<p>NumPy 还为数组操作提供了大量的通用函数，这些函数可以作为 math 模块中类似函数的替代。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">1.</span> <span class="p">,</span> <span class="mf">1.41421356</span><span class="p">,</span> <span class="mf">1.73205081</span><span class="p">,</span> <span class="mf">2.</span> <span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">0.54030231</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.41614684</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9899925</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.65364362</span><span class="p">])</span>
+</pre></div>
+<p>使用这些通用函数要比循环数组并使用 math 模块中的函数执行计算要快的多。尽量选择 NumPy 的数组方案。</p>
+<p>底层实现中， NumPy 数组使用了 C 或者 Fortran 语言的机制分配内存。它们是一个非常大的连续的并由同类型数据组成的内存区域。可以构造一个比普通 Python 列表大的多的数组。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">10000</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+<p>NumPy 扩展了 Python 列表的索引功能，特别是对于多维数组。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">101</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">107</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">105</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">111</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">109</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">115</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
+</pre></div>
+<p>讨论：NumPy 是 Python 领域中很多科学与工程库的基础，同时也是被广泛使用的最大最复杂的模块。</p>
+<h2 id="3.10-&#30697;&#38453;&#19982;&#32447;&#24615;&#20195;&#25968;&#36816;&#31639;">3.10 &#30697;&#38453;&#19982;&#32447;&#24615;&#20195;&#25968;&#36816;&#31639;<a class="anchor-link" href="#3.10-&#30697;&#38453;&#19982;&#32447;&#24615;&#20195;&#25968;&#36816;&#31639;">&#182;</a></h2><p>问题：需要执行矩阵和线性代数运算，比如矩阵乘法、寻找行列式、求解线性方程组等等。</p>
+<p>解决方案：NumPy 库有一个矩阵对象可以用来解决这个问题。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">9</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">]])</span>
+</pre></div>
+
+<pre><code>m.T Return transpose
+m.I Return inverse
+
+</code></pre>
+<p>matrix 对象的矩阵乘法直接使用 * 而 ndarray 的矩阵乘法需要使用 ndarray.dot. 可以在 numpy.linalg 子包中找到更多的操作函数</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy.linalg</span>
+</pre></div>
+
+<pre><code>numpy.linalg.det(m) Determinant
+numpy.linalg.eigvals(m) Eigenvalues
+numpy.linalg.solve(m, v) Solve for x in mx = v
+
+</code></pre>
+<h2 id="3.11-&#38543;&#26426;&#36873;&#25321;">3.11 &#38543;&#26426;&#36873;&#25321;<a class="anchor-link" href="#3.11-&#38543;&#26426;&#36873;&#25321;">&#182;</a></h2><p>问题：你想从一个序列中随机抽取若干元素，或者想生成几个随机数。</p>
+<p>解决：random 模块有大量的函数用来产生随机数和随机选择元素。</p>
+
+<pre><code>random.choice() 要想从一个序列中随机的抽取一个元素
+random.sample() 提取出N个不同元素
+random.shuffle() 打乱序列中元素的顺序
+random.randint() 生成随机整数
+random.random() 生成 0 到 1 范围内均匀分布的浮点数
+random.getrandbits() 获取N位随机位(二进制)的整数
+random.seed() # Seed based on system time or os.urandom()
+random.seed(12345) # Seed based on integer given
+random.seed(b'bytedata') # Seed based on byte data
+
+</code></pre>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="mi">335837000776573622800628485064121869519521710558559406913275</span>
+</pre></div>
+<p>讨论：random 模块使用 Mersenne Twister 算法来计算生成随机数。这是一个确定性算法， 但是你可以通过 random.seed() 函数修改初始化种子。random模块还包含基于均匀分布、高斯分布和其他分布的随机数生成函数。 比如， random.uniform() 计算均匀分布随机数， random.gauss() 计算正态分布随机数。</p>
+<p>在 random 模块中的函数不应该用在和密码学相关的程序中。 如果你确实需要类似的功能，可以使用 ssl 模块中相应的函数。ssl.RAND_bytes() 可以用来生成一个安全的随机字节序列。</p>
+<h2 id="3.12-&#22522;&#26412;&#30340;&#26085;&#26399;&#19982;&#26102;&#38388;&#36716;&#25442;">3.12 &#22522;&#26412;&#30340;&#26085;&#26399;&#19982;&#26102;&#38388;&#36716;&#25442;<a class="anchor-link" href="#3.12-&#22522;&#26412;&#30340;&#26085;&#26399;&#19982;&#26102;&#38388;&#36716;&#25442;">&#182;</a></h2><p>问题：需要执行简单的时间转换，比如天到秒，小时到分钟等的转换</p>
+<p>解决方案：为了执行不同时间单位的转换和计算，请使用 datetime 模块。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mf">4.5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">days</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">seconds</span>
+<span class="mi">37800</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="mf">10.5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="mf">58.5</span>
+</pre></div>
+<p>先创建一个 datetime 实例然后使用标准的数学运算来操作</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">03</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">days</span>
+<span class="mi">89</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">14</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mf">43.094063</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">15</span><span class="p">:</span><span class="mo">04</span><span class="p">:</span><span class="mf">43.094063</span>
+</pre></div>
+<p>datetime 会自动处理闰年。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+<span class="mi">1</span>
+</pre></div>
+<p>讨论
+对大多数基本的日期和时间处理问题， datetime 模块以及足够了。 如果你需要执行更加复杂的日期操作，比如处理时区，模糊时间范围，节假日计算等等，可以考虑使用 dateutil 模块。</p>
+<p>许多类似的时间计算可以使用 dateutil.relativedelta() 函数代替。 但是，有一点需要注意的就是，它会在处理月份(还有它们的天数差距)的时候填充间隙。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;months&#39;</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">invalid</span> <span class="n">keyword</span> <span class="n">argument</span> <span class="k">for</span> <span class="n">this</span> <span class="n">function</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=+</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Time between two dates</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=+</span><span class="mi">2</span><span class="p">,</span> <span class="n">days</span><span class="o">=+</span><span class="mi">28</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">months</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">days</span>
+<span class="mi">28</span>
+</pre></div>
+<h2 id="3.13-&#35745;&#31639;&#26368;&#21518;&#19968;&#20010;&#21608;&#20116;&#30340;&#26085;&#26399;">3.13 &#35745;&#31639;&#26368;&#21518;&#19968;&#20010;&#21608;&#20116;&#30340;&#26085;&#26399;<a class="anchor-link" href="#3.13-&#35745;&#31639;&#26368;&#21518;&#19968;&#20010;&#21608;&#20116;&#30340;&#26085;&#26399;">&#182;</a></h2><p>问题：需要查找星期中某一天最后出现的日期，比如星期五。</p>
+<p>解决方案：Python的 datetime 模块中有工具函数和类可以帮助你执行这样的计算。</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- encoding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Topic: 最后的周五</span>
+<span class="sd">Desc :</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Thursday&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Friday&#39;</span><span class="p">,</span> <span class="s1">&#39;Saturday&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunday&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_previous_byday</span><span class="p">(</span><span class="n">dayname</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">start_date</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="n">day_num</span> <span class="o">=</span> <span class="n">start_date</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span>
+    <span class="n">day_num_target</span> <span class="o">=</span> <span class="n">weekdays</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dayname</span><span class="p">)</span>
+    <span class="n">days_ago</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span> <span class="o">+</span> <span class="n">day_num</span> <span class="o">-</span> <span class="n">day_num_target</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+    <span class="k">if</span> <span class="n">days_ago</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">days_ago</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">target_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days_ago</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_date</span>
+</pre></div>
+<p>讨论：算法原理是这样的，先将开始日期和目标日期映射到星期数组的位置上(星期一索引为0)， 然后通过模运算计算出目标日期要经过多少天才能到达开始日期。然后用开始日期减去那个时间差即得到结果日期。</p>
+<p>如果你要像这样执行大量的日期计算的话，你最好安装第三方包 python-dateutil 来代替。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dateutil.rrule</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">23</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mf">52.718111</span>
+
+<span class="c1"># Next Friday</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weekday</span><span class="o">=</span><span class="n">FR</span><span class="p">))</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">28</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mf">52.718111</span>
+<span class="o">&gt;&gt;&gt;</span>
+
+<span class="c1"># Last Friday</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weekday</span><span class="o">=</span><span class="n">FR</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mf">52.718111</span>
+</pre></div>
+<h2 id="3.14-&#35745;&#31639;&#24403;&#21069;&#26376;&#20221;&#30340;&#26085;&#26399;&#33539;&#22260;">3.14 &#35745;&#31639;&#24403;&#21069;&#26376;&#20221;&#30340;&#26085;&#26399;&#33539;&#22260;<a class="anchor-link" href="#3.14-&#35745;&#31639;&#24403;&#21069;&#26376;&#20221;&#30340;&#26085;&#26399;&#33539;&#22260;">&#182;</a></h2><p>问题：你的代码需要在当前月份中循环每一天，想找到一个计算这个日期范围的高效方法。</p>
+<p>解决方案：在这样的日期上循环并需要事先构造一个包含所有日期的列表。 你可以先计算出开始日期和结束日期， 然后在你步进的时候使用 datetime.timedelta 对象递增这个日期变量即可。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">calendar</span>
+
+<span class="k">def</span> <span class="nf">get_month_range</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">start_date</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">days_in_month</span> <span class="o">=</span> <span class="n">calendar</span><span class="o">.</span><span class="n">monthrange</span><span class="p">(</span><span class="n">start_date</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">start_date</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days_in_month</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a_day</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">first_day</span><span class="p">,</span> <span class="n">last_day</span> <span class="o">=</span> <span class="n">get_month_range</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">while</span> <span class="n">first_day</span> <span class="o">&lt;</span> <span class="n">last_day</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">first_day</span><span class="p">)</span>
+<span class="o">...</span>     <span class="n">first_day</span> <span class="o">+=</span> <span class="n">a_day</span>
+<span class="o">...</span>
+</pre></div>
+
+<pre><code>2012-08-01
+2012-08-02
+2012-08-03
+#... and so on...
+
+</code></pre>
+<p>讨论：计算出一个对应月份第一天的日期。 一个快速的方法就是使用 date 或 datetime 对象的 replace() 方法简单的将 days 属性设置成 1 即可。replace() 会创建和传入对象类型相同的对象。使用 calendar.monthrange() 函数来找出该月的总天数。monthrange() 函数会返回包含星期和该月天数的元组。
+为了在日期范围上循环，要使用到标准的数学和比较操作。 比如，可以利用 timedelta 实例来递增日期，小于号 &lt; 用来检查一个日期是否在结束日期之前。</p>
+<h2 id="3.15-&#23383;&#31526;&#20018;&#36716;&#25442;&#20026;&#26085;&#26399;">3.15 &#23383;&#31526;&#20018;&#36716;&#25442;&#20026;&#26085;&#26399;<a class="anchor-link" href="#3.15-&#23383;&#31526;&#20018;&#36716;&#25442;&#20026;&#26085;&#26399;">&#182;</a></h2><p>问题：想把字符串格式的日期转换为 datetime 对象</p>
+<p>解决方案：使用Python的标准模块 datetime 可以很容易的解决这个问题。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;2012-09-20&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+<p>讨论：datetime.strptime() 方法支持很多的格式化代码， 比如 %Y 代表4位数年份，%m 代表两位数月份，这些格式化占位符也可以反过来使用。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">z</span>
+<span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">177393</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nice_z</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="s1">&#39;%A %B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nice_z</span>
+<span class="s1">&#39;Sunday September 23, 2012&#39;</span>
+</pre></div>
+<p><strong>strptime() 的性能要比你想象中的差很多，因为它使用纯 Python 实现</strong>，并且必须处理所有的系统本地设置。如果在意性能，可以自己实现</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="k">def</span> <span class="nf">parse_ymd</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">year_s</span><span class="p">,</span> <span class="n">mon_s</span><span class="p">,</span> <span class="n">day_s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">year_s</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">mon_s</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">day_s</span><span class="p">))</span>
+</pre></div>
+<h2 id="3.16-&#32467;&#21512;&#26102;&#21306;&#30340;&#26085;&#26399;&#25805;&#20316;">3.16 &#32467;&#21512;&#26102;&#21306;&#30340;&#26085;&#26399;&#25805;&#20316;<a class="anchor-link" href="#3.16-&#32467;&#21512;&#26102;&#21306;&#30340;&#26085;&#26399;&#25805;&#20316;">&#182;</a></h2><p>Not Now</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/pythoncookbook-note-2.html" title="Previous: PythonCookbook笔记(2)-字符串和文本">PythonCookbook笔记(2)-字符串和文本</a></li>
+                <li class="next-article"><a href="//zodiac911.github.io/blog/pythoncookbook-note-4.html" title="Next: PythonCookbook笔记(4)-迭代器与生成器">PythonCookbook笔记(4)-迭代器与生成器</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2019-06-19T00:00:00+08:00">Jun 19, 2019</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#pythoncookbook-ref">PythonCookbook
+                    <span>10</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>

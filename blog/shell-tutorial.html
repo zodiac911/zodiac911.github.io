@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="Shell脚本入门
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Shell, Ubuntu, Linux, posts, " />
+
+<meta property="og:title" content="Shell脚本入门 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/shell-tutorial.html" />
+<meta property="og:description" content="Shell脚本入门" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2018-10-18T10:26:00+08:00" />
+<meta name="twitter:title" content="Shell脚本入门 ">
+<meta name="twitter:description" content="Shell脚本入门">
+
+        <title>Shell脚本入门  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/shell-tutorial.html"> Shell脚本入门  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><div align="center">  <img src="http://image-bed-zodiac.oss-cn-qingdao.aliyuncs.com/2018101903.png" width="728"/> </div><br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>本教程摘录自<a href="https://github.com/qinjx/30min_guides/blob/master/shell.md">https://github.com/qinjx/30min_guides/blob/master/shell.md</a> 作者只完成了一部分，我在其基础上做了补充与修改</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#什么是Shell脚本" data-toc-modified-id="什么是Shell脚本-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>什么是Shell脚本</a></span><ul class="toc-item"><li><span><a href="#示例" data-toc-modified-id="示例-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>示例</a></span></li><li><span><a href="#示例解释" data-toc-modified-id="示例解释-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>示例解释</a></span></li><li><span><a href="#shell和shell脚本的概念" data-toc-modified-id="shell和shell脚本的概念-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>shell和shell脚本的概念</a></span></li></ul></li><li><span><a href="#环境" data-toc-modified-id="环境-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>环境</a></span><ul class="toc-item"><li><span><a href="#OS" data-toc-modified-id="OS-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>OS</a></span></li><li><span><a href="#脚本解释器" data-toc-modified-id="脚本解释器-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>脚本解释器</a></span></li></ul></li><li><span><a href="#如何选择shell编程语言" data-toc-modified-id="如何选择shell编程语言-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>如何选择shell编程语言</a></span><ul class="toc-item"><li><span><a href="#熟悉-vs-陌生" data-toc-modified-id="熟悉-vs-陌生-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>熟悉 vs 陌生</a></span></li><li><span><a href="#简单-vs-高级" data-toc-modified-id="简单-vs-高级-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>简单 vs 高级</a></span></li><li><span><a href="#环境兼容性" data-toc-modified-id="环境兼容性-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>环境兼容性</a></span></li></ul></li><li><span><a href="#第一个shell脚本" data-toc-modified-id="第一个shell脚本-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>第一个shell脚本</a></span><ul class="toc-item"><li><span><a href="#编写" data-toc-modified-id="编写-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>编写</a></span></li><li><span><a href="#运行" data-toc-modified-id="运行-4.2"><span class="toc-item-num">4.2&nbsp;&nbsp;</span>运行</a></span></li></ul></li><li><span><a href="#变量" data-toc-modified-id="变量-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>变量</a></span><ul class="toc-item"><li><span><a href="#定义变量" data-toc-modified-id="定义变量-5.1"><span class="toc-item-num">5.1&nbsp;&nbsp;</span>定义变量</a></span></li><li><span><a href="#使用变量" data-toc-modified-id="使用变量-5.2"><span class="toc-item-num">5.2&nbsp;&nbsp;</span>使用变量</a></span></li><li><span><a href="#重定义变量" data-toc-modified-id="重定义变量-5.3"><span class="toc-item-num">5.3&nbsp;&nbsp;</span>重定义变量</a></span></li></ul></li><li><span><a href="#注释" data-toc-modified-id="注释-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>注释</a></span><ul class="toc-item"><li><span><a href="#多行注释" data-toc-modified-id="多行注释-6.1"><span class="toc-item-num">6.1&nbsp;&nbsp;</span>多行注释</a></span></li></ul></li><li><span><a href="#字符串" data-toc-modified-id="字符串-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>字符串</a></span><ul class="toc-item"><li><span><a href="#单引号" data-toc-modified-id="单引号-7.1"><span class="toc-item-num">7.1&nbsp;&nbsp;</span>单引号</a></span></li><li><span><a href="#双引号" data-toc-modified-id="双引号-7.2"><span class="toc-item-num">7.2&nbsp;&nbsp;</span>双引号</a></span></li><li><span><a href="#字符串操作" data-toc-modified-id="字符串操作-7.3"><span class="toc-item-num">7.3&nbsp;&nbsp;</span>字符串操作</a></span></li></ul></li><li><span><a href="#数组" data-toc-modified-id="数组-8"><span class="toc-item-num">8&nbsp;&nbsp;</span>数组</a></span></li><li><span><a href="#管道" data-toc-modified-id="管道-9"><span class="toc-item-num">9&nbsp;&nbsp;</span>管道</a></span></li><li><span><a href="#运算符" data-toc-modified-id="运算符-10"><span class="toc-item-num">10&nbsp;&nbsp;</span>运算符</a></span><ul class="toc-item"><li><span><a href="#关系运算符" data-toc-modified-id="关系运算符-10.1"><span class="toc-item-num">10.1&nbsp;&nbsp;</span>关系运算符</a></span></li><li><span><a href="#字符串运算符" data-toc-modified-id="字符串运算符-10.2"><span class="toc-item-num">10.2&nbsp;&nbsp;</span>字符串运算符</a></span></li><li><span><a href="#文件检测运算符" data-toc-modified-id="文件检测运算符-10.3"><span class="toc-item-num">10.3&nbsp;&nbsp;</span>文件检测运算符</a></span></li></ul></li><li><span><a href="#条件判断" data-toc-modified-id="条件判断-11"><span class="toc-item-num">11&nbsp;&nbsp;</span>条件判断</a></span></li><li><span><a href="#流程控制" data-toc-modified-id="流程控制-12"><span class="toc-item-num">12&nbsp;&nbsp;</span>流程控制</a></span><ul class="toc-item"><li><span><a href="#if-else" data-toc-modified-id="if-else-12.1"><span class="toc-item-num">12.1&nbsp;&nbsp;</span>if else</a></span></li><li><span><a href="#for-while" data-toc-modified-id="for-while-12.2"><span class="toc-item-num">12.2&nbsp;&nbsp;</span>for while</a></span></li><li><span><a href="#case" data-toc-modified-id="case-12.3"><span class="toc-item-num">12.3&nbsp;&nbsp;</span>case</a></span></li></ul></li><li><span><a href="#函数" data-toc-modified-id="函数-13"><span class="toc-item-num">13&nbsp;&nbsp;</span>函数</a></span></li><li><span><a href="#重定向" data-toc-modified-id="重定向-14"><span class="toc-item-num">14&nbsp;&nbsp;</span>重定向</a></span><ul class="toc-item"><li><span><a href="#深入重定向" data-toc-modified-id="深入重定向-14.1"><span class="toc-item-num">14.1&nbsp;&nbsp;</span>深入重定向</a></span></li><li><span><a href="#Here-Document" data-toc-modified-id="Here-Document-14.2"><span class="toc-item-num">14.2&nbsp;&nbsp;</span>Here Document</a></span></li><li><span><a href="#特殊用法" data-toc-modified-id="特殊用法-14.3"><span class="toc-item-num">14.3&nbsp;&nbsp;</span>特殊用法</a></span></li></ul></li><li><span><a href="#文件包含" data-toc-modified-id="文件包含-15"><span class="toc-item-num">15&nbsp;&nbsp;</span>文件包含</a></span></li><li><span><a href="#用户输入" data-toc-modified-id="用户输入-16"><span class="toc-item-num">16&nbsp;&nbsp;</span>用户输入</a></span><ul class="toc-item"><li><span><a href="#执行脚本时传入" data-toc-modified-id="执行脚本时传入-16.1"><span class="toc-item-num">16.1&nbsp;&nbsp;</span>执行脚本时传入</a></span></li><li><span><a href="#脚本运行中输入" data-toc-modified-id="脚本运行中输入-16.2"><span class="toc-item-num">16.2&nbsp;&nbsp;</span>脚本运行中输入</a></span></li><li><span><a href="#select菜单" data-toc-modified-id="select菜单-16.3"><span class="toc-item-num">16.3&nbsp;&nbsp;</span>select菜单</a></span></li></ul></li><li><span><a href="#stdin和stdout" data-toc-modified-id="stdin和stdout-17"><span class="toc-item-num">17&nbsp;&nbsp;</span>stdin和stdout</a></span></li><li><span><a href="#常用的命令" data-toc-modified-id="常用的命令-18"><span class="toc-item-num">18&nbsp;&nbsp;</span>常用的命令</a></span><ul class="toc-item"><li><span><a href="#ps" data-toc-modified-id="ps-18.1"><span class="toc-item-num">18.1&nbsp;&nbsp;</span>ps</a></span></li><li><span><a href="#grep" data-toc-modified-id="grep-18.2"><span class="toc-item-num">18.2&nbsp;&nbsp;</span>grep</a></span></li><li><span><a href="#awk" data-toc-modified-id="awk-18.3"><span class="toc-item-num">18.3&nbsp;&nbsp;</span>awk</a></span></li><li><span><a href="#sed" data-toc-modified-id="sed-18.4"><span class="toc-item-num">18.4&nbsp;&nbsp;</span>sed</a></span></li><li><span><a href="#xargs" data-toc-modified-id="xargs-18.5"><span class="toc-item-num">18.5&nbsp;&nbsp;</span>xargs</a></span></li><li><span><a href="#curl" data-toc-modified-id="curl-18.6"><span class="toc-item-num">18.6&nbsp;&nbsp;</span>curl</a></span></li></ul></li><li><span><a href="#综合案例" data-toc-modified-id="综合案例-19"><span class="toc-item-num">19&nbsp;&nbsp;</span>综合案例</a></span></li><li><span><a href="#参考资料" data-toc-modified-id="参考资料-20"><span class="toc-item-num">20&nbsp;&nbsp;</span>参考资料</a></span></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20160;&#20040;&#26159;Shell&#33050;&#26412;">&#20160;&#20040;&#26159;Shell&#33050;&#26412;<a class="anchor-link" href="#&#20160;&#20040;&#26159;Shell&#33050;&#26412;">&#182;</a></h2><h3 id="&#31034;&#20363;">&#31034;&#20363;<a class="anchor-link" href="#&#31034;&#20363;">&#182;</a></h3><p>看个例子吧：</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="nb">cd</span> ~
+mkdir shell_tut
+<span class="nb">cd</span> shell_tut
+
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span> i&lt;<span class="m">10</span><span class="p">;</span> i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    touch test_<span class="nv">$i</span>.txt
+<span class="k">done</span>
+</pre></div>
+<h3 id="&#31034;&#20363;&#35299;&#37322;">&#31034;&#20363;&#35299;&#37322;<a class="anchor-link" href="#&#31034;&#20363;&#35299;&#37322;">&#182;</a></h3><ul>
+<li>第1行：指定脚本解释器，这里是用/bin/sh做解释器的</li>
+<li>第2行：切换到当前用户的home目录</li>
+<li>第3行：创建一个目录shell_tut</li>
+<li>第4行：切换到shell_tut目录</li>
+<li>第5行：循环条件，一共循环10次</li>
+<li>第6行：创建一个test_0…9.txt文件</li>
+<li>第7行：循环体结束</li>
+</ul>
+<p>mkdir, touch都是系统自带的程序，一般在/bin或者/usr/bin目录下。for, do, done是sh脚本语言的关键字。</p>
+<h3 id="shell&#21644;shell&#33050;&#26412;&#30340;&#27010;&#24565;">shell&#21644;shell&#33050;&#26412;&#30340;&#27010;&#24565;<a class="anchor-link" href="#shell&#21644;shell&#33050;&#26412;&#30340;&#27010;&#24565;">&#182;</a></h3><p>shell是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。Ken Thompson的sh是第一种Unix Shell，Windows Explorer是一个典型的图形界面Shell。</p>
+<p>shell脚本（shell script），是一种为shell编写的脚本程序。业界所说的shell通常都是指shell脚本，但读者朋友要知道，shell和shell script是两个不同的概念。由于习惯的原因，简洁起见，本文出现的“shell编程”都是指shell脚本编程，不是指开发shell自身（如Windows Explorer扩展开发）。</p>
+<h2 id="&#29615;&#22659;">&#29615;&#22659;<a class="anchor-link" href="#&#29615;&#22659;">&#182;</a></h2><p>shell编程跟java、php编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了。</p>
+<h3 id="OS">OS<a class="anchor-link" href="#OS">&#182;</a></h3><p>当前主流的操作系统都支持shell编程，本文档所述的shell编程是指Linux下的shell，讲的基本都是POSIX标准下的功能，所以，也适用于Unix及BSD（如Mac OS）。</p>
+<h4 id="Linux">Linux<a class="anchor-link" href="#Linux">&#182;</a></h4><p>Linux默认安装就带了shell解释器。</p>
+<h4 id="Mac-OS">Mac OS<a class="anchor-link" href="#Mac-OS">&#182;</a></h4><p>Mac OS不仅带了sh、bash这两个最基础的解释器，还内置了ksh、csh、zsh等不常用的解释器。</p>
+<h4 id="Windows&#19978;&#30340;&#27169;&#25311;&#22120;">Windows&#19978;&#30340;&#27169;&#25311;&#22120;<a class="anchor-link" href="#Windows&#19978;&#30340;&#27169;&#25311;&#22120;">&#182;</a></h4><p>windows出厂时没有内置shell解释器，需要自行安装，为了同时能用grep, awk, curl等工具，最好装一个cygwin或者mingw来模拟linux环境。</p>
+<ul>
+<li><a href="http://www.cygwin.com">cygwin</a></li>
+<li><a href="http://www.mingw.org">mingw</a></li>
+</ul>
+<h3 id="&#33050;&#26412;&#35299;&#37322;&#22120;">&#33050;&#26412;&#35299;&#37322;&#22120;<a class="anchor-link" href="#&#33050;&#26412;&#35299;&#37322;&#22120;">&#182;</a></h3><h4 id="sh">sh<a class="anchor-link" href="#sh">&#182;</a></h4><p>即Bourne shell，POSIX（Portable Operating System Interface）标准的shell解释器，它的二进制文件路径通常是/bin/sh，由Bell Labs开发。</p>
+<p>本文讲的是sh，如果你使用其它语言用作shell编程，请自行参考相应语言的文档。</p>
+<h4 id="bash">bash<a class="anchor-link" href="#bash">&#182;</a></h4><p>Bash是Bourne shell的替代品，属GNU Project，二进制文件路径通常是/bin/bash。业界通常混用bash、sh、和shell，比如你会经常在招聘运维工程师的文案中见到：熟悉Linux Bash编程，精通Shell编程。</p>
+<p>在CentOS里，/bin/sh是一个指向/bin/bash的符号链接:</p>
+
+<pre><code>[root@centosraw ~]# ls -l /bin/*sh
+-rwxr-xr-x. 1 root root 903272 Feb 22 05:09 /bin/bash
+-rwxr-xr-x. 1 root root 106216 Oct 17  2012 /bin/dash
+lrwxrwxrwx. 1 root root      4 Mar 22 10:22 /bin/sh -&gt; bash
+
+</code></pre>
+<p>但在Mac OS上不是，/bin/sh和/bin/bash是两个不同的文件，尽管它们的大小只相差100字节左右:</p>
+
+<pre><code>iMac:~ wuxiao$ ls -l /bin/*sh
+-r-xr-xr-x  1 root  wheel  1371648  6 Nov 16:52 /bin/bash
+-rwxr-xr-x  2 root  wheel   772992  6 Nov 16:52 /bin/csh
+-r-xr-xr-x  1 root  wheel  2180736  6 Nov 16:52 /bin/ksh
+-r-xr-xr-x  1 root  wheel  1371712  6 Nov 16:52 /bin/sh
+-rwxr-xr-x  2 root  wheel   772992  6 Nov 16:52 /bin/tcsh
+-rwxr-xr-x  1 root  wheel  1103984  6 Nov 16:52 /bin/zsh
+
+</code></pre>
+<h4 id="&#39640;&#32423;&#32534;&#31243;&#35821;&#35328;">&#39640;&#32423;&#32534;&#31243;&#35821;&#35328;<a class="anchor-link" href="#&#39640;&#32423;&#32534;&#31243;&#35821;&#35328;">&#182;</a></h4><p>理论上讲，只要一门语言提供了解释器（而不仅是编译器），这门语言就可以胜任脚本编程，常见的解释型语言都是可以用作脚本编程的，如：Perl、Tcl、Python、PHP、Ruby。Perl是最老牌的脚本编程语言了，Python这些年也成了一些linux发行版的预置解释器。</p>
+<p>编译型语言，只要有解释器，也可以用作脚本编程，如C shell是内置的（/bin/csh），Java有第三方解释器Jshell，Ada有收费的解释器AdaScript。</p>
+<p>如下是一个PHP Shell Script示例（假设文件名叫test.php）：</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/php</span>
+&lt;?php
+<span class="k">for</span> <span class="o">(</span><span class="nv">$i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span> <span class="nv">$i</span> &lt; <span class="m">10</span><span class="p">;</span> <span class="nv">$i</span>++<span class="o">)</span>
+        <span class="nb">echo</span> <span class="nv">$i</span> . <span class="s2">&quot;\n&quot;</span><span class="p">;</span>
+</pre></div>
+<p>执行：</p>
+
+<pre><code>/usr/bin/php test.php
+</code></pre>
+<p>或者：</p>
+<div class="highlight"><pre><span></span>chmod +x test.php
+./test.php
+</pre></div>
+<h2 id="&#22914;&#20309;&#36873;&#25321;shell&#32534;&#31243;&#35821;&#35328;">&#22914;&#20309;&#36873;&#25321;shell&#32534;&#31243;&#35821;&#35328;<a class="anchor-link" href="#&#22914;&#20309;&#36873;&#25321;shell&#32534;&#31243;&#35821;&#35328;">&#182;</a></h2><h3 id="&#29087;&#24713;-vs-&#38476;&#29983;">&#29087;&#24713; vs &#38476;&#29983;<a class="anchor-link" href="#&#29087;&#24713;-vs-&#38476;&#29983;">&#182;</a></h3><p>如果你已经掌握了一门编程语言（如PHP、Python、Java、JavaScript），建议你就直接使用这门语言编写脚本程序，虽然某些地方会有点啰嗦，但你能利用在这门语言领域里的经验（单元测试、单步调试、IDE、第三方类库）。</p>
+<p>新增的学习成本很小，只要学会怎么使用shell解释器（Jshell、AdaScript）就可以了。</p>
+<h3 id="&#31616;&#21333;-vs-&#39640;&#32423;">&#31616;&#21333; vs &#39640;&#32423;<a class="anchor-link" href="#&#31616;&#21333;-vs-&#39640;&#32423;">&#182;</a></h3><p>如果你觉得自己熟悉的语言（如Java、C）写shell脚本实在太啰嗦，你只是想做一些备份文件、安装软件、下载数据之类的事情，学着使用sh，bash会是一个好主意。</p>
+<p>shell只定义了一个非常简单的编程语言，所以，如果你的脚本程序复杂度较高，或者要操作的数据结构比较复杂，那么还是应该使用Python、Perl这样的脚本语言，或者是你本来就已经很擅长的高级语言。因为sh和bash在这方面很弱，比如说：</p>
+<ul>
+<li>它的函数只能返回字串，无法返回数组</li>
+<li>它不支持面向对象，你无法实现一些优雅的设计模式</li>
+<li>它是解释型的，一边解释一边执行，连PHP那种预编译都不是，如果你的脚本包含错误(例如调用了不存在的函数)，只要没执行到这一行，就不会报错</li>
+</ul>
+<h3 id="&#29615;&#22659;&#20860;&#23481;&#24615;">&#29615;&#22659;&#20860;&#23481;&#24615;<a class="anchor-link" href="#&#29615;&#22659;&#20860;&#23481;&#24615;">&#182;</a></h3><p>如果你的脚本是提供给别的用户使用，使用sh或者bash，你的脚本将具有最好的环境兼容性，perl很早就是linux标配了，python这些年也成了一些linux发行版的标配，至于mac os，它默认安装了perl、python、ruby、php、java等主流编程语言。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#31532;&#19968;&#20010;shell&#33050;&#26412;">&#31532;&#19968;&#20010;shell&#33050;&#26412;<a class="anchor-link" href="#&#31532;&#19968;&#20010;shell&#33050;&#26412;">&#182;</a></h2><h3 id="&#32534;&#20889;">&#32534;&#20889;<a class="anchor-link" href="#&#32534;&#20889;">&#182;</a></h3><p>打开文本编辑器，新建一个文件，扩展名为sh（sh代表shell），扩展名并不影响脚本执行，见名知意就好，如果你用php写shell 脚本，扩展名就用php好了。</p>
+<p>输入一些代码，第一行一般是这样：</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#!/usr/bin/php</span>
+</pre></div>
+<p>“#!”是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行。</p>
+<h3 id="&#36816;&#34892;">&#36816;&#34892;<a class="anchor-link" href="#&#36816;&#34892;">&#182;</a></h3><p>运行Shell脚本有两种方法：</p>
+<h4 id="&#20316;&#20026;&#21487;&#25191;&#34892;&#31243;&#24207;">&#20316;&#20026;&#21487;&#25191;&#34892;&#31243;&#24207;<a class="anchor-link" href="#&#20316;&#20026;&#21487;&#25191;&#34892;&#31243;&#24207;">&#182;</a></h4><div class="highlight"><pre><span></span>chmod +x test.sh
+./test.sh
+</pre></div>
+<p>注意，一定要写成./test.sh，而不是test.sh，运行其它二进制的程序也一样，直接写test.sh，linux系统会去PATH里寻找有没有叫test.sh的，而只有/bin, /sbin, /usr/bin，/usr/sbin等在PATH里，你的当前目录通常不在PATH里，所以写成test.sh是会找不到命令的，要用./test.sh告诉系统说，就在当前目录找。</p>
+<p>通过这种方式运行bash脚本，第一行一定要写对，好让系统查找到正确的解释器。</p>
+<p>这里的"系统"，其实就是shell这个应用程序（想象一下Windows Explorer），但我故意写成系统，是方便理解，既然这个系统就是指shell，那么一个使用/bin/sh作为解释器的脚本是不是可以省去第一行呢？是的。</p>
+<h4 id="&#20316;&#20026;&#35299;&#37322;&#22120;&#21442;&#25968;">&#20316;&#20026;&#35299;&#37322;&#22120;&#21442;&#25968;<a class="anchor-link" href="#&#20316;&#20026;&#35299;&#37322;&#22120;&#21442;&#25968;">&#182;</a></h4><p>这种运行方式是，直接运行解释器，其参数就是shell脚本的文件名，如：</p>
+<div class="highlight"><pre><span></span>/bin/sh test.sh
+/bin/php test.php
+</pre></div>
+<p>这种方式运行的脚本，不需要在第一行指定解释器信息，写了也没用。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21464;&#37327;">&#21464;&#37327;<a class="anchor-link" href="#&#21464;&#37327;">&#182;</a></h2><h3 id="&#23450;&#20041;&#21464;&#37327;">&#23450;&#20041;&#21464;&#37327;<a class="anchor-link" href="#&#23450;&#20041;&#21464;&#37327;">&#182;</a></h3><p>定义变量时，变量名不加美元符号（$），如：</p>
+<div class="highlight"><pre><span></span><span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;qinjx&quot;</span>
+</pre></div>
+<p>注意，变量名和等号之间不能有空格，这可能和你熟悉的所有编程语言都不一样。</p>
+<p><strong>除了显式地直接赋值，还可以用语句给变量赋值</strong>，如：</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> file in <span class="sb">`</span>ls /etc<span class="sb">`</span>
+</pre></div>
+<h3 id="&#20351;&#29992;&#21464;&#37327;">&#20351;&#29992;&#21464;&#37327;<a class="anchor-link" href="#&#20351;&#29992;&#21464;&#37327;">&#182;</a></h3><p>使用一个定义过的变量，只要在变量名前面加美元符号即可，如：</p>
+<div class="highlight"><pre><span></span><span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;qinjx&quot;</span>
+<span class="nb">echo</span> <span class="nv">$your_name</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">your_name</span><span class="si">}</span>
+</pre></div>
+
+<pre><code>qinjx
+qinjx
+
+</code></pre>
+<p>变量名外面的花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界，比如下面这种情况：</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> skill in Ada Coffe Action Java
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;I am good at </span><span class="si">${</span><span class="nv">skill</span><span class="si">}</span><span class="s2">Script&quot;</span>
+<span class="k">done</span>
+</pre></div>
+
+<pre><code>I am good at AdaScript
+I am good at CoffeScript
+I am good at ActionScript
+I am good at JavaScript
+
+</code></pre>
+<p>如果不给skill变量加花括号，写成<code>echo "I am good at $skillScript"</code>，解释器就会把<code>$skillScript</code>当成一个变量（其值为空），代码执行结果就不是我们期望的样子了。</p>
+<p>推荐给所有变量加上花括号，这是个好的编程习惯。IntelliJ IDEA编写shell script时，IDE就会提示加花括号。</p>
+<h3 id="&#37325;&#23450;&#20041;&#21464;&#37327;">&#37325;&#23450;&#20041;&#21464;&#37327;<a class="anchor-link" href="#&#37325;&#23450;&#20041;&#21464;&#37327;">&#182;</a></h3><p>已定义的变量，可以被重新定义，如：</p>
+<div class="highlight"><pre><span></span><span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;qinjx&quot;</span>
+<span class="nb">echo</span> <span class="nv">$your_name</span>
+
+<span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;alibaba&quot;</span>
+<span class="nb">echo</span> <span class="nv">$your_name</span>
+</pre></div>
+
+<pre><code>qinjx
+alibaba
+
+</code></pre>
+<p>这样写是合法的，但注意，第二次赋值的时候不能写<code>$your_name="alibaba"</code>，使用变量的时候才加美元符。</p>
+<p>注意，使用变量时必须加 <code>$</code>否则输出的都是变量名</p>
+<div class="highlight"><pre><span></span><span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;qinjx&quot;</span>
+<span class="nb">echo</span> your_name
+
+<span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;alibaba&quot;</span>
+<span class="nb">echo</span> your_name
+</pre></div>
+
+<pre><code>your_name
+your_name</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#27880;&#37322;">&#27880;&#37322;<a class="anchor-link" href="#&#27880;&#37322;">&#182;</a></h2><p>以“#”开头的行就是注释，会被解释器忽略。</p>
+<h3 id="&#22810;&#34892;&#27880;&#37322;">&#22810;&#34892;&#27880;&#37322;<a class="anchor-link" href="#&#22810;&#34892;&#27880;&#37322;">&#182;</a></h3><p>sh里没有多行注释，只能每一行加一个#号。就像这样：</p>
+
+<pre><code>#--------------------------------------------
+# 这是一个自动打ipa的脚本，基于webfrogs的ipa-build书写：https://github.com/webfrogs/xcode_shell/blob/master/ipa-build
+
+# 功能：自动为etao ios app打包，产出物为14个渠道的ipa包
+# 特色：全自动打包，不需要输入任何参数
+#--------------------------------------------
+
+##### 用户配置区 开始 #####
+#
+#
+# 项目根目录，推荐将此脚本放在项目的根目录，这里就不用改了
+# 应用名，确保和Xcode里Product下的target_name.app名字一致
+#
+##### 用户配置区 结束  #####
+
+</code></pre>
+<p>如果在开发过程中，遇到大段的代码需要临时注释起来，过一会儿又取消注释，怎么办呢？每一行加个#符号太费力了，可以把这一段要注释的代码用一对花括号括起来，定义成一个函数，没有地方调用这个函数，这块代码就不会执行，达到了和注释一样的效果。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23383;&#31526;&#20018;">&#23383;&#31526;&#20018;<a class="anchor-link" href="#&#23383;&#31526;&#20018;">&#182;</a></h2><p>字符串是shell编程中最常用最有用的数据类型（除了数字和字符串，也没啥其它类型好用了，哈哈），字符串可以用单引号，也可以用双引号，也可以不用引号。单双引号的区别跟PHP类似。</p>
+<h3 id="&#21333;&#24341;&#21495;">&#21333;&#24341;&#21495;<a class="anchor-link" href="#&#21333;&#24341;&#21495;">&#182;</a></h3><div class="highlight"><pre><span></span><span class="nv">str</span><span class="o">=</span><span class="s1">&#39;this is a string&#39;</span>
+</pre></div>
+<p>单引号字符串的限制：</p>
+<ul>
+<li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的</li>
+<li>单引号字串中不能出现单引号（对单引号使用转义符后也不行）</li>
+</ul>
+<h3 id="&#21452;&#24341;&#21495;">&#21452;&#24341;&#21495;<a class="anchor-link" href="#&#21452;&#24341;&#21495;">&#182;</a></h3><div class="highlight"><pre><span></span><span class="nv">your_name</span><span class="o">=</span><span class="s1">&#39;qinjx&#39;</span>
+<span class="nv">str</span><span class="o">=</span><span class="s2">&quot;Hello, I know your are \&quot;</span><span class="nv">$your_name</span><span class="s2">\&quot;! \n&quot;</span>
+</pre></div>
+<ul>
+<li>双引号里可以有变量</li>
+<li>双引号里可以出现转义字符</li>
+</ul>
+<h3 id="&#23383;&#31526;&#20018;&#25805;&#20316;">&#23383;&#31526;&#20018;&#25805;&#20316;<a class="anchor-link" href="#&#23383;&#31526;&#20018;&#25805;&#20316;">&#182;</a></h3><h4 id="&#25340;&#25509;&#23383;&#31526;&#20018;">&#25340;&#25509;&#23383;&#31526;&#20018;<a class="anchor-link" href="#&#25340;&#25509;&#23383;&#31526;&#20018;">&#182;</a></h4><div class="highlight"><pre><span></span><span class="nv">your_name</span><span class="o">=</span><span class="s2">&quot;qinjx&quot;</span>
+<span class="nv">greeting</span><span class="o">=</span><span class="s2">&quot;hello, &quot;</span><span class="nv">$your_name</span><span class="s2">&quot; !&quot;</span>
+<span class="nv">greeting_1</span><span class="o">=</span><span class="s2">&quot;hello, </span><span class="si">${</span><span class="nv">your_name</span><span class="si">}</span><span class="s2"> !&quot;</span>
+
+<span class="nb">echo</span> <span class="nv">$greeting</span> <span class="nv">$greeting_1</span>
+</pre></div>
+<h4 id="&#33719;&#21462;&#23383;&#31526;&#20018;&#38271;&#24230;&#65306;">&#33719;&#21462;&#23383;&#31526;&#20018;&#38271;&#24230;&#65306;<a class="anchor-link" href="#&#33719;&#21462;&#23383;&#31526;&#20018;&#38271;&#24230;&#65306;">&#182;</a></h4><div class="highlight"><pre><span></span><span class="nv">string</span><span class="o">=</span><span class="s2">&quot;abcd&quot;</span>
+<span class="nb">echo</span> <span class="si">${#</span><span class="nv">string</span><span class="si">}</span> <span class="c1">#输出：4</span>
+</pre></div>
+<h4 id="&#25552;&#21462;&#23376;&#23383;&#31526;&#20018;">&#25552;&#21462;&#23376;&#23383;&#31526;&#20018;<a class="anchor-link" href="#&#25552;&#21462;&#23376;&#23383;&#31526;&#20018;">&#182;</a></h4><div class="highlight"><pre><span></span><span class="nv">string</span><span class="o">=</span><span class="s2">&quot;alibaba is a great company&quot;</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">string</span><span class="p">:</span><span class="nv">1</span><span class="p">:</span><span class="nv">4</span><span class="si">}</span> <span class="c1">#输出：liba</span>
+</pre></div>
+<h4 id="&#26597;&#25214;&#23376;&#23383;&#31526;&#20018;">&#26597;&#25214;&#23376;&#23383;&#31526;&#20018;<a class="anchor-link" href="#&#26597;&#25214;&#23376;&#23383;&#31526;&#20018;">&#182;</a></h4><div class="highlight"><pre><span></span><span class="nv">string</span><span class="o">=</span><span class="s2">&quot;alibaba is a great company&quot;</span>
+<span class="nb">echo</span> <span class="sb">`</span>expr index <span class="s2">&quot;</span><span class="nv">$string</span><span class="s2">&quot;</span> is<span class="sb">`</span> <span class="c1">#输出：3，这个语句的意思是：找出字母i在这名话中的位置，要在linux下运行，mac下会报错</span>
+</pre></div>
+<h4 id="&#26356;&#22810;">&#26356;&#22810;<a class="anchor-link" href="#&#26356;&#22810;">&#182;</a></h4><p>参见本文档末尾的参考资料中<a href="http://tldp.org/LDP/abs/html/string-manipulation.html">Advanced Bash-Scripting Guid Chapter 10.1</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#25968;&#32452;">&#25968;&#32452;<a class="anchor-link" href="#&#25968;&#32452;">&#182;</a></h2><div class="highlight"><pre><span></span><span class="nv">array</span><span class="o">=(</span><span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span><span class="o">)</span> <span class="c1">#定义数组</span>
+<span class="nv">array_1</span><span class="o">=(</span>aa bb cc dd ee<span class="o">)</span> <span class="c1">#定义数组</span>
+<span class="nv">value</span><span class="o">=</span><span class="si">${</span><span class="nv">array</span><span class="p">[3]</span><span class="si">}</span> <span class="c1"># 数组第4个元素</span>
+<span class="nb">echo</span> <span class="nv">$value</span>
+<span class="nv">value_1</span><span class="o">=</span><span class="si">${</span><span class="nv">array_1</span><span class="p">[3]</span><span class="si">}</span> <span class="c1"># 数组第4个元素</span>
+<span class="nb">echo</span> <span class="nv">$value_1</span>
+<span class="nv">length</span><span class="o">=</span><span class="si">${#</span><span class="nv">array</span><span class="p">[*]</span><span class="si">}</span> <span class="c1"># 数组长度</span>
+<span class="nb">echo</span> <span class="nv">$length</span>
+</pre></div>
+
+<pre><code>4
+dd
+5</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#31649;&#36947;">&#31649;&#36947;<a class="anchor-link" href="#&#31649;&#36947;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#36816;&#31639;&#31526;">&#36816;&#31639;&#31526;<a class="anchor-link" href="#&#36816;&#31639;&#31526;">&#182;</a></h2><p>包括 <code>+ - * / % == = != ! -o -a</code> 分别为：加减乘除 取余 相等 赋值 不等 非 或 与</p>
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hello World&quot;</span>
+<span class="nv">a</span><span class="o">=</span><span class="m">3</span>
+<span class="nv">b</span><span class="o">=</span><span class="m">5</span>
+
+<span class="nv">val</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$a</span> + <span class="nv">$b</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="s2">&quot;value: </span><span class="nv">$val</span><span class="s2">&quot;</span>
+
+<span class="nv">val</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$a</span> - <span class="nv">$b</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="s2">&quot;value: </span><span class="nv">$val</span><span class="s2">&quot;</span>
+
+<span class="nv">val</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$a</span> <span class="se">\*</span> <span class="nv">$b</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="s2">&quot;value: </span><span class="nv">$val</span><span class="s2">&quot;</span>
+
+<span class="nv">val</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$a</span> / <span class="nv">$b</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="s2">&quot;value: </span><span class="nv">$val</span><span class="s2">&quot;</span>
+</pre></div>
+
+<pre><code>8
+-2
+15
+0
+
+</code></pre>
+<p><strong>定义变量的时候“=”前后是不能有空格的，但是进行四则运算的时候运算符号前后一定要有空格，乘法的时候需要进行转义</strong></p>
+<p><strong>表达式外的不是引号而是 ```</strong></p>
+<h3 id="&#20851;&#31995;&#36816;&#31639;&#31526;">&#20851;&#31995;&#36816;&#31639;&#31526;<a class="anchor-link" href="#&#20851;&#31995;&#36816;&#31639;&#31526;">&#182;</a></h3><p><code>-eq -ne -gt -lt -ge -le</code> 等于 不等于 大于 小于 大于等于 小于等于</p>
+<div class="highlight"><pre><span></span><span class="nv">a</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">b</span><span class="o">=</span><span class="m">20</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$a</span> -eq <span class="nv">$b</span> <span class="o">]</span>
+<span class="k">then</span>
+<span class="nb">echo</span> <span class="s2">&quot;true&quot;</span>
+<span class="k">else</span>
+<span class="nb">echo</span> <span class="s2">&quot;false&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+<p>**注意 <code>[]</code>内需要有空格</p>
+<h3 id="&#23383;&#31526;&#20018;&#36816;&#31639;&#31526;">&#23383;&#31526;&#20018;&#36816;&#31639;&#31526;<a class="anchor-link" href="#&#23383;&#31526;&#20018;&#36816;&#31639;&#31526;">&#182;</a></h3><p><code>= ！= -z -n</code> 字符串相同 字符串不相同 字符床长度为0 字符串长度不为0</p>
+<div class="highlight"><pre><span></span><span class="nv">mstring</span><span class="o">=</span>“Hello”
+<span class="nv">mstring_1</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span>
+<span class="nv">mstring_2</span><span class="o">=</span><span class="nv">$mstring</span><span class="s2">&quot; &quot;</span>
+
+<span class="nb">echo</span> <span class="sb">`</span>expr <span class="nv">mstring</span> <span class="o">=</span> mstring_1<span class="sb">`</span>
+<span class="nb">echo</span> <span class="sb">`</span>expr <span class="nv">$mstring</span> <span class="o">=</span> <span class="nv">$mstring_1</span><span class="sb">`</span>
+</pre></div>
+
+<pre><code>0
+0
+
+</code></pre>
+<h3 id="&#25991;&#20214;&#26816;&#27979;&#36816;&#31639;&#31526;">&#25991;&#20214;&#26816;&#27979;&#36816;&#31639;&#31526;<a class="anchor-link" href="#&#25991;&#20214;&#26816;&#27979;&#36816;&#31639;&#31526;">&#182;</a></h3><div class="highlight"><pre><span></span>-d file <span class="c1"># 检测文件是否为目录</span>
+-r file <span class="c1"># 检测文件是否可读</span>
+-w file <span class="c1"># 检测文件是否可写</span>
+-x file <span class="c1"># 检测文件是否可执行</span>
+-s file <span class="c1"># 检测文件是否非空</span>
+-e file <span class="c1"># 检测文件（或者目录）是否存在</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> -e <span class="s2">&quot;requirements.txt&quot;</span> <span class="o">]</span> <span class="c1"># if [ -e &quot;requirements.txt&quot; ] 也一样</span>
+<span class="k">then</span>
+<span class="nb">echo</span> <span class="s2">&quot;yes it exits&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+
+<pre><code>yes it exits</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26465;&#20214;&#21028;&#26029;">&#26465;&#20214;&#21028;&#26029;<a class="anchor-link" href="#&#26465;&#20214;&#21028;&#26029;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#27969;&#31243;&#25511;&#21046;">&#27969;&#31243;&#25511;&#21046;<a class="anchor-link" href="#&#27969;&#31243;&#25511;&#21046;">&#182;</a></h2><p>sh的流程控制不可为空, 如果else分支没有语句执行，就不要写这个else。</p>
+<p>还要注意，sh里的if [ $foo -eq 0 ]，这个方括号跟Java/PHP里if后面的圆括号大不相同，它是一个可执行程序（和ls, grep一样），想不到吧？在CentOS上，它在/usr/bin目录下：</p>
+
+<pre><code>ll /usr/bin/[
+-rwxr-xr-x. 1 root root 33408 6月  22 2012 /usr/bin/[
+
+</code></pre>
+<p>正因为方括号在这里是一个可执行程序，<strong>方括号后面必须加空格</strong>，不能写成if [$foo -eq 0]</p>
+<h3 id="if-else">if else<a class="anchor-link" href="#if-else">&#182;</a></h3><h4 id="if">if<a class="anchor-link" href="#if">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">if</span> condition
+<span class="k">then</span>
+    command1 
+    command2
+    ...
+    commandN 
+<span class="k">fi</span>
+</pre></div>
+<p>写成一行（适用于终端命令提示符）：</p>
+
+<pre><code>if `ps -ef | grep ssh`;  then echo hello; fi
+
+</code></pre>
+<p>末尾的fi就是if倒过来拼写，后面还会遇到类似的</p>
+<h4 id="if-else">if else<a class="anchor-link" href="#if-else">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">if</span> condition
+<span class="k">then</span>
+    command1 
+    command2
+    ...
+    commandN
+<span class="k">else</span>
+    <span class="nb">command</span>
+<span class="k">fi</span>
+</pre></div>
+<h4 id="if-else-if-else">if else-if else<a class="anchor-link" href="#if-else-if-else">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">if</span> condition1
+<span class="k">then</span>
+    command1
+<span class="k">elif</span> condition2
+    command2
+<span class="k">else</span>
+    commandN
+<span class="k">fi</span>
+</pre></div>
+<h3 id="for-while">for while<a class="anchor-link" href="#for-while">&#182;</a></h3><h4 id="for">for<a class="anchor-link" href="#for">&#182;</a></h4><p>在开篇的示例里演示过了：</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> var in item1 item2 ... itemN
+<span class="k">do</span>
+    command1
+    command2
+    ...
+    commandN
+<span class="k">done</span>
+</pre></div>
+<p>写成一行：</p>
+
+<pre><code>for var in item1 item2 ... itemN; do command1; command2… done;
+
+</code></pre>
+<h4 id="C&#39118;&#26684;&#30340;for">C&#39118;&#26684;&#30340;for<a class="anchor-link" href="#C&#39118;&#26684;&#30340;for">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">((</span> EXP1<span class="p">;</span> EXP2<span class="p">;</span> EXP3 <span class="o">))</span>
+<span class="k">do</span>
+    command1
+    command2
+    command3
+<span class="k">done</span>
+</pre></div>
+<h4 id="while">while<a class="anchor-link" href="#while">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">while</span> condition
+<span class="k">do</span>
+    <span class="nb">command</span>
+<span class="k">done</span>
+</pre></div>
+<h4 id="&#26080;&#38480;&#24490;&#29615;">&#26080;&#38480;&#24490;&#29615;<a class="anchor-link" href="#&#26080;&#38480;&#24490;&#29615;">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">while</span> :
+<span class="k">do</span>
+    <span class="nb">command</span>
+<span class="k">done</span>
+</pre></div>
+<p>或者</p>
+<div class="highlight"><pre><span></span><span class="k">while</span> <span class="nb">true</span>
+<span class="k">do</span>
+    <span class="nb">command</span>
+<span class="k">done</span>
+</pre></div>
+<p>或者</p>
+
+<pre><code>for (( ; ; ))
+
+</code></pre>
+<h4 id="until">until<a class="anchor-link" href="#until">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">until</span> condition
+<span class="k">do</span>
+    <span class="nb">command</span>
+<span class="k">done</span>
+</pre></div>
+<h3 id="case">case<a class="anchor-link" href="#case">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">case</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">opt</span><span class="si">}</span><span class="s2">&quot;</span> in
+    <span class="s2">&quot;Install-Puppet-Server&quot;</span> <span class="o">)</span>
+        install_master <span class="nv">$1</span>
+        <span class="nb">exit</span>
+    <span class="p">;;</span>
+
+    <span class="s2">&quot;Install-Puppet-Client&quot;</span> <span class="o">)</span>
+        install_client <span class="nv">$1</span>
+        <span class="nb">exit</span>
+    <span class="p">;;</span>
+
+    <span class="s2">&quot;Config-Puppet-Server&quot;</span> <span class="o">)</span>
+        config_puppet_master
+        <span class="nb">exit</span>
+    <span class="p">;;</span>
+
+    <span class="s2">&quot;Config-Puppet-Client&quot;</span> <span class="o">)</span>
+        config_puppet_client
+        <span class="nb">exit</span>
+    <span class="p">;;</span>
+
+    <span class="s2">&quot;Exit&quot;</span> <span class="o">)</span>
+        <span class="nb">exit</span>
+    <span class="p">;;</span>
+
+    * <span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;Bad option, please choose again&quot;</span>
+<span class="k">esac</span>
+</pre></div>
+<p>case的语法和C family语言差别很大，它需要一个esac（就是case反过来）作为结束标记，每个case分支用右圆括号，用两个分号表示break</p>
+<div class="highlight"><pre><span></span><span class="nb">break</span> <span class="c1">#跳出所有循环</span>
+<span class="nb">break</span> n <span class="c1"># 跳出第n层循环</span>
+<span class="k">continue</span> <span class="c1"># 跳出当前循环</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20989;&#25968;">&#20989;&#25968;<a class="anchor-link" href="#&#20989;&#25968;">&#182;</a></h2><div class="highlight"><pre><span></span>testfunc<span class="o">(){</span>
+    <span class="nb">echo</span> <span class="s2">&quot;hello world&quot;</span>
+<span class="o">}</span>
+
+testfunc
+</pre></div>
+<p>定义一个没有返回值的函数并调用</p>
+<div class="highlight"><pre><span></span>testfunc<span class="o">(){</span>
+    <span class="nv">num</span><span class="o">=</span><span class="m">3</span>
+    <span class="nv">num_1</span><span class="o">=</span><span class="m">5</span>
+    <span class="k">return</span> <span class="k">$((</span><span class="nv">$num</span> <span class="o">+</span> <span class="nv">$num_1</span><span class="k">))</span> <span class="c1"># 此处必须有两层括号</span>
+<span class="o">}</span>
+
+testfunc
+<span class="nv">result</span><span class="o">=</span><span class="nv">$?</span>
+
+<span class="nb">echo</span> <span class="nv">$result</span>
+</pre></div>
+<p>定义一个返回值的函数并输出结果</p>
+<div class="highlight"><pre><span></span>funWithParam<span class="o">(){</span>
+    <span class="nb">echo</span> <span class="s2">&quot;第一个参数为 </span><span class="nv">$1</span><span class="s2"> !&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;第二个参数为 </span><span class="nv">$2</span><span class="s2"> !&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;第十个参数为 </span><span class="nv">$10</span><span class="s2"> !&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;第十个参数为 </span><span class="si">${</span><span class="nv">10</span><span class="si">}</span><span class="s2"> !&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;第十一个参数为 </span><span class="si">${</span><span class="nv">11</span><span class="si">}</span><span class="s2"> !&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;参数总数有 </span><span class="nv">$#</span><span class="s2"> 个!&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;作为一个字符串输出所有参数 </span><span class="nv">$*</span><span class="s2"> !&quot;</span>
+<span class="o">}</span>
+funWithParam <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">34</span> <span class="m">73</span>
+</pre></div>
+<p>参数处理</p>
+<div class="highlight"><pre><span></span><span class="nv">$#</span>  传递到脚本的参数个数
+<span class="nv">$*</span>  以一个单字符串显示所有向脚本传递的参数
+<span class="nv">$$</span>  脚本运行的当前进程ID号
+<span class="nv">$!</span>  后台运行的最后一个进程的ID号
+<span class="nv">$@</span>  与<span class="nv">$*</span>相同，但是使用时加引号，并在引号中返回每个参数。
+<span class="nv">$-</span>  显示Shell使用的当前选项，与set命令功能相同。
+<span class="nv">$?</span>  显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#37325;&#23450;&#21521;">&#37325;&#23450;&#21521;<a class="anchor-link" href="#&#37325;&#23450;&#21521;">&#182;</a></h2>
+<pre><code>command &gt; file  将输出重定向到 file。
+command &lt; file  将输入重定向到 file。
+command &gt;&gt; file 将输出以追加的方式重定向到 file。
+n &gt; file    将文件描述符为 n 的文件重定向到 file。
+n &gt;&gt; file   将文件描述符为 n 的文件以追加的方式重定向到 file。
+n &gt;&amp; m  将输出文件 m 和 n 合并。
+n &lt;&amp; m  将输入文件 m 和 n 合并。
+&lt;&lt; tag  将开始标记 tag 和结束标记 tag 之间的内容作为输入。</code></pre>
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;yes&quot;</span> &gt; users
+cat users
+</pre></div>
+
+<pre><code>yes
+
+</code></pre>
+<h3 id="&#28145;&#20837;&#37325;&#23450;&#21521;">&#28145;&#20837;&#37325;&#23450;&#21521;<a class="anchor-link" href="#&#28145;&#20837;&#37325;&#23450;&#21521;">&#182;</a></h3><p>一般情况下，每个 Unix/Linux 命令运行时都会打开三个文件：</p>
+<ul>
+<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
+<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
+<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
+</ul>
+<p>默认情况下，command &gt; file 将 stdout 重定向到 file，command &lt; file 将stdin 重定向到 file。</p>
+<h3 id="Here-Document">Here Document<a class="anchor-link" href="#Here-Document">&#182;</a></h3><p>Here Document 是 Shell 中的一种特殊的重定向方式，用来将输入重定向到一个交互式 Shell 脚本或程序</p>
+<p>它的基本的形式如下：</p>
+<div class="highlight"><pre><span></span><span class="nb">command</span> <span class="s">&lt;&lt; delimiter</span>
+<span class="s">    document</span>
+<span class="s">delimiter</span>
+</pre></div>
+<p>将两个 delimiter 之间的内容(document) 作为输入传递给 command</p>
+<p>比如计算一段文字的行数</p>
+<div class="highlight"><pre><span></span>wc -l <span class="s">&lt;&lt; EOF</span>
+<span class="s">    hahah</span>
+<span class="s">    heihei</span>
+<span class="s">    啦啦啦</span>
+<span class="s">EOF</span>
+</pre></div>
+
+<pre><code>3
+
+
+</code></pre>
+<h3 id="&#29305;&#27530;&#29992;&#27861;">&#29305;&#27530;&#29992;&#27861;<a class="anchor-link" href="#&#29305;&#27530;&#29992;&#27861;">&#182;</a></h3><div class="highlight"><pre><span></span><span class="nb">command</span> &gt; file <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="nb">command</span> &gt;&gt; file <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</pre></div>
+<p>这里的&amp;没有固定的意思</p>
+<p>放在&gt;后面的&amp;，表示重定向的目标不是一个文件，而是一个文件描述符，内置的文件描述符如下</p>
+
+<pre><code>1 =&gt; stdout
+2 =&gt; stderr
+0 =&gt; stdin</code></pre>
+<p>换言之 2&gt;1 代表将stderr重定向到当前路径下文件名为1的regular file中，而2&gt;&amp;1代表将stderr重定向到文件描述符为1的文件(即/dev/stdout)中，这个文件就是stdout在file system中的映射</p>
+<p>而&amp;&gt;file是一种特殊的用法，也可以写成&gt;&amp;file，二者的意思完全相同，都等价于</p>
+<div class="highlight"><pre><span></span>&gt;file <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#25991;&#20214;&#21253;&#21547;">&#25991;&#20214;&#21253;&#21547;<a class="anchor-link" href="#&#25991;&#20214;&#21253;&#21547;">&#182;</a></h2><p>可以使用source和.关键字，如：</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> ./function.sh
+. ./function.sh
+</pre></div>
+<p>在bash里，source和.是等效的，他们都是读入function.sh的内容并执行其内容（类似PHP里的include），为了更好的可移植性，推荐使用第二种写法。</p>
+<p>包含一个文件和执行一个文件一样，也要写这个文件的路径，不能光写文件名，比如上述例子中:</p>
+<div class="highlight"><pre><span></span>. ./function.sh
+</pre></div>
+<p>不可以写作：</p>
+<div class="highlight"><pre><span></span>. <span class="k">function</span>.sh
+</pre></div>
+<p>如果function.sh是用户传入的参数，如何获得它的绝对路径呢？方法是：</p>
+<div class="highlight"><pre><span></span><span class="nv">real_path</span><span class="o">=</span><span class="sb">`</span>readlink -f <span class="nv">$1</span><span class="sb">`</span><span class="c1">#$1是用户输入的参数，如function.sh</span>
+. <span class="nv">$real_path</span>
+</pre></div>
+<h2 id="&#29992;&#25143;&#36755;&#20837;">&#29992;&#25143;&#36755;&#20837;<a class="anchor-link" href="#&#29992;&#25143;&#36755;&#20837;">&#182;</a></h2><h3 id="&#25191;&#34892;&#33050;&#26412;&#26102;&#20256;&#20837;">&#25191;&#34892;&#33050;&#26412;&#26102;&#20256;&#20837;<a class="anchor-link" href="#&#25191;&#34892;&#33050;&#26412;&#26102;&#20256;&#20837;">&#182;</a></h3><h3 id="&#33050;&#26412;&#36816;&#34892;&#20013;&#36755;&#20837;">&#33050;&#26412;&#36816;&#34892;&#20013;&#36755;&#20837;<a class="anchor-link" href="#&#33050;&#26412;&#36816;&#34892;&#20013;&#36755;&#20837;">&#182;</a></h3><h3 id="select&#33756;&#21333;">select&#33756;&#21333;<a class="anchor-link" href="#select&#33756;&#21333;">&#182;</a></h3><h2 id="stdin&#21644;stdout">stdin&#21644;stdout<a class="anchor-link" href="#stdin&#21644;stdout">&#182;</a></h2><h2 id="&#24120;&#29992;&#30340;&#21629;&#20196;">&#24120;&#29992;&#30340;&#21629;&#20196;<a class="anchor-link" href="#&#24120;&#29992;&#30340;&#21629;&#20196;">&#182;</a></h2><p>sh脚本结合系统命令便有了强大的威力，在字符处理领域，有grep、awk、sed三剑客，grep负责找出特定的行，awk能将行拆分成多个字段，sed则可以实现更新插入删除等写操作。</p>
+<h3 id="ps">ps<a class="anchor-link" href="#ps">&#182;</a></h3><p>查看进程列表</p>
+<h3 id="grep">grep<a class="anchor-link" href="#grep">&#182;</a></h3><h4 id="&#25490;&#38500;grep&#33258;&#36523;">&#25490;&#38500;grep&#33258;&#36523;<a class="anchor-link" href="#&#25490;&#38500;grep&#33258;&#36523;">&#182;</a></h4><h4 id="&#26597;&#25214;&#19982;target&#30456;&#37051;&#30340;&#32467;&#26524;">&#26597;&#25214;&#19982;target&#30456;&#37051;&#30340;&#32467;&#26524;<a class="anchor-link" href="#&#26597;&#25214;&#19982;target&#30456;&#37051;&#30340;&#32467;&#26524;">&#182;</a></h4><h3 id="awk">awk<a class="anchor-link" href="#awk">&#182;</a></h3><h3 id="sed">sed<a class="anchor-link" href="#sed">&#182;</a></h3><h4 id="&#25554;&#20837;">&#25554;&#20837;<a class="anchor-link" href="#&#25554;&#20837;">&#182;</a></h4><h4 id="&#26367;&#25442;">&#26367;&#25442;<a class="anchor-link" href="#&#26367;&#25442;">&#182;</a></h4><h4 id="&#21024;&#38500;">&#21024;&#38500;<a class="anchor-link" href="#&#21024;&#38500;">&#182;</a></h4><h3 id="xargs">xargs<a class="anchor-link" href="#xargs">&#182;</a></h3><h3 id="curl">curl<a class="anchor-link" href="#curl">&#182;</a></h3><h2 id="&#32508;&#21512;&#26696;&#20363;">&#32508;&#21512;&#26696;&#20363;<a class="anchor-link" href="#&#32508;&#21512;&#26696;&#20363;">&#182;</a></h2><h2 id="&#21442;&#32771;&#36164;&#26009;">&#21442;&#32771;&#36164;&#26009;<a class="anchor-link" href="#&#21442;&#32771;&#36164;&#26009;">&#182;</a></h2><ul>
+<li><a href="http://tldp.org/LDP/abs/html/">Advanced Bash-Scripting Guide</a>，非常详细，非常易读，大量example，既可以当入门教材，也可以当做工具书查阅</li>
+<li><a href="http://www.tutorialspoint.com/unix/unix-shell.htm">Unix Shell Programming</a></li>
+<li><a href="http://bash.cyberciti.biz/guide/Main_Page">Linux Shell Scripting Tutorial - A Beginner's handbook</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/shadowsocksr.html" title="Previous: 安装ShadowSocks的升级版ShadowSocksR">安装ShadowSocks的升级版ShadowSocksR</a></li>
+                <li class="next-article"><a href="//zodiac911.github.io/blog/elegant-tuning.html" title="Next: Pelican主题Elegant细节设置">Pelican主题Elegant细节设置</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2018-10-18T10:26:00+08:00">Oct 18, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#linux-ref">Linux
+                    <span>1</span>
+</a></li>
+                <li><a href="//zodiac911.github.io/blog/tags#shell-ref">Shell
+                    <span>1</span>
+</a></li>
+                <li><a href="//zodiac911.github.io/blog/tags#ubuntu-ref">Ubuntu
+                    <span>4</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>

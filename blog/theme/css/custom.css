@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+/* site title */
+.site-name {
+    font-family: 'PT Sans', 'Calibri', 'Tahoma', 'Arial', 'Sans-Serif';
+}
+
+.article-content, div.recent-posts p {
+    font: 1.2em/1.6em 'Source Sans Pro', Helvetica, Roboto, 'Calibri', 'Tahoma', 'Arial', 'Sans-Serif';
+    text-align: justify;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Oswald', 'Arial Narrow', Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.table-of-content .toc {
+    font-size: 1em;
+}

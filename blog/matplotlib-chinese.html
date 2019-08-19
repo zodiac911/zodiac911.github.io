@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="让Matplotlib正确显示中文
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Python, Matplotlib, posts, " />
+
+<meta property="og:title" content="让Matplotlib正确显示中文 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/matplotlib-chinese.html" />
+<meta property="og:description" content="让Matplotlib正确显示中文" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2018-10-25T10:56:00+08:00" />
+<meta name="twitter:title" content="让Matplotlib正确显示中文 ">
+<meta name="twitter:description" content="让Matplotlib正确显示中文">
+
+        <title>让Matplotlib正确显示中文  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/matplotlib-chinese.html"> 让Matplotlib正确显示中文  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><div align="center">  <img src="https://matplotlib.org/_static/logo2.png" width="1000"/> </div><br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>用 Matplotlib 画图时中文无法显示，遂解决之</p>
+</blockquote>
+<p>本方法只适用于 Linux 环境</p>
+<p>Matplotlib 无法显示中文这个问题由来已久，官方一直没有解决，只能自己解决啦。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#安装中文字体" data-toc-modified-id="安装中文字体-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>安装中文字体</a></span></li><li><span><a href="#将字体文件拷贝到-Matplolib-字体文件夹" data-toc-modified-id="将字体文件拷贝到-Matplolib-字体文件夹-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>将字体文件拷贝到 Matplolib 字体文件夹</a></span><ul class="toc-item"><li><span><a href="#可选操作" data-toc-modified-id="可选操作-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>可选操作</a></span></li></ul></li><li><span><a href="#方案1-通过-rc.Params-指定字体" data-toc-modified-id="方案1-通过-rc.Params-指定字体-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>方案1-通过 <code>rc.Params</code> 指定字体</a></span></li><li><span><a href="#方案2-通过路径指定字体" data-toc-modified-id="方案2-通过路径指定字体-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>方案2-通过路径指定字体</a></span></li><li><span><a href="#总结" data-toc-modified-id="总结-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>总结</a></span></li><li><span><a href="#可能需要的操作" data-toc-modified-id="可能需要的操作-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>可能需要的操作</a></span></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23433;&#35013;&#20013;&#25991;&#23383;&#20307;">&#23433;&#35013;&#20013;&#25991;&#23383;&#20307;<a class="anchor-link" href="#&#23433;&#35013;&#20013;&#25991;&#23383;&#20307;">&#182;</a></h2><p>可以从这个 repo 安装</p>
+<div class="highlight"><pre><span></span>git clone https://github.com/tracyone/program_font 
+<span class="nb">cd</span> program_font 
+./install.sh
+</pre></div>
+<p>安装完字体之后 <code>/usr/share/fonts</code> 目录下会多出很多字体。这只是给 Ubuntu 系统安装了字体，但 Matplotlib 还是不能使用这些字体，需要将字体文件拷贝到 Matplolib 字体文件夹</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23558;&#23383;&#20307;&#25991;&#20214;&#25335;&#36125;&#21040;-Matplolib-&#23383;&#20307;&#25991;&#20214;&#22841;">&#23558;&#23383;&#20307;&#25991;&#20214;&#25335;&#36125;&#21040; Matplolib &#23383;&#20307;&#25991;&#20214;&#22841;<a class="anchor-link" href="#&#23558;&#23383;&#20307;&#25991;&#20214;&#25335;&#36125;&#21040;-Matplolib-&#23383;&#20307;&#25991;&#20214;&#22841;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>检测　Matplotlib 字体文件夹</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/home/nwpu/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Matplotlib 的字体文件夹应该在同级目录，即　<code>/home/nwpu/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data/fonts</code></p>
+<p>从　<code>/usr/share/fonts</code> 中找一个中文字体的 ttf 文件拷贝到　<code>/home/nwpu/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data/fonts</code> 文件夹</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#21487;&#36873;&#25805;&#20316;">&#21487;&#36873;&#25805;&#20316;<a class="anchor-link" href="#&#21487;&#36873;&#25805;&#20316;">&#182;</a></h3><p>删除当前用户matplotlib 的缓存文件（如果没有直接进入第四步）</p>
+<div class="highlight"><pre><span></span><span class="nv">$cd</span> ~/.cache/matplotlib
+<span class="nv">$rm</span> -rf *.*
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>通过以下脚本检测 Ubuntu 和 Matplotlib 都可用的字体</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="k">import</span> <span class="n">FontManager</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">fm</span> <span class="o">=</span> <span class="n">FontManager</span><span class="p">()</span>
+<span class="n">mat_fonts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fm</span><span class="o">.</span><span class="n">ttflist</span><span class="p">)</span>
+<span class="c1">#print(mat_fonts)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
+    <span class="s1">&#39;fc-list :lang=zh -f &quot;%</span><span class="si">{family}</span><span class="se">\n</span><span class="s1">&quot;&#39;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 获取字体列表</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="c1">#print(output)</span>
+
+<span class="n">zh_fonts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">available</span> <span class="o">=</span> <span class="n">mat_fonts</span> <span class="o">&amp;</span> <span class="n">zh_fonts</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;可用的字体&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">available</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>********** 可用的字体 **********
+Yahei Mono
+YaHei Consolas Hybrid
+Droid Sans Fallback
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26041;&#26696;1-&#36890;&#36807;-rc.Params-&#25351;&#23450;&#23383;&#20307;">&#26041;&#26696;1-&#36890;&#36807; <code>rc.Params</code> &#25351;&#23450;&#23383;&#20307;<a class="anchor-link" href="#&#26041;&#26696;1-&#36890;&#36807;-rc.Params-&#25351;&#23450;&#23383;&#20307;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">font_name</span> <span class="o">=</span> <span class="s2">&quot;YaHei Consolas Hybrid&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">font_name</span> <span class="c1"># 指定字体，实际上相当于修改 matplotlibrc 文件　只不过这样做是暂时的　下次失效</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1"># 正确显示负号，防止变成方框</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;text for t轴&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;text for y轴&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;t和y对应关系&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;data/save.png&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;测试&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>以上操作<strong>暂时更改</strong> Matplotlib 的字体选项，只在本 kernel 中有效</p>
+<p>若想<strong>永久更改</strong> Matplotlib 所使用的字体，可以直接修改<code>matplotlibrc</code>文件，路径为 <code>matplotlib.matplotlib_fname()</code> 的返回值即 <code>/home/nwpu/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc</code></p>
+<p>具体修改以下几项</p>
+
+<pre><code>font.family         : sans-serif        
+font.sans-serif     : SimHei, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif # 在其中添加中文字体名
+axes.unicode_minus  :False，#作用就是解决负号'-'显示为方块的问题</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26041;&#26696;2-&#36890;&#36807;&#36335;&#24452;&#25351;&#23450;&#23383;&#20307;">&#26041;&#26696;2-&#36890;&#36807;&#36335;&#24452;&#25351;&#23450;&#23383;&#20307;<a class="anchor-link" href="#&#26041;&#26696;2-&#36890;&#36807;&#36335;&#24452;&#25351;&#23450;&#23383;&#20307;">&#182;</a></h2><p>通过路径指定字体可以指定系统内任意字体，而不需要是 matplotlib 字体文件夹内的字体</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">mfm</span>
+
+<span class="n">font_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/share/fonts/MyFonts/YaHei.Consolas.1.11b.ttf&quot;</span>
+<span class="n">prop</span> <span class="o">=</span> <span class="n">mfm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">font_path</span><span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;text for t轴&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;text for y轴&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;t和y对应关系&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;data/save.png&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;测试&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#24635;&#32467;">&#24635;&#32467;<a class="anchor-link" href="#&#24635;&#32467;">&#182;</a></h2><ol>
+<li>为 Ubuntu 系统安装中文字体</li>
+<li>将中文字体拷贝到 Matplotlib 字体文件夹</li>
+<li>在代码中指定一个可用的字体</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21487;&#33021;&#38656;&#35201;&#30340;&#25805;&#20316;">&#21487;&#33021;&#38656;&#35201;&#30340;&#25805;&#20316;<a class="anchor-link" href="#&#21487;&#33021;&#38656;&#35201;&#30340;&#25805;&#20316;">&#182;</a></h2><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">_rebuild</span>
+
+<span class="n">_rebuild</span><span class="p">()</span> <span class="c1">#reload一下</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>References：</p>
+<blockquote><ul>
+<li><a href="https://jdhao.github.io/2017/05/13/guide-on-how-to-use-chinese-with-matplotlib/">A Gentle Guide on How to Use Chinese Characters With Matplotlib</a></li>
+</ul>
+</blockquote>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/python-multiprocessing.html" title="Previous: Python多进程">Python多进程</a></li>
+                <li class="next-article"><a href="//zodiac911.github.io/blog/boxx.html" title="Next: [分享]Box-X一款提高 Python 代码开发和调试效率神器">[分享]Box-X一款提高 Python 代码开发和调试效率神器</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2018-10-25T10:56:00+08:00">Oct 25, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#matplotlib-ref">Matplotlib
+                    <span>10</span>
+</a></li>
+                <li><a href="//zodiac911.github.io/blog/tags#python-ref">Python
+                    <span>16</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>

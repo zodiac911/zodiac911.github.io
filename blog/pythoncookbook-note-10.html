@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="PythonCookbook笔记(10)-模块与包
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="PythonCookbook, posts, " />
+
+<meta property="og:title" content="PythonCookbook笔记(10)-模块与包 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/pythoncookbook-note-10.html" />
+<meta property="og:description" content="PythonCookbook笔记(10)-模块与包" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2019-06-26T00:00:00+08:00" />
+<meta name="twitter:title" content="PythonCookbook笔记(10)-模块与包 ">
+<meta name="twitter:description" content="PythonCookbook笔记(10)-模块与包">
+
+        <title>PythonCookbook笔记(10)-模块与包  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/pythoncookbook-note-10.html"> PythonCookbook笔记(10)-模块与包  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python CookBook 学习笔记</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#第十章-模块与包" data-toc-modified-id="第十章-模块与包-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>第十章 模块与包</a></span><ul class="toc-item"><li><span><a href="#10.1-构建一个模块的层级包" data-toc-modified-id="10.1-构建一个模块的层级包-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>10.1 构建一个模块的层级包</a></span></li><li><span><a href="#10.2-控制模块被全部导入的内容" data-toc-modified-id="10.2-控制模块被全部导入的内容-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>10.2 控制模块被全部导入的内容</a></span></li><li><span><a href="#10.3-使用相对路径名导入包中子模块" data-toc-modified-id="10.3-使用相对路径名导入包中子模块-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>10.3 使用相对路径名导入包中子模块</a></span></li><li><span><a href="#10.4-将模块分割成多个文件" data-toc-modified-id="10.4-将模块分割成多个文件-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>10.4 将模块分割成多个文件</a></span></li><li><span><a href="#10.5-利用命名空间导入目录分散的代码" data-toc-modified-id="10.5-利用命名空间导入目录分散的代码-1.5"><span class="toc-item-num">1.5&nbsp;&nbsp;</span>10.5 利用命名空间导入目录分散的代码</a></span></li><li><span><a href="#10.6-重新加载模块" data-toc-modified-id="10.6-重新加载模块-1.6"><span class="toc-item-num">1.6&nbsp;&nbsp;</span>10.6 重新加载模块</a></span></li><li><span><a href="#10.7-运行目录或压缩文件" data-toc-modified-id="10.7-运行目录或压缩文件-1.7"><span class="toc-item-num">1.7&nbsp;&nbsp;</span>10.7 运行目录或压缩文件</a></span></li><li><span><a href="#10.8-读取位于包中的数据文件" data-toc-modified-id="10.8-读取位于包中的数据文件-1.8"><span class="toc-item-num">1.8&nbsp;&nbsp;</span>10.8 读取位于包中的数据文件</a></span></li><li><span><a href="#10.9-将文件夹加入到sys.path" data-toc-modified-id="10.9-将文件夹加入到sys.path-1.9"><span class="toc-item-num">1.9&nbsp;&nbsp;</span>10.9 将文件夹加入到sys.path</a></span></li><li><span><a href="#10.10-通过字符串名导入模块" data-toc-modified-id="10.10-通过字符串名导入模块-1.10"><span class="toc-item-num">1.10&nbsp;&nbsp;</span>10.10 通过字符串名导入模块</a></span></li><li><span><a href="#10.13-安装私有的包" data-toc-modified-id="10.13-安装私有的包-1.11"><span class="toc-item-num">1.11&nbsp;&nbsp;</span>10.13 安装私有的包</a></span></li><li><span><a href="#10.14-创建新的-Python-环境" data-toc-modified-id="10.14-创建新的-Python-环境-1.12"><span class="toc-item-num">1.12&nbsp;&nbsp;</span>10.14 创建新的 Python 环境</a></span></li><li><span><a href="#10.15-分发包" data-toc-modified-id="10.15-分发包-1.13"><span class="toc-item-num">1.13&nbsp;&nbsp;</span>10.15 分发包</a></span></li></ul></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#31532;&#21313;&#31456;-&#27169;&#22359;&#19982;&#21253;">&#31532;&#21313;&#31456; &#27169;&#22359;&#19982;&#21253;<a class="anchor-link" href="#&#31532;&#21313;&#31456;-&#27169;&#22359;&#19982;&#21253;">&#182;</a></h1><p>值得注意的小节：</p>
+<ul>
+<li>10.11</li>
+<li>10.12</li>
+</ul>
+<p>10.11 10.12 未完成</p>
+<p>模块与包是任何大型程序的核心，就连Python 安装程序本身也是一个包。本章重点涉及有关模块和包的常用编程技术，例如如何组织包、把大型模块分割成多个文件、创建命名空间包。同时，也给出了让你自定义导入语句的秘籍。</p>
+<p><strong>Table of Contents:</strong></p>
+<ul>
+<li><a href="#10.1-构建一个模块的层级包">10.1 构建一个模块的层级包</a></li>
+<li><a href="#10.2-控制模块被全部导入的内容">10.2 控制模块被全部导入的内容</a></li>
+<li><a href="#10.3-使用相对路径名导入包中子模块">10.3 使用相对路径名导入包中子模块</a></li>
+<li><a href="#10.4-将模块分割成多个文件">10.4 将模块分割成多个文件</a></li>
+<li><a href="#10.5-利用命名空间导入目录分散的代码">10.5 利用命名空间导入目录分散的代码</a></li>
+<li><a href="#10.6-重新加载模块">10.6 重新加载模块</a></li>
+<li><a href="#10.7-运行目录或压缩文件">10.7 运行目录或压缩文件</a></li>
+<li><a href="#10.8-读取位于包中的数据文件">10.8 读取位于包中的数据文件</a></li>
+<li><a href="#10.9-将文件夹加入到sys.path">10.9 将文件夹加入到sys.path</a></li>
+<li><a href="#10.10-通过字符串名导入模块">10.10 通过字符串名导入模块</a></li>
+<li><a href="#10.13-安装私有的包">10.13 安装私有的包</a></li>
+<li><a href="#10.14-创建新的-Python-环境">10.14 创建新的 Python 环境</a></li>
+<li><a href="#10.15-分发包">10.15 分发包</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.1-&#26500;&#24314;&#19968;&#20010;&#27169;&#22359;&#30340;&#23618;&#32423;&#21253;">10.1 &#26500;&#24314;&#19968;&#20010;&#27169;&#22359;&#30340;&#23618;&#32423;&#21253;<a class="anchor-link" href="#10.1-&#26500;&#24314;&#19968;&#20010;&#27169;&#22359;&#30340;&#23618;&#32423;&#21253;">&#182;</a></h2><p>问题：你想将你的代码组织成由很多分层模块构成的包。</p>
+<p>解决方案：封装成包是很简单的。在文件系统上组织你的代码，并确保每个目录都包含一个 <code>__init__.py</code> 文件</p>
+
+<pre><code>graphics/
+    __init__.py
+    primitive/
+        __init__.py
+        line.py
+        fill.py
+        text.py
+    formats/
+        __init__.py
+        png.py
+        jpg.py
+
+</code></pre>
+<p>应该能够执行各种import语句</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">graphics.primitive.line</span>
+<span class="kn">from</span> <span class="nn">graphics.primitive</span> <span class="kn">import</span> <span class="n">line</span>
+<span class="kn">import</span> <span class="nn">graphics.formats.jpg</span> <span class="kn">as</span> <span class="nn">jpg</span>
+</pre></div>
+<p>讨论:文件<strong>init</strong>.py 的目的是要包含不同运行级别的包的可选的初始化代码。</p>
+<p>如果执行了语句 import graphics， 文件 <code>graphics/__init__.py</code> 将被导入,建立 graphics 命名空间的内容。import graphics.format.jpg 这样导入，文件 <code>graphics/__init__.py</code> 和文件 <code>graphics/graphics/formats/__init__.py</code> 将在文件 graphics/formats/jpg.py 导入之前导入。</p>
+<p><strong>注意这里的区别是 上层目录的 <code>__init__.py</code> 会不会被执行</strong></p>
+<p>绝大部分时候让 <code>__init__.py</code> 空着就好。但是有些情况下可能包含代码。 举个例子，<code>__init__.py</code> 能够用来自动加载子模块:</p>
+<div class="highlight"><pre><span></span><span class="c1"># graphics/formats/__init__.py</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">jpg</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">png</span>
+</pre></div>
+<p>像这样一个文件可以只 import grahpics.formats 来代替 import graphics.formats.jpg 以及 import graphics.formats.png</p>
+<p><code>__init__.py</code> 的其他常用用法包括将多个文件合并到一个逻辑命名空间，这将在10.4小节讨论。</p>
+<p>敏锐的程序员会发现，即使没有 <code>__init__.py</code> 文件存在，python 仍然会导入包。如果你没有定义 <code>__init__.py</code> 时，实际上创建了一个所谓的“命名空间包”，这将在10.5小节讨论，但是最好还是创建一个 <code>__init__.py</code> 文件。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.2-&#25511;&#21046;&#27169;&#22359;&#34987;&#20840;&#37096;&#23548;&#20837;&#30340;&#20869;&#23481;">10.2 &#25511;&#21046;&#27169;&#22359;&#34987;&#20840;&#37096;&#23548;&#20837;&#30340;&#20869;&#23481;<a class="anchor-link" href="#10.2-&#25511;&#21046;&#27169;&#22359;&#34987;&#20840;&#37096;&#23548;&#20837;&#30340;&#20869;&#23481;">&#182;</a></h2><p>问题：当使用 <code>from module import *</code> 语句时，希望对从模块或包导出的符号进行精确控制。</p>
+<p>解决方案：在你的模块中定义一个变量 <code>__all__</code> 来明确地列出需要导出的内容。</p>
+<div class="highlight"><pre><span></span><span class="c1"># somemodule.py</span>
+<span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">grok</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="n">blah</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="c1"># Only export &#39;spam&#39; and &#39;grok&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spam&#39;</span><span class="p">,</span> <span class="s1">&#39;grok&#39;</span><span class="p">]</span>
+</pre></div>
+<p>讨论：强烈反对使用 <code>from module import [*]</code> 在定义了大量变量名的模块中频繁使用如果不使用保护措施的话， 这样的导入将会导入所有不以下划线开头的变量或函数等。 另一方面,如果定义了 <code>__all__</code> , 那么只有被列举出的东西会被导出。</p>
+<p>如果 <code>__all__</code> 定义成一个空列表, 没有东西将被导入。 如果 <code>__all__</code> 包含未定义的名字, 在导入时引起 AttributeError。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.3-&#20351;&#29992;&#30456;&#23545;&#36335;&#24452;&#21517;&#23548;&#20837;&#21253;&#20013;&#23376;&#27169;&#22359;">10.3 &#20351;&#29992;&#30456;&#23545;&#36335;&#24452;&#21517;&#23548;&#20837;&#21253;&#20013;&#23376;&#27169;&#22359;<a class="anchor-link" href="#10.3-&#20351;&#29992;&#30456;&#23545;&#36335;&#24452;&#21517;&#23548;&#20837;&#21253;&#20013;&#23376;&#27169;&#22359;">&#182;</a></h2><p>问题：将代码组织成包,用 import 语句从另一个包名没有硬编码过的包中导入子模块。</p>
+<p>解决方案：使用包的相对导入，在一个模块导入同一个包的另一个模块。</p>
+
+<pre><code>mypackage/
+    __init__.py
+    A/
+        __init__.py
+        spam.py
+        grok.py
+    B/
+        __init__.py
+        bar.py
+
+</code></pre>
+<p>如果模块 mypackage.A.spam 要导入同目录下的模块 grok，它应该包括的 import 语句如下：</p>
+<div class="highlight"><pre><span></span><span class="c1"># mypackage/A/spam.py</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">grok</span>
+</pre></div>
+<p>如果模块mypackage.A.spam要导入不同目录下的模块B.bar，它应该使用的import语句如下：</p>
+<div class="highlight"><pre><span></span><span class="c1"># mypackage/A/spam.py</span>
+<span class="kn">from</span> <span class="nn">..B</span> <span class="kn">import</span> <span class="n">bar</span>
+</pre></div>
+<p>两个import语句都没包含顶层包名，而是使用了spam.py的相对路径。</p>
+<p>讨论：在包内，既可以使用相对路径也可以使用绝对路径来导入。</p>
+<div class="highlight"><pre><span></span><span class="c1"># mypackage/A/spam.py</span>
+<span class="kn">from</span> <span class="nn">mypackage.A</span> <span class="kn">import</span> <span class="n">grok</span> <span class="c1"># OK</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">grok</span> <span class="c1"># OK</span>
+<span class="kn">import</span> <span class="nn">grok</span> <span class="c1"># Error (not found)</span>
+</pre></div>
+<p>像 mypackage.A 这样使用绝对路径名的不利之处是这将顶层包名硬编码到你的源码中。如果你想重新组织它，会很不方便。同样，硬编码的名称会使移动代码变得困难。</p>
+<p>import 语句的 . 和 ..看起来很滑稽, 但它指定目录名.为当前目录，..B 为目录 ../B。这种语法只适用于 import。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">grok</span> <span class="c1"># OK</span>
+<span class="kn">import</span> <span class="o">.</span><span class="n">grok</span> <span class="c1"># ERROR</span>
+</pre></div>
+<p>尽管使用相对导入看起来像是浏览文件系统，但是不能到定义包的目录之外。也就是说，使用点的这种模式从不是包的目录中导入将会引发错误。</p>
+<p>最后，<strong>相对导入只适用于在合适的包中的模块。尤其是在顶层的脚本的简单模块中，它们将不起作用。如果包的部分被作为脚本直接执行，那它们将不起作用</strong></p>
+<div class="highlight"><pre><span></span>% python3 mypackage/A/spam.py <span class="c1"># Relative imports fail</span>
+</pre></div>
+<p>另一方面，如果你使用 Python 的 -m 选项来执行先前的脚本，相对导入将会正确运行。</p>
+<div class="highlight"><pre><span></span>% python3 -m mypackage.A.spam <span class="c1"># Relative imports work</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.4-&#23558;&#27169;&#22359;&#20998;&#21106;&#25104;&#22810;&#20010;&#25991;&#20214;">10.4 &#23558;&#27169;&#22359;&#20998;&#21106;&#25104;&#22810;&#20010;&#25991;&#20214;<a class="anchor-link" href="#10.4-&#23558;&#27169;&#22359;&#20998;&#21106;&#25104;&#22810;&#20010;&#25991;&#20214;">&#182;</a></h2><p>问题：想将一个模块分割成多个文件。但是破坏原来的代码逻辑</p>
+<p>解决方案：程序模块可以通过变成包来分割成多个独立的文件。</p>
+<div class="highlight"><pre><span></span><span class="c1"># mymodule.py</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A.spam&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;B.bar&#39;</span><span class="p">)</span>
+</pre></div>
+<p>假设你想 mymodule.py 分为两个文件，每个定义的一个类。要做到这一点，首先用 mymodule 目录来替换文件 mymodule.py。 这这个目录下，创建以下文件：</p>
+
+<pre><code>mymodule/
+    __init__.py
+    a.py
+    b.py
+
+</code></pre>
+<p>在a.py文件中插入以下代码：</p>
+<div class="highlight"><pre><span></span><span class="c1"># a.py</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A.spam&#39;</span><span class="p">)</span>
+</pre></div>
+<p>在b.py文件中插入以下代码：</p>
+<div class="highlight"><pre><span></span><span class="c1"># b.py</span>
+<span class="kn">from</span> <span class="nn">.a</span> <span class="kn">import</span> <span class="n">A</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;B.bar&#39;</span><span class="p">)</span>
+</pre></div>
+<p>最后，<strong>在 <strong>init</strong>.py 中，将2个文件粘合在一起</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="kn">from</span> <span class="nn">.a</span> <span class="kn">import</span> <span class="n">A</span>
+<span class="kn">from</span> <span class="nn">.b</span> <span class="kn">import</span> <span class="n">B</span>
+</pre></div>
+<p>如果按照这些步骤，所产生的包 MyModule 将作为一个单一的逻辑模块：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">mymodule</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">A</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">spam</span><span class="p">()</span>
+<span class="n">A</span><span class="o">.</span><span class="n">spam</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">B</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="n">B</span><span class="o">.</span><span class="n">bar</span>
+</pre></div>
+<p>讨论：举个例子，在一个大型的代码库中，你可以将这一切都分割成独立的文件，让用户使用大量的import语句，就像这样：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mymodule.a</span> <span class="kn">import</span> <span class="n">A</span>
+<span class="kn">from</span> <span class="nn">mymodule.b</span> <span class="kn">import</span> <span class="n">B</span>
+</pre></div>
+<p>通常情况下，将这些统一起来，使用一条 import 将更加容易，就像这样：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mymodule</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+</pre></div>
+<p>对后者而言，让mymodule成为一个大的源文件是最常见的。但是，这一章节展示了如何合并多个文件合并成一个单一的逻辑命名空间。 这样做的关键是创建一个包目录，使用 <strong>init</strong>.py 文件来将每部分粘合在一起。</p>
+<p>作为这一章节的延伸，将介绍延迟导入。如图所示，<strong>init</strong>.py文件一次导入所有必需的组件的。但是对于一个很大的模块，可能你只想组件在需要时被加载。 要做到这一点，<strong>init</strong>.py有细微的变化：</p>
+<div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="k">def</span> <span class="nf">A</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">.a</span> <span class="kn">import</span> <span class="n">A</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">B</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">.b</span> <span class="kn">import</span> <span class="n">B</span>
+    <span class="k">return</span> <span class="n">B</span><span class="p">()</span>
+</pre></div>
+<p>在这个版本中，类 A 和类 B 被替换为在第一次访问时加载所需的类的函数。对于用户，这看起来不会有太大的不同。</p>
+<p><strong>延迟加载的主要缺点是继承和类型检查可能会中断</strong></p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">A</span><span class="p">):</span> <span class="c1"># Error</span>
+
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">A</span><span class="p">):</span> <span class="c1"># Ok</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.5-&#21033;&#29992;&#21629;&#21517;&#31354;&#38388;&#23548;&#20837;&#30446;&#24405;&#20998;&#25955;&#30340;&#20195;&#30721;">10.5 &#21033;&#29992;&#21629;&#21517;&#31354;&#38388;&#23548;&#20837;&#30446;&#24405;&#20998;&#25955;&#30340;&#20195;&#30721;<a class="anchor-link" href="#10.5-&#21033;&#29992;&#21629;&#21517;&#31354;&#38388;&#23548;&#20837;&#30446;&#24405;&#20998;&#25955;&#30340;&#20195;&#30721;">&#182;</a></h2><p>问题：你可能有大量的代码，由不同的人来分散地维护。每个部分被组织为文件目录，如一个包。然而，你希望能用共同的包前缀将所有组件连接起来，不是将每一个部分作为独立的包来安装。</p>
+<p>解决方案：从本质上讲，你要定义一个顶级Python包，作为一个大集合分开维护子包的命名空间。这个问题经常出现在大的应用框架中，框架开发者希望鼓励用户发布插件或附加包。</p>
+<p>在不同的目录里统一相同的命名空间，但是要删去用来将组件联合起来的<strong>init</strong>.py文件。假设你有Python代码的两个不同的目录如下：</p>
+
+<pre><code>foo-package/
+    spam/
+        blah.py
+
+bar-package/
+    spam/
+        grok.py
+
+</code></pre>
+<p>在这 2 个目录里，都有着共同的命名空间 spam。在任何一个目录里都没有 <code>__init__.py</code> 文件。</p>
+<p>如果将 foo-package 和 bar-package 都加到 python 块路径并尝试导入：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;foo-package&#39;</span><span class="p">,</span> <span class="s1">&#39;bar-package&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spam.blah</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spam.grok</span>
+</pre></div>
+<p>两个不同的包目录被合并到一起，你可以导入 spam.blah 和 spam.grok，并且它们能够工作。</p>
+<p>讨论：在这里工作的机制被称为“包命名空间”的一个特征。从本质上讲，包命名空间是一种特殊的封装设计，为合并不同的目录的代码到一个共同的命名空间。对于大的框架，这可能是有用的，因为它允许一个框架的部分被单独地安装下载。它使得能够轻松地为这样的框架编写第三方附加组件和其他扩展。</p>
+<p><strong>包命名空间的关键是确保顶级目录中没有 <code>__init__.py</code> 文件来作为共同的命名空间</strong>。缺失 <code>__init__.py</code> 文件使得在导入包的时候会发生有趣的事情：这并没有产生错误，解释器创建了一个由所有包含匹配包名的目录组成的列表。特殊的包命名空间模块被创建，只读的目录列表副本被存储在其 <code>__path__</code> 变量中。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spam</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">spam</span><span class="o">.</span><span class="n">__path__</span>
+<span class="n">_NamespacePath</span><span class="p">([</span><span class="s1">&#39;foo-package/spam&#39;</span><span class="p">,</span> <span class="s1">&#39;bar-package/spam&#39;</span><span class="p">])</span>
+</pre></div>
+<p>在定位包的子组件时，目录 <code>__path__</code> 将被用到(例如, 当导入 spam.grok 或者 spam.blah 的时候).</p>
+<p>包命名空间的一个重要特点是任何人都可以用自己的代码来扩展命名空间。</p>
+<p>一个包是否被作为一个包命名空间的主要方法是检查其 <code>__file__</code> 属性。如果没有，那包是个命名空间。这也可以由其字符表现形式中的“namespace”这个词体现出来。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">spam</span><span class="o">.</span><span class="vm">__file__</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+    <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;module&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__file__&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">spam</span>
+<span class="o">&lt;</span><span class="n">module</span> <span class="s1">&#39;spam&#39;</span> <span class="p">(</span><span class="n">namespace</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.6-&#37325;&#26032;&#21152;&#36733;&#27169;&#22359;">10.6 &#37325;&#26032;&#21152;&#36733;&#27169;&#22359;<a class="anchor-link" href="#10.6-&#37325;&#26032;&#21152;&#36733;&#27169;&#22359;">&#182;</a></h2><p>问题：你想重新加载已经加载的模块，因为你对其源码进行了修改。</p>
+<p>解决方案：使用 imp.reload() 来重新加载先前加载的模块</p>
+<p><strong>注：3.4+ 已弃用</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.7-&#36816;&#34892;&#30446;&#24405;&#25110;&#21387;&#32553;&#25991;&#20214;">10.7 &#36816;&#34892;&#30446;&#24405;&#25110;&#21387;&#32553;&#25991;&#20214;<a class="anchor-link" href="#10.7-&#36816;&#34892;&#30446;&#24405;&#25110;&#21387;&#32553;&#25991;&#20214;">&#182;</a></h2><p>问题：有一个已成长为包含多个文件的应用，它已远不再是一个简单的脚本，你想向用户提供一些简单的方法运行这个程序。</p>
+<p>解决方案：如果你的应用程序已经有多个文件，你可以把你的应用程序放进它自己的目录并添加一个 <code>__main__.py</code> 文件。</p>
+
+<pre><code>myapplication/
+    spam.py
+    bar.py
+    grok.py
+    __main__.py
+
+</code></pre>
+<p>如果 <code>__main__.py</code> 存在，你可以简单地在顶级目录运行 Python 解释器：</p>
+<p><code>bash % python3 myapplication</code></p>
+<p>解释器将执行 <code>__main__.py</code> 文件作为主程序。</p>
+<p>如果你将你的代码打包成 zip 件，这种技术同样也适用</p>
+<div class="highlight"><pre><span></span>bash % ls
+spam.py bar.py grok.py __main__.py
+bash % zip -r myapp.zip *.py
+bash % python3 myapp.zip
+... output from __main__.py ...
+</pre></div>
+<p>讨论：创建一个目录或zip文件并添加<strong>main</strong>.py文件来将一个更大的Python应用打包是可行的。这和作为标准库被安装到Python库的代码包是有一点区别的。相反，这只是让别人执行的代码包。</p>
+<p>由于目录和zip文件与正常文件有一点不同，你可能还需要增加一个 shell 脚本，使执行更加容易。例如，如果代码文件名为myapp.zip，你可以创建这样一个顶级脚本：</p>
+<p><code>#!/usr/bin/env python3 /usr/local/bin/myapp.zip</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.8-&#35835;&#21462;&#20301;&#20110;&#21253;&#20013;&#30340;&#25968;&#25454;&#25991;&#20214;">10.8 &#35835;&#21462;&#20301;&#20110;&#21253;&#20013;&#30340;&#25968;&#25454;&#25991;&#20214;<a class="anchor-link" href="#10.8-&#35835;&#21462;&#20301;&#20110;&#21253;&#20013;&#30340;&#25968;&#25454;&#25991;&#20214;">&#182;</a></h2><p>问题：你的包中包含代码需要去读取的数据文件。你需要尽可能地用最便捷的方式来做这件事。</p>
+<p>解决方案：假设你的包中的文件组织成如下：</p>
+
+<pre><code>mypackage/
+    __init__.py
+    somedata.dat
+    spam.py
+
+</code></pre>
+<p>现在假设 spam.py 文件需要读取 somedata.dat 文件中的内容。</p>
+<div class="highlight"><pre><span></span><span class="c1"># spam.py</span>
+<span class="kn">import</span> <span class="nn">pkgutil</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">__package__</span><span class="p">,</span> <span class="s1">&#39;somedata.dat&#39;</span><span class="p">)</span>
+</pre></div>
+<p>由此产生的变量是包含该文件的原始内容的字节字符串。</p>
+<p>讨论：要读取数据文件，你可能会倾向于编写使用内置的I/O功能的代码，如open()。但是这种方法也有一些<strong>问题</strong>。</p>
+<p>首先，一个包对解释器的当前工作目录几乎没有控制权。因此，编程时任何I/O操作都必须使用绝对文件名。由于每个模块包含有完整路径的<strong>file</strong>变量，这弄清楚它的路径不是不可能，但它很凌乱。</p>
+<p>第二，包通常安装作为.zip或.egg文件，这些文件并不像在文件系统上的一个普通目录里那样被保存。因此，你试图用open()对一个包含数据文件的归档文件进行操作，它根本不会工作。</p>
+<p>pkgutil.get_data() 函数是一个读取数据文件的高级工具，不用管包是如何安装以及安装在哪。它只是工作并将文件内容以字节字符串返回给你。</p>
+<p>get_data()的第一个参数是包含包名的字符串。你可以直接使用包名，也可以使用特殊的变量，比如 <code>__package__</code>。第二个参数是包内文件的相对名称。如果有必要，可以使用标准的Unix命名规范到不同的目录，只有最后的目录仍然位于包中。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.9-&#23558;&#25991;&#20214;&#22841;&#21152;&#20837;&#21040;sys.path">10.9 &#23558;&#25991;&#20214;&#22841;&#21152;&#20837;&#21040;sys.path<a class="anchor-link" href="#10.9-&#23558;&#25991;&#20214;&#22841;&#21152;&#20837;&#21040;sys.path">&#182;</a></h2><p>问题：你无法导入你的Python代码因为它所在的目录不在 sys.path 里。你想将添加新目录到Python路径，但是不想硬链接到你的代码。</p>
+<p>解决方案：有两种常用的方式将新目录添加到sys.path。第一种，你可以使用PYTHONPATH环境变量来添加。</p>
+<div class="highlight"><pre><span></span>bash % env <span class="nv">PYTHONPATH</span><span class="o">=</span>/some/dir:/other/dir python3
+Python <span class="m">3</span>.3.0 <span class="o">(</span>default, Oct <span class="m">4</span> <span class="m">2012</span>, <span class="m">10</span>:17:33<span class="o">)</span>
+<span class="o">[</span>GCC <span class="m">4</span>.2.1 <span class="o">(</span>Apple Inc. build <span class="m">5666</span><span class="o">)</span> <span class="o">(</span>dot <span class="m">3</span><span class="o">)]</span> on darwin
+Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path
+<span class="o">[</span><span class="s1">&#39;&#39;</span>, <span class="s1">&#39;/some/dir&#39;</span>, <span class="s1">&#39;/other/dir&#39;</span>, ...<span class="o">]</span>
+</pre></div>
+<p>在自定义应用程序中，这样的环境变量可在程序启动时设置或通过 shell 脚本。</p>
+<p>第二种方法是创建一个.pth文件，将目录列举出来</p>
+
+<pre><code># myapplication.pth
+/some/dir
+/other/dir</code></pre>
+<p>这个 .pth 文件需要放在某个 Python 的 site-packages 目录，通常位于 /usr/local/lib/python3.3/site-packages 或者 ~/.local/lib/python3.3/sitepackages。当解释器启动时，.pth 文件里列举出来的存在于文件系统的目录将被添加到 sys.path。安装一个 .pth 文件可能需要管理员权限，如果它被添加到系统级的 Python 解释器。</p>
+<p>讨论：比起费力地找文件，你可能会倾向于写一个代码<strong>手动调节 sys.path 的值，但这并不是一个很好的选择</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/some/dir&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;/other/dir&#39;</span><span class="p">)</span>
+</pre></div>
+<p>虽然这能“工作”，它是在实践中极为脆弱，应尽量避免使用。这种方法的问题是，它将目录名硬编码到了你的源代码。如果你的代码被移到一个新的位置，这会导致维护问题。更好的做法是在不修改源代码的情况下，将path配置到其他地方。如果您使用模块级的变量来精心构造一个适当的绝对路径，有时你可以解决硬编码目录的问题，比如 <code>__file__</code>。举个例子：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">join</span><span class="p">,</span> <span class="n">dirname</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">abspath</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;__file__&#39;</span><span class="p">)),</span> <span class="s1">&#39;src&#39;</span><span class="p">))</span>
+</pre></div>
+<p>这将 src 目录添加到 path 里，和执行插入步骤的代码在同一个目录里。</p>
+<p>site-packages 目录是第三方包和模块安装的目录。如果你手动安装你的代码，它将被安装到 site-packages 目录。虽然用于配置 path 的 .pth 文件必须放置在 site-packages 里，但它配置的路径可以是系统上任何你希望的目录。因此，你可以把你的代码放在一系列不同的目录，只要那些目录包含在 .pth 文件里。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.10-&#36890;&#36807;&#23383;&#31526;&#20018;&#21517;&#23548;&#20837;&#27169;&#22359;">10.10 &#36890;&#36807;&#23383;&#31526;&#20018;&#21517;&#23548;&#20837;&#27169;&#22359;<a class="anchor-link" href="#10.10-&#36890;&#36807;&#23383;&#31526;&#20018;&#21517;&#23548;&#20837;&#27169;&#22359;">&#182;</a></h2><p>问题：你想导入一个模块，但是模块的名字在字符串里。你想对字符串调用导入命令。</p>
+<p>解决方案：使用 importlib.import_module() 函数来手动导入名字为字符串给出的一个模块或者包的一部分。</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">importlib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;math&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="mf">0.9092974268256817</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;urllib.request&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">u</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://www.python.org&#39;</span><span class="p">)</span>
+</pre></div>
+<p>import_module 只是简单地执行和 import 相同的步骤，但是返回生成的模块对象。你只需要将其存储在一个变量，然后像正常的模块一样使用。</p>
+<p>import_module() 也可用于相对导入。但是，你需要给它一个额外的参数。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="c1"># Same as &#39;from . import b&#39;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;.b&#39;</span><span class="p">,</span> <span class="n">__package__</span><span class="p">)</span>
+</pre></div>
+<p>讨论：使用 import_module ()手动导入模块的问题通常出现在以某种方式编写修改或覆盖模块的代码时候。例如，也许你正在执行某种自定义导入机制，需要通过名称来加载一个模块，通过补丁加载代码。</p>
+<p>在旧的代码，有时你会看到用于导入的内建函数 <code>__import__()</code>。尽管它能工作，但是 importlib.import_module() 通常更容易使用。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.13-&#23433;&#35013;&#31169;&#26377;&#30340;&#21253;">10.13 &#23433;&#35013;&#31169;&#26377;&#30340;&#21253;<a class="anchor-link" href="#10.13-&#23433;&#35013;&#31169;&#26377;&#30340;&#21253;">&#182;</a></h2><p>问题：想要安装一个第三方包，但是没有权限将它安装到系统 Python 库中去。或者，你可能想要安装一个供自己使用的包，而不是系统上面所有用户。</p>
+<p>解决方案：Python 有一个用户安装目录，通常类似 ”~/.local/lib/python3.3/site-packages”。 要强制在这个目录中安装包，可使用安装选项 “–user”。</p>
+<p><code>python3 setup.py install --user</code></p>
+<p>或者</p>
+<p><code>pip install --user packagename</code></p>
+<p>在 sys.path 中用户的 “site-packages” 目录位于系统的 “site-packages” 目录之前。 因此，你安装在里面的包就比系统已安装的包优先级高 （尽管并不总是这样，要取决于第三方包管理器，比如 distribute 或pip）。</p>
+<p>讨论：通常包会被安装到系统的 site-packages 目录中去，路径类似 “/usr/local/lib/python3.3/site-packages”。 不过，这样做需要有管理员权限并且使用 sudo 命令。</p>
+<p>安装包到用户目录中通常是一个有效的方案，它允许你创建一个自定义安装。</p>
+<p>另外，你还可以创建一个虚拟环境。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.14-&#21019;&#24314;&#26032;&#30340;-Python-&#29615;&#22659;">10.14 &#21019;&#24314;&#26032;&#30340; Python &#29615;&#22659;<a class="anchor-link" href="#10.14-&#21019;&#24314;&#26032;&#30340;-Python-&#29615;&#22659;">&#182;</a></h2><p>问题：你想创建一个新的 Python 环境，用来安装模块和包。 不过，你不想安装一个新的 Python 克隆，也不想对系统 Python 环境产生影响。</p>
+<p>解决方案：你可以使用 <code>pyvenv</code> 命令创建一个新的“虚拟”环境。 这个命令被安装在 Python 解释器同一目录，或 Windows 上面的 Scripts 目录中。下面是一个例子：</p>
+<p><code>bash % pyvenv Spam</code></p>
+<p>传给 <code>pyvenv</code> 命令的名字是将要被创建的目录名。当被创建后，Span 目录像下面这样：</p>
+<div class="highlight"><pre><span></span>bash % ls
+bin include lib pyvenv.cfg
+</pre></div>
+<p>在 bin 目录中，你会找到一个可以使用的 Python 解释器：</p>
+<div class="highlight"><pre><span></span>bash % Spam/bin/python3
+</pre></div>
+<p>这个解释器的特点就是他的 <code>site-packages</code> 目录被设置为新创建的环境。 如果你要安装第三方包，它们会被安装在那里，而不是通常系统的 <code>site-packages</code> 目录。</p>
+<p>讨论：有了一个新的虚拟环境，下一步就是安装一个包管理器，比如 <code>distribute</code> 或 <code>pip</code>。 但安装这样的工具和包的时候，你需要确保你使用的是虚拟环境的解释器。 它会将包安装到新创建的 <code>site-packages</code> 目录中去。</p>
+<p>尽管一个虚拟环境看上去是 Python 安装的一个复制， 不过它实际上只包含了少量几个文件和一些符号链接。 所有标准库函文件和可执行解释器都来自原来的 Python 安装。 因此，创建这样的环境是很容易的，并且几乎不会消耗机器资源。</p>
+<p>默认情况下，虚拟环境是空的，不包含任何额外的第三方库。<strong>如果想将一个已经安装的包作为虚拟环境的一部分， 可以使用 <code>“–system-site-packages”</code> 选项来创建虚拟环境</strong></p>
+<div class="highlight"><pre><span></span>bash % pyvenv --system-site-packages Spam
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.15-&#20998;&#21457;&#21253;">10.15 &#20998;&#21457;&#21253;<a class="anchor-link" href="#10.15-&#20998;&#21457;&#21253;">&#182;</a></h2><p>问题：你已经编写了一个有用的库，想将它分享给其他人。</p>
+<p>解决方案：如果你想分发你的代码，第一件事就是给它一个唯一的名字，并且清理它的目录结构。 例如，一个典型的函数库包会类似下面这样：</p>
+
+<pre><code>projectname/
+    README.txt
+    Doc/
+        documentation.txt
+    projectname/
+        __init__.py
+        foo.py
+        bar.py
+        utils/
+            __init__.py
+            spam.py
+            grok.py
+    examples/
+        helloworld.py
+        ...
+
+</code></pre>
+<p>要让你的包可以发布出去，首先你要编写一个 <code>setup.py</code> ，类似下面这样：</p>
+<div class="highlight"><pre><span></span><span class="c1"># setup.py</span>
+<span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;projectname&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s1">&#39;Your Name&#39;</span><span class="p">,</span>
+    <span class="n">author_email</span><span class="o">=</span><span class="s1">&#39;you@youraddress.com&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://www.you.com/projectname&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;projectname&#39;</span><span class="p">,</span> <span class="s1">&#39;projectname.utils&#39;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+<p>下一步，就是创建一个 <code>MANIFEST.in</code> 文件，列出所有在你的包中需要包含进来的非源码文件：</p>
+<div class="highlight"><pre><span></span><span class="c1"># MANIFEST.in</span>
+<span class="n">include</span> <span class="o">*.</span><span class="n">txt</span>
+<span class="n">recursive</span><span class="o">-</span><span class="n">include</span> <span class="n">examples</span> <span class="o">*</span>
+<span class="n">recursive</span><span class="o">-</span><span class="n">include</span> <span class="n">Doc</span> <span class="o">*</span>
+</pre></div>
+<p>确保 <code>setup.py</code> 和 <code>MANIFEST.in</code> 文件放在你的包的最顶级目录中。 一旦你已经做了这些，你就可以像下面这样执行命令来创建一个源码分发包了：</p>
+<div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">bash</span> <span class="n">python3</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span>
+</pre></div>
+<p>它会创建一个文件比如 <code>”projectname-1.0.zip”</code> 或 <code>“projectname-1.0.tar.gz”</code>, 具体依赖于你的系统平台。如果一切正常，这个文件就可以发送给别人使用或者上传至 <a href="http://pypi.python.org/">Python Package Index</a>。</p>
+<p>讨论：对于纯 Python 代码，编写一个普通的 <code>setup.py</code> 文件通常很简单。 一个可能的问题是你必须手动列出所有构成包源码的子目录。 一个常见错误就是仅仅只列出一个包的最顶级目录，忘记了包含包的子组件。 这也是为什么在 <code>setup.py</code> 中对于包的说明包含了列表 <code>packages=['projectname', 'projectname.utils']</code>。</p>
+<p>大部分 Python 程序员都知道，有很多第三方包管理器供选择，包括 setuptools、distribute 等等。 有些是为了替代标准库中的 distutils。注意如果你依赖这些包， 用户可能不能安装你的软件，除非他们已经事先安装过所需要的包管理器。 正因如此，你更应该时刻记住越简单越好的道理。 最好让你的代码使用标准的 Python 3 安装。 如果其他包也需要的话，可以通过一个可选项来支持。</p>
+<p>对于涉及到 C 扩展的代码打包与分发就更复杂点了。</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/pythoncookbook-note-9.html" title="Previous: PythonCookbook笔记(9)-编程">PythonCookbook笔记(9)-编程</a></li>
+                <li class="next-article"><a href="//zodiac911.github.io/blog/constructor.html" title="Next: 结构体与类的自定义构造函数和默认构造函数">结构体与类的自定义构造函数和默认构造函数</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2019-06-26T00:00:00+08:00">Jun 26, 2019</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#pythoncookbook-ref">PythonCookbook
+                    <span>10</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>
