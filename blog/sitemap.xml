@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>//zodiac911.github.io/blog/</loc>
-<lastmod>2019-08-15T05:53:14-00:00</lastmod>
+<lastmod>2019-08-25T05:47:48-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//zodiac911.github.io/blog/archives.html</loc>
-<lastmod>2019-08-15T05:53:14-00:00</lastmod>
+<lastmod>2019-08-25T05:47:48-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//zodiac911.github.io/blog/tags.html</loc>
-<lastmod>2019-08-15T05:53:14-00:00</lastmod>
+<lastmod>2019-08-25T05:47:48-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//zodiac911.github.io/blog/categories.html</loc>
-<lastmod>2019-08-15T05:53:14-00:00</lastmod>
+<lastmod>2019-08-25T05:47:48-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -235,6 +235,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>//zodiac911.github.io/blog/matplotlib-template.html</loc>
+<lastmod>2019-01-07T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>//zodiac911.github.io/blog/matplotlib-chinese-windows.html</loc>
 <lastmod>2019-01-06T03:21:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
@@ -256,6 +263,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>//zodiac911.github.io/blog/matplotlib-axis.html</loc>
+<lastmod>2019-01-06T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>//zodiac911.github.io/blog/seaborn-quickstart.html</loc>
 <lastmod>2019-01-05T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
@@ -263,21 +277,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>//zodiac911.github.io/blog/pandas-tutorial.html</loc>
+<loc>//zodiac911.github.io/blog/matplotlib-tutorial.html</loc>
 <lastmod>2019-01-04T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>//zodiac911.github.io/blog/numpy-tutorial.html</loc>
+<loc>//zodiac911.github.io/blog/pandas-tutorial.html</loc>
 <lastmod>2019-01-03T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>//zodiac911.github.io/blog/matplotlib-axis.html</loc>
+<loc>//zodiac911.github.io/blog/numpy-tutorial.html</loc>
 <lastmod>2019-01-02T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -293,13 +307,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>//zodiac911.github.io/blog/Matplotlib-bar.html</loc>
 <lastmod>2018-12-23T21:07:00+08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>//zodiac911.github.io/blog/matplotlib-template.html</loc>
-<lastmod>2018-12-19T22:08:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -384,13 +391,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>//zodiac911.github.io/blog/shadowsocksr.html</loc>
 <lastmod>2018-10-14T22:48:00+08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>//zodiac911.github.io/blog/matplotlib-tutorial.html</loc>
-<lastmod>2018-10-14T13:45:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -649,7 +649,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>//zodiac911.github.io/blog/tag/matplotlib.html</loc>
-<lastmod>2019-01-06T03:21:00+08:06</lastmod>
+<lastmod>2019-01-07T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -663,7 +663,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>//zodiac911.github.io/blog/tag/pandas.html</loc>
-<lastmod>2019-01-04T00:00:00+08:06</lastmod>
+<lastmod>2019-01-03T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -1274,15 +1274,15 @@ h6:hover .anchor-link {
 <div class="highlight"><pre><span></span>ffmpeg -i original.mp4 -c:v h264 output.mp4 <span class="c1"># 转码为 h264 编码</span>
 ffmpeg -i original.mp4 output.gif <span class="c1"># 转换为 gif</span>
 
-ffmpeg -i original.mp4 -s 640x480 -r <span class="m">29</span>.97 -c:v h264 -b:v 500k -b:a 48k -ac <span class="m">2</span> output.mp4 <span class="c1"># 多参数</span>
+ffmpeg -i original.mp4 -s 640x480 -vframes <span class="m">90</span> -r <span class="m">29</span>.97 -c:v h264 -b:v 500k -b:a 48k -ac <span class="m">2</span> output.mp4 <span class="c1"># 多参数</span>
 </pre></div>
 <p>参数：</p>
 <ul>
 <li><code>-i</code> 参数为输入文件</li>
+<li><code>-s</code> 指定分辨率</li>
+<li><code>-r</code> 指定帧率</li>
 <li><code>-c:v</code> 或 <code>-vcodec</code> 参数为输出编码 可以省略，如果插入PPT最好输出为 gif 可选项 <code>mpeg4</code> <code>libxvid</code> 等</li>
 <li><code>-c:a</code> 或 <code>-acodec</code> 指定音频编码</li>
-<li><code>-r</code> 指定帧率</li>
-<li><code>-s</code> 指定分辨率</li>
 <li><code>-b:v</code> 指定视频比特率</li>
 <li><code>-b:a</code> 或 <code>-ab</code> 指定音频比特率</li>
 <li><code>-ac</code> 指定声道数</li>
