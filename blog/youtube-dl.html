@@ -1244,7 +1244,7 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>一款非常好用的命令行Youtube视频下载工具</p>
+<p>一款非常好用的基于命令行的Youtube视频下载工具</p>
 
 </div>
 </div>
@@ -1253,7 +1253,7 @@ h6:hover .anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
-<div class="toc"><ul class="toc-item"><li><span><a href="#获取目标地址音视频列表" data-toc-modified-id="获取目标地址音视频列表-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>获取目标地址音视频列表</a></span></li><li><span><a href="#按指定代码组合下载" data-toc-modified-id="按指定代码组合下载-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>按指定代码组合下载</a></span></li><li><span><a href="#下载字幕" data-toc-modified-id="下载字幕-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>下载字幕</a></span></li><li><span><a href="#合并字幕" data-toc-modified-id="合并字幕-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>合并字幕</a></span><ul class="toc-item"><li><span><a href="#硬字幕" data-toc-modified-id="硬字幕-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>硬字幕</a></span></li><li><span><a href="#软字幕" data-toc-modified-id="软字幕-4.2"><span class="toc-item-num">4.2&nbsp;&nbsp;</span>软字幕</a></span></li></ul></li><li><span><a href="#使用-aria2-多线程下载" data-toc-modified-id="使用-aria2-多线程下载-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>使用 aria2 多线程下载</a></span></li><li><span><a href="#下载视频列表中的视频" data-toc-modified-id="下载视频列表中的视频-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>下载视频列表中的视频</a></span></li><li><span><a href="#其他参数" data-toc-modified-id="其他参数-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>其他参数</a></span></li><li><span><a href="#注意事项" data-toc-modified-id="注意事项-8"><span class="toc-item-num">8&nbsp;&nbsp;</span>注意事项</a></span></li></ul></div>
+<div class="toc"><ul class="toc-item"><li><span><a href="#获取目标地址音视频列表" data-toc-modified-id="获取目标地址音视频列表-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>获取目标地址音视频列表</a></span></li><li><span><a href="#按指定代码组合下载" data-toc-modified-id="按指定代码组合下载-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>按指定代码组合下载</a></span></li><li><span><a href="#字幕" data-toc-modified-id="字幕-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>字幕</a></span><ul class="toc-item"><li><span><a href="#只下载字幕" data-toc-modified-id="只下载字幕-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>只下载字幕</a></span></li><li><span><a href="#将下载的字幕与视频进行合并" data-toc-modified-id="将下载的字幕与视频进行合并-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>将下载的字幕与视频进行合并</a></span><ul class="toc-item"><li><span><a href="#硬字幕" data-toc-modified-id="硬字幕-3.2.1"><span class="toc-item-num">3.2.1&nbsp;&nbsp;</span>硬字幕</a></span></li><li><span><a href="#软字幕" data-toc-modified-id="软字幕-3.2.2"><span class="toc-item-num">3.2.2&nbsp;&nbsp;</span>软字幕</a></span></li></ul></li><li><span><a href="#下载并同时嵌入字幕" data-toc-modified-id="下载并同时嵌入字幕-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>下载并同时嵌入字幕</a></span></li></ul></li><li><span><a href="#使用-aria2-多线程下载" data-toc-modified-id="使用-aria2-多线程下载-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>使用 aria2 多线程下载</a></span></li><li><span><a href="#下载视频列表中的视频" data-toc-modified-id="下载视频列表中的视频-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>下载视频列表中的视频</a></span></li><li><span><a href="#其他参数" data-toc-modified-id="其他参数-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>其他参数</a></span></li><li><span><a href="#注意事项" data-toc-modified-id="注意事项-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>注意事项</a></span></li></ul></div>
 </div>
 </div>
 </div>
@@ -1263,7 +1263,7 @@ h6:hover .anchor-link {
 <p>系统要求</p>
 <ul>
 <li>youtube-dl</li>
-<li>ffmpeg 下载的音视频需要利用 ffmpeg 进行合并(youtube-dl 自动调用，当然也可以手动合并)</li>
+<li>ffmpeg 下载的音视频需要利用 ffmpeg 进行合并(youtube-dl 会自动调用)</li>
 </ul>
 <div class="highlight"><pre><span></span>sudo apt install youtube-dl ffmpeg
 </pre></div>
@@ -1329,32 +1329,38 @@ format code  extension  resolution note
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#19979;&#36733;&#23383;&#24149;">&#19979;&#36733;&#23383;&#24149;<a class="anchor-link" href="#&#19979;&#36733;&#23383;&#24149;">&#182;</a></h2><div class="highlight"><pre><span></span>youtube-dl --write-sub --skip-download <span class="o">[</span>url<span class="o">]</span> //下载单独的 vtt 字幕文件,而不会下载视频
+<h2 id="&#23383;&#24149;">&#23383;&#24149;<a class="anchor-link" href="#&#23383;&#24149;">&#182;</a></h2><h3 id="&#21482;&#19979;&#36733;&#23383;&#24149;">&#21482;&#19979;&#36733;&#23383;&#24149;<a class="anchor-link" href="#&#21482;&#19979;&#36733;&#23383;&#24149;">&#182;</a></h3><div class="highlight"><pre><span></span>youtube-dl --write-sub --skip-download <span class="o">[</span>url<span class="o">]</span> //下载单独的 vtt 字幕文件,而不下载视频
 
 youtube-dl --write-sub --all-subs --skip-download <span class="o">[</span>url<span class="o">]</span> //下载所有语言的字幕 <span class="o">(</span>如果有的话<span class="o">)</span>
 
 youtube-dl --write-auto-sub --skip-download <span class="o">[</span>url<span class="o">]</span> //下载自动生成的字幕 <span class="o">(</span>YouTube only<span class="o">)</span>
 </pre></div>
-<p><strong>下载视频的同时写入字幕似乎会出现无法预料的后果</strong></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#21512;&#24182;&#23383;&#24149;">&#21512;&#24182;&#23383;&#24149;<a class="anchor-link" href="#&#21512;&#24182;&#23383;&#24149;">&#182;</a></h2><ul>
+<h3 id="&#23558;&#19979;&#36733;&#30340;&#23383;&#24149;&#19982;&#35270;&#39057;&#36827;&#34892;&#21512;&#24182;">&#23558;&#19979;&#36733;&#30340;&#23383;&#24149;&#19982;&#35270;&#39057;&#36827;&#34892;&#21512;&#24182;<a class="anchor-link" href="#&#23558;&#19979;&#36733;&#30340;&#23383;&#24149;&#19982;&#35270;&#39057;&#36827;&#34892;&#21512;&#24182;">&#182;</a></h3><ul>
 <li>硬字幕(字幕为画面一部分)</li>
 <li>软字幕(可选择打开关闭字幕)</li>
 </ul>
-<h3 id="&#30828;&#23383;&#24149;">&#30828;&#23383;&#24149;<a class="anchor-link" href="#&#30828;&#23383;&#24149;">&#182;</a></h3><p>先将 vtt 字幕转换为 ass 字幕</p>
+<h4 id="&#30828;&#23383;&#24149;">&#30828;&#23383;&#24149;<a class="anchor-link" href="#&#30828;&#23383;&#24149;">&#182;</a></h4><p>先将 vtt 字幕转换为 ass 字幕</p>
 <div class="highlight"><pre><span></span>ffmpeg -i subtitle.vtt subtitle.ass
 </pre></div>
 <p>合并字幕和视频</p>
 <div class="highlight"><pre><span></span>ffmpeg -i video.mp4 -vf <span class="nv">ass</span><span class="o">=</span>subtitle.ass out.mp4
 </pre></div>
-<h3 id="&#36719;&#23383;&#24149;">&#36719;&#23383;&#24149;<a class="anchor-link" href="#&#36719;&#23383;&#24149;">&#182;</a></h3><div class="highlight"><pre><span></span>ffmpeg -i video.mp4 -i subtitle.vtt -c copy -c:s mov_text out.mp4
+<h4 id="&#36719;&#23383;&#24149;">&#36719;&#23383;&#24149;<a class="anchor-link" href="#&#36719;&#23383;&#24149;">&#182;</a></h4><div class="highlight"><pre><span></span>ffmpeg -i video.mp4 -i subtitle.vtt -c copy -c:s mov_text out.mp4
 </pre></div>
+<h3 id="&#19979;&#36733;&#24182;&#21516;&#26102;&#23884;&#20837;&#23383;&#24149;">&#19979;&#36733;&#24182;&#21516;&#26102;&#23884;&#20837;&#23383;&#24149;<a class="anchor-link" href="#&#19979;&#36733;&#24182;&#21516;&#26102;&#23884;&#20837;&#23383;&#24149;">&#182;</a></h3><p>使用<code>--write-sub</code>下载，并使用<code>--embed-subs</code>嵌入</p>
+<div class="highlight"><pre><span></span>youtube-dl --write-sub --embed-subs --sub-lang en_US,en-US,en https://www.youtube.com/watch?v<span class="o">=</span>6wy1CP-mM08
+</pre></div>
+<p>一些选项：</p>
+<ul>
+<li>--sub-lang 字幕语言</li>
+<li>--all-subs 下载所有字幕</li>
+<li>--list-subs 列出所有的字幕</li>
+</ul>
+<p>如果需要下载并同时嵌入自动生成的字幕，使用<code>--write-auto-sub</code></p>
+<div class="highlight"><pre><span></span>youtube-dl --write-auto-sub --embed-subs -f https://www.youtube.com/watch?v<span class="o">=</span>6wy1CP-mM08
+</pre></div>
+<p>参考：
+<a href="https://forum.manjaro.org/t/how-to-download-a-video-from-youtube-with-captions-solved/81046/6">https://forum.manjaro.org/t/how-to-download-a-video-from-youtube-with-captions-solved/81046/6</a></p>
 
 </div>
 </div>
@@ -1475,7 +1481,7 @@ Linux 环境下使用 <code>apt-get</code>安装即可</p>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2018-10-10T13:53:00+08:00">Oct 10, 2018</time>
+            <time itemprop="dateCreated" datetime="2018-10-10T13:53:00+08:00">10 10, 2018</time>
             <h4>Category</h4>
             <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
             <h4>Tags</h4>
