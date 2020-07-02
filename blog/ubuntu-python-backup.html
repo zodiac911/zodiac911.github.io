@@ -1236,12 +1236,8 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>重装系统是件麻烦事！</p>
-<p>重装系统是件麻烦事！</p>
-<p>重装系统是件麻烦事！</p>
-<p>相信很多人都遇到过重装系统的情况，系统重装完之后，需要重新安装日常使用的各种软件，如果想把之前使用的软件都重新装好，可能半天就没了。小软件还好，可以等到需要的时候再安装，但是如果软件安装包体积庞大，需要使用的时候再装的话，等软件安装好了黄花菜都凉了。</p>
-<p>有没有一种方法可以备份系统上已安装的软件列表呢？当我们下次再重装系统的时候，就可以直接对着这份软件列表把上面的软件都安装一遍就好了。</p>
-<p>答案是肯定的，使用apt-clone</p>
+<p>重装系统真的是件麻烦事！尤其是当你需要重装一系列之前使用的程序/软件包的时候。</p>
+<p>由于本人主要使用 Anaconda 环境以及 Python 语言编程，本文简单记录一下 Ubuntu 下通过 apt 安装的 package，以及 Anaconda Python 环境中 package 的备份方法。</p>
 
 </div>
 </div>
@@ -1250,7 +1246,7 @@ h6:hover .anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Ubuntu-软件包备份" data-toc-modified-id="Ubuntu-软件包备份-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Ubuntu 软件包备份</a></span><ul class="toc-item"><li><span><a href="#安装apt-clone" data-toc-modified-id="安装apt-clone-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>安装apt-clone</a></span></li><li><span><a href="#备份" data-toc-modified-id="备份-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>备份</a></span></li><li><span><a href="#恢复安装" data-toc-modified-id="恢复安装-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>恢复安装</a></span></li></ul></li><li><span><a href="#Anaconda-环境中的Python包备份" data-toc-modified-id="Anaconda-环境中的Python包备份-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Anaconda 环境中的Python包备份</a></span><ul class="toc-item"><li><span><a href="#原生pip备份" data-toc-modified-id="原生pip备份-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>原生pip备份</a></span></li><li><span><a href="#conda备份" data-toc-modified-id="conda备份-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>conda备份</a></span></li></ul></li></ul></div>
+<div class="toc"><ul class="toc-item"><li><span><a href="#Ubuntu-软件包备份" data-toc-modified-id="Ubuntu-软件包备份-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Ubuntu 软件包备份</a></span><ul class="toc-item"><li><span><a href="#安装apt-clone" data-toc-modified-id="安装apt-clone-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>安装apt-clone</a></span></li><li><span><a href="#备份" data-toc-modified-id="备份-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>备份</a></span></li><li><span><a href="#恢复安装" data-toc-modified-id="恢复安装-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>恢复安装</a></span></li></ul></li><li><span><a href="#Anaconda-环境中的Python包备份" data-toc-modified-id="Anaconda-环境中的Python包备份-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Anaconda 环境中的Python包备份</a></span><ul class="toc-item"><li><span><a href="#原生pip备份" data-toc-modified-id="原生pip备份-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>原生pip备份</a></span><ul class="toc-item"><li><span><a href="#pip-freeze-和-pip-list-的区别" data-toc-modified-id="pip-freeze-和-pip-list-的区别-2.1.1"><span class="toc-item-num">2.1.1&nbsp;&nbsp;</span>pip freeze 和 pip list 的区别</a></span></li><li><span><a href="#pipdeptree-依赖分析工具" data-toc-modified-id="pipdeptree-依赖分析工具-2.1.2"><span class="toc-item-num">2.1.2&nbsp;&nbsp;</span>pipdeptree 依赖分析工具</a></span></li></ul></li><li><span><a href="#conda备份" data-toc-modified-id="conda备份-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>conda备份</a></span></li></ul></li></ul></div>
 </div>
 </div>
 </div>
@@ -1352,8 +1348,12 @@ Babel==2.6.0
 <p>内容包括版本信息，似乎没有找到不输出版本号备份包名的方法，安装时似乎也没有忽略版本号的方法，如果想安装相应包的最新版本，可以在安装完成后再升级一遍。</p>
 <p>再次安装时只需</p>
 
-<pre><code>pip install -r ~/mypackages/requirements.txt</code></pre>
-<p>实际上可以在安装软件时顺便保存方便之后安装</p>
+<pre><code>pip install -r requirements.txt</code></pre>
+<p>上述命令会在将所有安装文件下载完毕后统一安装，因此一旦某个 package 出错就可能导致其他 package 也无法安装。</p>
+<p><strong>可以使用以下命令分别安装每个 package </strong></p>
+
+<pre><code>cat requirements.txt | xargs -n1 pip install</code></pre>
+<p>也可以在安装软件时保存 cache 方便以后安装</p>
 <div class="highlight"><pre><span></span>pip install -r requirements.txt -d your_download_dir
 pip install -r requirements.txt --no-index --find-links<span class="o">=</span>file://your_download_dir
 </pre></div>
@@ -1374,6 +1374,12 @@ astroid                            <span class="m">2</span>.0.4
 astropy                            <span class="m">3</span>.0.4
 </pre></div>
 <p>无法直接作为 requirements.txt 文件使用。</p>
+<h4 id="pipdeptree-&#20381;&#36182;&#20998;&#26512;&#24037;&#20855;">pipdeptree &#20381;&#36182;&#20998;&#26512;&#24037;&#20855;<a class="anchor-link" href="#pipdeptree-&#20381;&#36182;&#20998;&#26512;&#24037;&#20855;">&#182;</a></h4><p>使用 pipdeptree 可以分析当前 Python 环境中所有 package 之间的依赖关系</p>
+
+<pre><code>pip install pipdeptree
+
+pipdeptree # 分析依赖关系
+pipdeptree --reverse --packages xxx # 某个 package 为何被安装</code></pre>
 
 </div>
 </div>
@@ -1387,6 +1393,7 @@ conda create -n myenv --file package-list.txt <span class="c1"># 依列表创建
 </pre></div>
 <p>myenv 为环境名，package-list.txt为之前备份的pkg列表</p>
 <p>使用<code>--offline</code>选项禁用不必要的下载，而是从root或其他环境中复制可复用的包</p>
+<p>注：conda 备份文件用于恢复时，对通过 pip 安装的 package 不太友好</p>
 
 </div>
 </div>

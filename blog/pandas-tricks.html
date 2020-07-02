@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Zodiac Wang" />
+
+        <meta name="description" content="Pandas 小技巧
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Pandas, posts, " />
+
+<meta property="og:title" content="Pandas 小技巧 "/>
+<meta property="og:url" content="//zodiac911.github.io/blog/pandas-tricks.html" />
+<meta property="og:description" content="Pandas 小技巧" />
+<meta property="og:site_name" content="Zodiac Wang" />
+<meta property="og:article:author" content="Zodiac Wang" />
+<meta property="og:article:published_time" content="2020-07-01T00:00:00+08:00" />
+<meta name="twitter:title" content="Pandas 小技巧 ">
+<meta name="twitter:description" content="Pandas 小技巧">
+
+        <title>Pandas 小技巧  · Zodiac Wang
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="//zodiac911.github.io/blog/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="//zodiac911.github.io/blog/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="//zodiac911.github.io/blog/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="//zodiac911.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zodiac Wang - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="//zodiac911.github.io/blog/"><span class=site-name>Zodiac Wang</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="//zodiac911.github.io/blog">Home</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/categories">Categories</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/tags">Tags</a></li>
+                            <li ><a href="//zodiac911.github.io/blog/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="//zodiac911.github.io/blog/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="//zodiac911.github.io/blog/pandas-tricks.html"> Pandas 小技巧  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>几个 Pandas 小技巧，提升数据处理效率</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#统一-columns-names-格式" data-toc-modified-id="统一-columns-names-格式-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>统一 columns names 格式</a></span></li><li><span><a href="#过滤野值" data-toc-modified-id="过滤野值-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>过滤野值</a></span></li><li><span><a href="#加载前预览-csv-文件" data-toc-modified-id="加载前预览-csv-文件-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>加载前预览 csv 文件</a></span></li><li><span><a href="#计算变化百分比" data-toc-modified-id="计算变化百分比-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>计算变化百分比</a></span></li><li><span><a href="#Date-range" data-toc-modified-id="Date-range-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Date range</a></span></li><li><span><a href="#merge-细节" data-toc-modified-id="merge-细节-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>merge 细节</a></span></li><li><span><a href="#压缩存储-DataFrame" data-toc-modified-id="压缩存储-DataFrame-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>压缩存储 DataFrame</a></span></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#32479;&#19968;-columns-names-&#26684;&#24335;">&#32479;&#19968; columns names &#26684;&#24335;<a class="anchor-link" href="#&#32479;&#19968;-columns-names-&#26684;&#24335;">&#182;</a></h2><p>小写，去括号，空格替换为下划线</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">dates</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+                  <span class="s2">&quot;Sales (dolloars)&quot;</span><span class="p">,</span> <span class="s2">&quot;COUNT (piecies)&quot;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sales (dolloars)</th>
+      <th>COUNT (piecies)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sales_dolloars</th>
+      <th>count_piecies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#36807;&#28388;&#37326;&#20540;">&#36807;&#28388;&#37326;&#20540;<a class="anchor-link" href="#&#36807;&#28388;&#37326;&#20540;">&#182;</a></h2><p>丢弃值超过最大值的某个百分比的所有项</p>
+<p>例如只保留 count_piecies 列中 10% ~ 90% 区间的值（基于最大值计算）</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 按比例过滤 outliers</span>
+<span class="n">mask1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_piecies&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_piecies&#39;</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">mask2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_piecies&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_piecies&#39;</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask1</span> <span class="o">&amp;</span> <span class="n">mask2</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sales_dolloars</th>
+      <th>count_piecies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-02</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21152;&#36733;&#21069;&#39044;&#35272;-csv-&#25991;&#20214;">&#21152;&#36733;&#21069;&#39044;&#35272; csv &#25991;&#20214;<a class="anchor-link" href="#&#21152;&#36733;&#21069;&#39044;&#35272;-csv-&#25991;&#20214;">&#182;</a></h2><p>对于需要加载的 csv 文件，需要考虑文件头有没有应该忽略的注释行等问题</p>
+<p>用一下命令预览 csv 文件</p>
+
+<pre><code>! head -10 'file_name.csv'</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> head - <span class="m">5</span> <span class="s1">&#39;data/sample.csv&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>head: -: No such file or directory
+head: 5: No such file or directory
+==&gt; data/sample.csv &lt;==
+# 这是一行注释
+# 这是一行注释
+,sales_dolloars,count_piecies
+2013-01-01,0,1
+2013-01-02,2,3
+2013-01-03,4,5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/sample.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sales_dolloars</th>
+      <th>count_piecies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#35745;&#31639;&#21464;&#21270;&#30334;&#20998;&#27604;">&#35745;&#31639;&#21464;&#21270;&#30334;&#20998;&#27604;<a class="anchor-link" href="#&#35745;&#31639;&#21464;&#21270;&#30334;&#20998;&#27604;">&#182;</a></h2><p>当前值相对之前的值的变化百分比</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_change&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;count_piecies&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sales_dolloars</th>
+      <th>count_piecies</th>
+      <th>perc_change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0</td>
+      <td>1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>2</td>
+      <td>3</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>4</td>
+      <td>5</td>
+      <td>0.666667</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Date-range">Date range<a class="anchor-link" href="#Date-range">&#182;</a></h2><p>补全空缺日期</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-02-14&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">))})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-02-15</td>
+      <td>-0.628081</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-02-22</td>
+      <td>0.800372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-03-01</td>
+      <td>1.216360</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-03-08</td>
+      <td>-0.479696</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-03-15</td>
+      <td>-0.210752</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>  <span class="c1"># 生成更细分的 index</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>val</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-02-15</th>
+      <td>-0.628081</td>
+    </tr>
+    <tr>
+      <th>2015-02-22</th>
+      <td>0.800372</td>
+    </tr>
+    <tr>
+      <th>2015-03-01</th>
+      <td>1.216360</td>
+    </tr>
+    <tr>
+      <th>2015-03-08</th>
+      <td>-0.479696</td>
+    </tr>
+    <tr>
+      <th>2015-03-15</th>
+      <td>-0.210752</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_fill</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_fill</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015-02-15</th>
+      <td>-0.628081</td>
+    </tr>
+    <tr>
+      <th>2015-02-16</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2015-02-17</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2015-02-18</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2015-02-19</th>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Dates&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of tweets&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;unfilled&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_fill</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;filled&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYoAAAEGCAYAAAB7DNKzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAAgAElEQVR4nOydd3hb5b34P681LMkzthNnOLGzJyQkkISdlF1WLy2ltOWyWkpLW27vry2XC2W10N4W2tsWKKUto4OWwqUQdhuIQ1ghJCQh20nIcOLYifeQZY3398c5RzqWJVuWjiyP9/M8eqRzdMZXsny+57uFlBKFQqFQKOKRlWkBFAqFQjG4UYpCoVAoFL2iFIVCoVAoekUpCoVCoVD0ilIUCoVCoegVe6YFsJqSkhJZUVGR9P7t7e3k5ORYJ1AaGUqywtCTty+G2ucZavLGYyh9jqEk6/r1649JKUfHem/YKYqKigo+/PDDpPevrKxk2bJl1gmURoaSrDD05O2LofZ5hpq88RhKn2MoySqE2B/vPeV6UigUCkWvKEWhUCgUil5RikKhUCgUvTLsYhQKhWJk4/f7qa6uprOzM9OiUFBQwPbt2zMtRjdcLhdlZWU4HI6E91GKQqFQDCuqq6vJy8ujoqICIURGZWltbSUvLy+jMpiRUlJfX091dTWTJ09OeD/lelIoFMOKzs5OiouLM64kBiNCCIqLi/ttbSlFoVAohh1KScQnme9GKYohyr6dm6jfuz7TYigUihGAUhRDkK5AiI+fuZfT9v8aNU9EoRgeXHnllRx//PH84he/4I477mDlypUALFu2LFxEXFFRwbFjxxI+5hNPPME3v/nNlGVTwewhyB/f20exrw1Xlo/GDj9FOc5Mi6RQKFLgyJEjrFu3jt27d2dalJgoi2KI0dDexS/fqCLXFsRJgH317ZkWSaFQRLFv3z7mzZsXXr7//vu56667WLZsGbfccguLFy9mxowZrFmzBoBzzz2XQ4cOsWDBAtasWcM111zDs88+2+s5/vznP7N48WIWLFjA1772NYLBIACPP/44M2bMYPHixbzzzjuWfB5lUQwxfv6vnXR0BZlf7sZ52M/+Y20snDQq02IpFIOSu1/cyrbDLZYec874fO68eG7S+wcCAT744ANeeeUV7r77blauXMmKFSu46KKL2LhxIwB/+MMfej3G9u3befrpp3nnnXdwOBx84xvf4C9/+QvnnHMOd955J+vXr6egoIDly5dzwgknJC2rgVIUQ4gdR1p4au0BrlpaTkmTJEtIDhxtzbRYCoWiH1x22WUALFq0iH379iV1jDfeeIP169dz0kknAeD1ehkzZgxr165l2bJljB6tNYG94oor2LVrV8oyK0UxRJBS8sOXtpHncvAfZ88g6+9+AA7VN2ZYMoVi8JLKnX8q2O12QqFQeNlct5CdnQ2AzWYjEAgkdXwpJVdffTU//vGPu61//vnnkzpeX6gYxRBh5fY63tldz3fOns6oHCcEfADU1FtrVisUitQpLS2lrq6O+vp6fD4fL730kqXHP+uss3j22Wepq6sDoKGhgf3797NkyRJWr15NfX09fr+fZ555xpLzKYtiCOALBLn35W1MG5PLl5aWayuDmqKobWjOoGQKhSIWDoeDO+64g+XLlzNx4kRmzZpl6fHnzJnDj370I84991xCoRAOh4OHHnqIpUuXctddd3HyySdTWFjIggULLDmfUhRDgCff3ce++g6euPYkHDbdCAx0AdDR6aW5w0+BJ/EGXwqFIv18+9vf5tprr43b66mkpCQco6ioqGDLli3h95544onw68rKyvBrc0zjiiuu4Iorruhx3GuvvZZrr702JdmjUa6nQc6xNh+/fmM3y2eOZtnMMZE3dIsiGz/7G1SKrEKhSB9KUQxyHvjnLrz+ILddOKf7G4GIothX35EByRQKxUhBKYpBzLbDLTy97gBXnVzOtDG53d/UFYWTAPuPKYtCoVCkD6UoBilSSu55aSsFbgf/cdaMnhsEtRjFuFyhLAqFQpFWlKIYpLy+tZb39zbwn+fMiB2o1i2Ksjwb+1UbD4VCkUaUohiE+AJB7ntlOzNKc7ly8aSeG4RCENIK7ibkZSmLQqFQpBWlKAYhj7+zjwMNHfzgojnYbTH+RLrbCWBcro1jbT7afMlVeCoUCuv51a9+xezZs5k0aRI/+clPALjrrru4//77ARJq+mcmusngQKPqKAYZR1t9PPjmbs6ePYbTp4+OvVEg0g5grEd73l/fztzxBQMgoUKh6IuHH36YlStXUlBQMKhmZidLRi0KIcRjQog6IcSWOO8LIcSvhBC7hRCbhRALB1rGgeb+13fiCwT570/Pjr+RyaIY7dae9yv3k0IxKLjxxhvZu3cvF1xwAQ8++GCfg4PWr1/PmWeeyaJFizjvvPOoqakJr58/fz7z58/noYceGgjR45Jpi+IJ4EHgj3HevwCYrj+WAL/Rn4clWw418/f1B7n+1MlMGZ0bf0M9kA1QrCsKNZdCoYjBq/8FRz629phjj4MLfhL37UceeYTXXnuNVatW8eyzz3Lo0KG42/r9fr71rW/xwgsvMHr0aJ5++mluu+02HnvsMa699loefPBBzjjjDL73ve9Z+xn6SUYVhZTyLSFERS+bXAr8UWrzPt8XQhQKIcZJKWsGRMABREuH3cYoj5NvnTW9941NFkU2AUbnZbP/mLIoFIqhxs6dO9myZQvnnHMOAMFgkHHjxtHU1ERTUxNnnHEGAFdddRWvvvpqxuTMtEXRFxOAg6blan1dN0UhhLgBuAG0ro3m3ij9pa2tLaX9k2XdkQAffOLj6jlOPlrb+1SqnLb9nKS/3lO1nVH2yWzcc4jKyob0C5oCmfpu08VQ+zxDTd549PU5CgoKaG3V57Scdlt6hGjtfQ6MlJK2tjZCoRBdXV20trbi8/lwOBy0trbi9/vxer20tbUxa9Ys3njjjW77NzU1IaUMf4729nZCoVDkc6VIZ2dnv34Lg11RJISU8lHgUYATTzxRLlu2LOljVVZWksr+ydDpD3L7z1cza2weP/jSabEzncwc/gi0WetMnVTG8e7xvF11bMDl7i+Z+G7TyVD7PENN3nj09Tm2b9+e8QCyEILc3FyysrJwOp3k5eWRnZ1NdnY2eXl5OBwO3G43CxcupKGhgS1btnDyySfj9/vZtWsXc+fOZdSoUWzatInTTjuN559/nqysLMs+l8vl6tfku8GeHnsImGhaLtPXDSv+8PYnVDd6uSNeOmw0phgFgU7KizwcaenE2xVMn5AKhcJynE4nzz77LLfccgvz589nwYIFvPvuu4A2+/qmm25iwYIFaN73zDHYLYoVwDeFEH9DC2I3D7f4RF1LJw+t2s25c0o5ZVpJYjuZFUWwi/KxOQAcaOhg5tihn4qXaT7ZvoGmo4c44YyLMy2KYohitAP/0pe+FLYC7rrrrvD75jbiCxYs4K233upxjEWLFrFp06bw8k9/+tO0yJoIGVUUQoi/AsuAEiFENXAn4ACQUj4CvAJ8GtgNdADWNlkfBPz09Z34g6He02GjMQWzCfioKNaKKfbVtytFYQF1L9/L2NaP2T1rec9mjArFCCTTWU9X9vG+BG4aIHEGnI+rm3l2fTVfO2MKFSU5ie/YzaLwUV6k7at6PlmD9LXioZPvrNjKn65fjBAi0yIpFBllsMcohi1SSu5+cSsluU6++alp/ds5aI5RdFHgcTDK41A9nyxC+r24hZ+3dx/jtS1HMi2OIgky7dMfzCTz3ShFkSFe2lzDh/sb+e65M8lz9XOMqT4GNSTsYaVRXpyjLAoLaOn0Ywv5cIsuZo3N44cvbVNJAkMMl8tFfX29UhYxkFJSX1+Py+Xq136DPZg9LOn0B/nJqzuYPS6fy0+c2PcO0ei9ngJ2D07dDVVR7GHdvkYrxRyRHGr04qILmwxwz8Wz+fzvPuChVbv57nkzMy2aIkHKysqorq7m6NGjmRaFzs7Ofl+U043L5aKsrKxf+yhFkQF+99ZeDjV5eeDz87FlJeH/1oPZQZsnHK8oL87hhU2H8QWCZNttVoo7oqhu9FKO9v0uLnPzbydM4NG39vK5RWX9iyMpMobD4WDy5MmZFgPQaj76U68wWFGupwHmSHMnD1fu4YJ5Y1k6pTi5g+jKIWD3hJVGRYkHKeFgg9cqUUck1Y0duHRFQaCTWy+YhdOexT0vbcusYApFBlGKYoD56es7CIYkt17Qj3TYaPS4RLRFASrzKVWqG714hK4o/B2MyXfxH2dP580ddazcVptZ4RSKDKEUxQCy8WATz204xPWnT2aSXvuQFAHD9eQKK40KXVGozKfUqG7swC206YH4tVjQ1adUMG1MLne/tJVOvwpsK0YeSlEMEFJK7nlxKyW52dy0vJ/psNEEfWDLJpTlCCuNUR4HeS67sihSpLrRS3bY9aS58Ry2LO65ZC4HG7z8dvXeDEqnUGQGpSgGiBWbDrPhQBPfP28mudkp5hAEfGB36YpCu+sVQlBRnKMsihQ53NCGHX2srD8ySfCUaSVcePw4Hq7czcEG9R0rRhZKUQwA3i4tHXbehHw+t6h/aWkxCfjA7tQUhamdR3mxR1kUKdDS6cfXaVICge6JAbd9ejZZQvCjl1VgWzGyUIpiAPjtW3uoae7kjovmkpVMOmw0wS6T6ylSpV1RnEN1oxd/MJT6OUYgRg1FGJNFATC+0M23zprG61trWb0r8zn6CsVAoRRFmqk9eoz2tx7kwuPGsnhykTUH1S0KKXpaFMGQ5FCjSpFNhupoRRHo+T1ef9pkJpfkcNeKrfhDqvJXMTJQiiLN7Frzd27LepJbFll40G7BbJNFUWJkPin3UzJoGU+mPlr+nooi227jzovn8Mmxdv65zz+A0ikUmUMpijTT1KiNJ52YY6E7KNClxyj0Xk96T5tyPeV2vwpoJ0V1o5dChyn9NYaiAFg2cwznzillxR4/Nc3KelMMf5SiSDNNzc0ACL+FF+9Ap5715NSWdffT6NxsPE6bsiiS5GBDBxPzTDGkQGfcbX9w0RxCEu59efsASKZQZBalKNJMW1uL9iLO3WlSBLvApmc9Qdj9JITQu8gqiyIZqhu9TMg1KYpe/mYTizxcNMXBS5treHfPsQGQTqHIHEpRpJGG9i5kl37R9lt4lx/wgT1bC2ZDt4B2RbFHWRRJUt3YwThz379eLAqACyY7mFjk5s4XtqpMM8WwRimKNFJV24obPTjaZeFdvjk9FroFtMuLczjY0EFQZeT0i2avn5bOAKUe0/fWhxXotAnuuGguVXVtPPnuvvQKqFBkEKUo0siuujY8hqKwNEbhiwSzodvEu4piD/6g5HCTCrL2ByOleIzLpCj6sCgAzp49huUzR/O/K6uoa+17e4ViKKIURRqpqm0l36a7hbosdj31YlGAynzqL9WN2vdVnK27kIStR8FdLIQQ3HHxXLoCIX7yyo50iqhQZAylKNJIVW0bJdlG3yArXU9ajCKc9dStlkJLkVVxiv5RrVsUo5x6eqynKOG/2eSSHL56xmSe++gQ6/Y1pEtEhSJjKEWRRqrqWhnl0IuyrIxR9BLMLs1zkW3PUj2f+kl1oxeP0xaZReEuSsj1ZHDT8mmML3BxxwtbCajAtmKYoRRFmmho7+JYWxf5NmO2gYUX7nB6rB6jMFkUWVmC8mKP6iLbT6obOygb5UYEOgEBrvx+pTR7nHZuv2gO22taeOqDA+kT1ES7L8DDr6zj4F0zWffeqgE5p2JkohRFmthV2wpAjkhD1lPAcD0ZFoWv29taLYWyKPpDdaOXslEeTTk43GB39cuiALhg3lhOm1bC/a/vpL7N1/cOSRIIhvjrBwdYdn8lr655n4kcYeWqlWqokiJtKEWRJqrq2gDIlvrFxqoYRTAAMhgVzO7qtklFsYf99R2EVIpswhgWhVH1jsPd7yJJIQR3XTKHjq4gP31tp+UySil5c0ctF/xyDbc+9zHlRR4e+MwUAHztLfzuLTVUSZEelKJIE1W1reRl27EZHUitynoyrAejeyz0uPMtL87BFwhRq9I1E8KooSgb5dYynZK0KACmjcnjutMm8/SHB9l4sMkyGbccauZLv1/LdU98SCAkeeTLC3nmxpOZUaj9C59Q6uChyt0qLVqRFpSiSBO7aluZVpqLMO5KrWrhYcQjzBZFMNqi0LvIHlNxikQwaigmjvJorcWTtCgMvn3WdMbkZXPHC1tStuoONXn5z6c3ctGv32Z7TQt3XzKXf37nDM6fNw4hBPg0y3X5ZDdSwr2vqN5TCutRiiJNVNW2MWN0bsTlZFUw21AK9th1FGDuIqviFIlg1FBEYhSelBRFbrad2y6czebqZp7+8GBSx2jp9PM/r+1g+f2VvPRxDV9fNpXV31/O1adU4LCZ/m27tFhYfpaPry+bysuba3hvT31S51Qo4qEURRqob/NR397FrNF2QL+jtCqYbSgFe3yLYnyhG4dNqMynBDFqKDTXkxccLrC7k3I9GVwyfzyLJxfx09d20NTR1fcOOv5giCfe+YRlP6vkN5V7uOi4caz67jJuOX8W+S5Hzx10i4KuNm48cyoTCt3c/aJK0VVYi1IUacAIZM8sskVWWhbM1i86cSqzAWxZgolFan52olQ3eslx2ij0OEzBbFdK7kIhBHdfMpeWzgAP/HNXn9tLKXltyxHO/cVb3PXiNmaNzeOlb53Gz69YwIRCd/wdjdhXVxsuh43bL5zNjiOt/GXtwKToKkYGSlGkgSo9NXZaod6y2pmXBovCFMwO9kzFrCjOURZFgmgZTx7N5x9Oj3VDyA+h5FNOZ4/L56ql5fxl7X62HGqOu92GA41c/sh73Pjn9dizBI9fcxJ/+coS5k0o6PskXbpFoVsW588by6nTinngnztpaE/cklEoeqNPRSGEuFwIkae/vl0I8ZwQYmH6RRu6VNW1kZdtZ3S2fpHJKbEuRtEtmN2z4M6gvFizKKRUKbJ9odVQ6HftZosCUk5C+M45MyjKccYMbB+o7+CmpzZw2cPvsq++gx9fdhyv3nw6y2eN0ZRWIvi0mxJDYQghuPPiubR3Bbn/n9an6CpGJolYFD+QUrYKIU4Dzgb+APwmvWINbXpkPOWMhlCgR71DUpjSYxFZEDU326CiOIeOriBH01j4NVwI11BAd4sCUopTABS4Hdxy/iw2HGjiHx8dAqCxvYt7XtzGWT+v5M3tddx81nRWf28ZVy6ehN3WTyM/7HqK3IjMKM3j308u568fHOjVklEoEiWRX6Vhe18IPCqlfBlwpk+koU9VbRszxuRFrIic0dqzFVZF2PXkijwHeyogNT87MSI1FNr3ZbVFAfDZhWUsnFTIj1/dwcOVuznzZ6t44t1P+OzCMiq/t4zvnDODnGx7cgePcj0Z/MfZMyjyOLlzxVZlVSpSJhFFcUgI8VvgCuAVIUR2gvuNSIyMp+mluZG4RE6J9mxFnMIUzAY0yyKORQGw75gKaPfGIXPGE5jSYz2R5RTJyhLcc+k87vPdR82/fs3C8lG8evMZ/OSzx1Oa70rt4OGsp9ZuqwvcDr5//kzW72/khY2HUzuHYsSTyAX/88DrwHlSyiagCPheWqUawhgZT9NLY1kUFigKUzAb0BRGjGD2hFFubFmCAw3KouiNg+YaCjClx+oX8IA1hZLzJhTwqeztfHt6A09cu5iZY/MsOW5YQURZFACXL5rI8WUF3PfKdtp8AWvOpxiRJKIofiulfE5KWQUgpawBrrLi5EKI84UQO4UQu4UQ/xXj/WuEEEeFEBv1x1esOG86MTKeZpTmRu5GrVQUMS2Knq4nhy2LslFulfnUB91qKEJBLdPJ7ja5nixqgxIMYA90MNphcVsVIzYR8vf4HWRlCe66ZC51rT4efHO3tedVjCgSURRzzQtCCBuwKNUT68d5CLgAmANcKYSYE2PTp6WUC/TH71M9b7rZVatlPI3Nd6XH9WQEV80WRZyAq+oi2zfVjR2RGgpDsRsFd2CZRYGvRXvubLHmeOHjmiyJrp5WxcJJo/jswjL+8PZejrSrIjxFcsRVFEKIW4UQrcDxQogWIUSrvlwHvGDBuRcDu6WUe6WUXcDfgEstOG5GqaprZXpprp6Tb7iedEVhZTDbbFHECGaD1kX2k2MqRbY3jPbiQgiTEk6DRdHZ3P3ZKrraIFuvt/C1xtzklgtmkm238dcdw7euor2thWDAn2kxhi1xFYWU8sdSyjzgZ1LKfCllnv4ollLeasG5JwDmRjjV+rpoPiuE2CyEeFYIMdGC86aVqto2po/R/c+GBeEu6r6cCqZeT9qzK2YwGzSLorUzQFOH+geKR7cainRaFOlQFKGQpijyxmrLMSwKgDF5Lm4+azqbjgZ5c0etdecfJDzz4UGO/ewkVj9+e6ZFGbYkkpN3mxDiy8BkKeUP9Yv1OCnlB2mWDeBF4K9SSp8Q4mvAk8CnojcSQtwA3ABQWlpKZWVl0idsa2tLev+WLkl9exdZbbVUVlYyde9Oxmdl8+FHW1kCbN+8ntq6/KRlA5h4YDtTgbfe+4A2b4CmVi/QwcYYMrfWaQHM5/61hqmFth7vDzSpfLfpYt/RdsY7OqisrMTdUc0SYFvVJ7TUOlgKbP/4I2qPjoq5b38+T2HjZhYAwfYG1lj0HdgCXk4HGgPZjAI2vL+GloKjMbedHJKUuiW3/n09PzrNjSMrwYK+QYjxvXcGJH/c1sX7h7vY6zrChoPbeH3lKrLtg+ezDcbffDIkoigeAkJoF+gfAm36upNSPPchwGwhlOnrwkgpzW0wfw/8NNaBpJSPAo8CnHjiiXLZsmVJC1VZWUmy+7+3px7efJ8LTlnAGTNGQ+vz0JDHktOXwwcwe+okZp+UvGwArP4A9sIZy86mcs3bFJaMgc6WmDKX1bXxvxtWU1w+i2UnxDLWBpZUvtt00Oz1433tnyydN51lZ0yBmk3wAcw5fhGUnQhrYfbU8rh/s359nm0tsAlsoU6WnX4q2GI0+OsvrUfgbRg1aTY0bWbh3OkwLb482+tX8sB6H7uzJvH1ZVNTP3+GqKyspHTmQm56agOfHAtwy5mlsBZyZTsNBVO54qRJmRYxzGD7zSdLIsHsJVLKm4BOACllI9YU3K0DpgshJgshnMAXgBXmDYQQ40yLlwCDutn+7jrNRzy9NFdb4e8Apzkn36L0WJEFNl3Hx0mPBZhY5EYI2KcC2jGJtBc3XE96PKJbeqxFMQqfKYgdJ5bQ/2PqrqbcUu05juvJ4LjRds6ZU8qv36ziSPPQHGolpWTVAT+XPvQObZ0B/vKVJdy4uBiAUqeXpz5Irq27oncSURR+PUNJAgghRqNZGCkhpQwA30Sr0dgO/F1KuVUIcY8Q4hJ9s28LIbYKITYB3wauSfW86aRbxhNoqYuOHHDm6MsWZT0ZgWyIW3AHkG23Mb7Araqz4xBJjTWqsvV4hN2ttfEA6wZOmWMTnRZNvjNqKPL0+6kYtRTR/ODCOQRCkp+8OqjvuWLS2unnm3/9iCe3dbFkchGv3Hw6p0wtAa/2fU50+dh0sImth1XbEqtJRFH8CvgHUCqEuBd4G7jPipNLKV+RUs6QUk6VUt6rr7tDSrlCf32rlHKulHK+lHK5lHKHFedNF7tqTRlPELEosmzaxd2KrKdgVyQ1FvT02Pj9nMqLPcqiiEN1j6psk0VhcwLCOouim6Kw6EJm1FCEg9l9/50nFXu44fQpPL/xMB/ua7BGjgHg4+pmLvr127y25Qifm+HgyWsXU5Kr3zB1NgJQINrJtmfxlGqxbjl9Kgop5V+A76MphxrgM1LKZ9It2FCkqq6NGaWmituujojbyemxyKLwRdwioGU/xUmPBaOWQlkUsehWQwHdLQohUppy14N0KArDgggrisRcWt9YPpVxBS7ueGErwRRHtaYbKSWPv/MJl/3mHboCIZ6+YSkXTXGSZQ7G6xZFVmcTFx4/jhc2HqZdVaJbSqI9m0qADinlg8AxIcTkNMo0JKlv89HQ3sW0MbmRlf6OiNvJkWPNRSfYFeV66t2iqCj20NDeRbNXpchG062GArpbFKCnHltlUbTEfp0KRkzCUwzClpDrCcDjtPPfn57NtpoW/rZu8N59N3V08bU/refuF7dxxvTRvPLt0zmxoqjnhl7NoiDQyZcWjqHNF+DFTaq/lZUkMo/iTuAWwKidcAB/TqdQQ5Fdtdo/aTeLwh9lUVhVcBfteurDogBt9oGiO9WNXiYWmabHmS0K0C0KC11ProLIayswguLOXMjO7TOYbeai48exZHIR97++s1+jWgeKDQcaufBXb7NqZx23Xzib3199IqNy4uTQeCMxn4VjtPY5T30weBXgUCQRi+Lf0DKO2gGklIcBizqaDR+q6oweT1GuJ6euKBxu6wruEgxmA1SUaOdXcYqeGJPtwoQL7syKwiIF29kMhZMir63AiElk5+pTFBP/Gwuh9YFq9vr5+b/6HtU6UIRCkt+u3sPnH3kPIeCZG0/hK6dP6X2Qkyk5QHQ288XFk9hc3axmcVhIIoqiS2o9IIysp5z0ijQ0qdIznkrzTRdxv571BLrryaKsp2iLIuTXqnRjMKnImEuhFIWZZq+f1s5AJJANPRWF3W1tMDt/AiAsVBS6BWFk1vUz7Xb2uHy+vLScP7+/n+01FvegSoL6Nh/XPbmOH7+6g3PmlPLyt09nwcTCvnc0XE/6639bWEa2PUvNDbeQRBTF3/V5FIVCiK8CK4HfpVesoUePjCfoblE4Pf2644tLwNfTooC4tRQep6a8VBfZ7vSooQBdKQg94wktVmFVMNvXDK5CcOV3r6lI6ZitmjKz2fvtejL4z3NmUOB2cFeGBxyt3VvPp3+1hnd31/PDS+fy8JcWUuBOsCjR2wSI8OsCt4OLjh/Pio2HVHt1i0gk6+l+4Fng/4CZwB1Syl+nW7ChRo+Mp6Bfu9M3YhQOj3Vtxu1mRWEUhvWWIqu6yEbTo4YCImNQDWVvaTBbj1G4Cqx1PWXryRPO3KRuRAo9Tr573kzWftLAS5trrJGrHwRDkl+/UcWVv3sfj9POc984hatOrkh8Zjhorqf8CZHXwBeXTKK9K8gKNbTJEhIJZl8P7PWyg7kAACAASURBVJNSfk9K+V0p5b8GQK4hxTE942l6t/iE/k8bDmbnWJgea1IUxt1vLwHtimKPsiii6FFDAZExqAZWpceGQlqmk+WKok1TEADZeQlnPUXzhZMmMWdcPve9sp2OroG7A69r7eTfH1vLA//axcXzx/Pit05j3oSC/h/I2whFkyOvgYWTCpk1No+nPthvocQjl0RcT5OA3woh9gohnhFCfEsIsSDdgg0lqvSMp+nRqbFgCmZblPUU7IooB4gojT4siqOtPpVbbqK6sYPcbHt394a/MxKfAOssiq5WQGpKIttCReEzKQpnTsJ1FNHYsgR3XzqXmuZOflO5xxrZ+uDtqmN8+pdrWL+/kf/57HH87xULyE12bri3SU8UEOEMKCEEX1wyiS2HWthcbVEl/AgmEdfTnVLKT6ENMFqDNgZ1fboFG0rEzXiCSDDb0oI7s0Whv+7VotBkUIV3EYz24t1cHAFveiwKQzG48q23KMyupyQtCoCTKoq4dMF4fvvW3rSmUgeCIe5/fSdXPbaWQo+TF246jStOmtQ/V1M03kZwjwJ3YbfA9qULJuByZPFXlSqbMom4nm4XQrwK/BOYBnwXrdOrQmdXbSt5rhgZT2CyKHK0C1Gc7KSEiRfM7uXOt7xYZT5F020OhYHfG3EVgoWKQg9eh11PFhbchV1PycUozNx6wWzsWYIfvrzNAuHAHwyx80gr//iomvte2c6Xf7+WJ370Faa+/R0+t7CMFd88NfXZ4f5O7f/KXaglC5hSZQvcDi4+fjwvbDxMa+fgKThdt+oFNvz4HLydg69+JR6J2HqXAQHgZWA18J6UMr6fYwSiDSuKkfEE3QvuQHNJZeeSNMEYBXfQZ78nQMUpTFQ3drBkclSVr98bqcoG69JjwxaFxTEKXxuMqtBeO/O030bQn3QL87EFLr75qWn89LWdrN51lDNnjE5432avn+01LWyvaWHb4Ra2H2lh15E2uoLajZHTnsXM0jzOdu9kXPAI/3b5/KRk7IGhGNyjtIc5VRYtqP3M+mpe2HiYLy8tt+acKdDuC7BtzXNcHfqAv7+zns+fdXKmRUqIPhWFlHKhECIfOBU4B3hUCFEnpTwt7dINEarq2jh3Tmn3leEYhVFHYSgKb2qKItDVs9cT9Op6ynM5KMl1KotCp7kjRg0FxAhmW5Qe201R6OmxoRBkJdpBJw5dbZHfl/HsawVPjDYXCXL9aZP5+7qD3P3iVl67+Qyc9u4ySik52OBlW00L20yK4VBT5HsqyXUye1w+155awZzx+cwel8+Ukhzstiz4RQt01Kek0LphVGW7CnXXU/d4xIKJhcwel89Taw/wpSUpurgs4JHVe5jsPwY2+Nf7H/GZM5f0+I4HI30qCiHEPOB04EzgRLTxpWvSLNeQIWbGE0QUhTk9FnSXVOJ3aj0I+vodzAYtoK2qszUOxqqhAE0p5I6JLNvdejFjUOsAnCzRFgVSUxbuBIrJesPXplkSELn56GpLSVFk223ccfEcrnviQ363Zi+nTy/RLARdMeyoaaVVT4rIEjC5JIeF5aP48tJyZo/LY874fMbkuWIfPBSC1hpAakOXCi2YbGxYEO5RmrJo7J7lJITgi4sn8oMXtrK5upn5iRTwpYnqxg4efWsvL+a3QwfY2mt5/qNDfP6kQT/hOSHX00+At9Daja+TUg4eZ98gYFetEciOshK6oiwKw/WUSkBbyqSC2aC5n97bU9/rNiOFmDUUENuigNStQKPALrsg0u8pVUUhZc9gNlhS1PmpWaV8Y9JBlq+6lX97/W58OMlx2pg9Lp/PnDAhbCXMLM3D7eyHAu2o1xQvaArDCkURdj0VasoixqyPS0+YwH2v7OCptQcyqih+/OoOhIApzmbogBMKO/jN6j18dlEZtkE+mjYRRbFSSvm/5hVCiJullL9Mk0xDit11RmpstEURVUdhZD+lUnQXCgAyTjC7d4uiojiH5zYcotMfxOXI/PzsTBKzKhsiBXcGRnPAQGdqiiI668m8Lln8HYDsXkcBKWU+mflGRQ25dfv5/UVFTJp9IhNHebq39k6GVlPxW4tFhXBec4xCdz1JGSmaBPJdDi6ZP54Vmw5z20WzyXdZ4PLqJx980sDLm2u4+VPTsK87AsA5ZUF+vLmdlz+u4ZL54wdcpv6QiHPs32Osu8ZiOYYsMTOewGRRRAWzU7njMwKrMYPZvQddjYD2gQYV0K5u9PasoYDeLYpU6GzWbhRsDusUhaEQomMUSdZSRJPr1S7kp4/2Ul6ck7qSAGgxVX63WlQFbrieXLpFIYMxe159cckkvP4gL2SgUjsUktzz0lbGFbi4ceno8M3iZGcLU0fn8PCq3Rltn5IIcRWFEOJKIcSLwGQhxArTYxUwdEZjpZldtVrrjh5BsrgxihQu1AHdvRSz11PvriejlmLfMRWniFlDATHSY00JCKnQ2RRRENn5+roUFYXR18mwJAzLwiKLguaD3Z+tIB0WRafe58lVoCmL8LruHF9WwBw9qD3QF+Vn11ez5VAL/3XBLNydteH1orWGbyybxo4jrbyxvW5AZeovvVkU7wIPADv0Z+Px/4Dz0i/a4EdKSVVta/eKbIOudshyRDI7wnd8KVyojcZ//ez1BKrozozWXtzd840e6bHGd2uBReHSFYRVFoWhKMx1FGBN40mAJl1BNFlYrNZSAwitL5OVFoUrX0s2cI+KrIvCqNTeXtPCxoMDV6ntDUh++vpOFk4q1NxLhoLMGw+th7lkwXjKRrl5cJBbFXEVhZRyv5SyUkp5spRytemxQUqpekEA9e1dNHb4e2Y8QWRetoElFkUMRZFgMLvA46DQ4xjxmU9SSg7pk+26EQpqgVa7SYGEXU8p1lIYfZ7ApChSLLrr4XoyZT2lStAfufu3UlG0HtayygomdndDpYK3KWJJGMkB3tiK4NIF4/E4bQM6U/ulPX6Otfm48+K5mgVrKMgJC6GlBkeW4MYzp7LxYNOgTjYZ/Am8g5i4GU+gz8s2je4IWxQpKApDGXRLj00smA1qfjZAizdAqy9GDUV4FkVUwR1YZFEMlOvJghhFyyGQegcBK11PLTWQNw7yx3V3Q6WC0b4DIgojhkUBWj3RpQvG8+Lmw7QMQKX2gfoOXt/n57KFEyLZVi0mRRHwQmcTn1tUxpi8bB5ctTvtMiWLUhQpUBVr/KmBvz3KonBH1idLrxZF34pC6yI7si2KuDUU4USBdFgUJkVhs2sX9ZSD2aYxqKC3R8+yxqIw3E6F5ZHXVtBao7md8idoF0wrXC2dTRFLwlAYMWIUBlcunkSnP8TzHx1K/dx9cN8r28nKglvOnxVZ2XJIm3FuVNS31OBy2Pjq6VN4d089Gw7EVnKZprdg9hv68/8MnDhDi6o6LeNpTF52zzejA6N2FyBSC4waisIczDZiIAlaFIebvPgCweRlGOLEraEYKIsCrGnjYR6DClo6aD/HocbFsCLKT4X2OuuGN7Uc1qyJvHHhu+mUMVsU7t4tCoDjywqZNyH9Qe339tTz2tYjXDTFQWm+6TfVWqPFJ4z5Gbpl9cUlkyj0OHh4kFoVvVkU44QQpwCXCCFOEEIsND8GSsDBTNyMJ9D+YZ0m15MQqc+kCAezTa4nITTFkYCiqCj2EJKRi+VIJG4NRbosCqlXYRsuJ9AUhc+qYHaUe9OKrCcjLlGu9yFqrk79mH5dMRiuJ7AmTmGOUTg8mls2TozC4IuLy9lxpJUNB9IT1A6GJPe8tI0JhW7Or4hKwTYrSwh/BznZdq49ZTIrt9cNirG00fSmKO4AfoDWKfbndM98uj/9og1ujIynmPEJ0ILWjqi71lRnUoRdT1EtEuyuPoPZoFkUMLK7yFY3esmLVUMRTmc2KwoLEhD8HVqhpNUWRTiYbXJ7ZudaU0fRdBByx0LxNH3ZguCvke2TP167o4bU4xRS6q4n3aIQokcH2VhcsmA8OU5b2tqPP73uINtrWrj107Nw2qJuIlv1OI2hKEzZX9ecUkFutp2HBqFV0VvW07NSyguAn0opl0c9PjWAMg5KjrXpGU/RFdkGXVFZT5D6TIpYwWzQLIwELQqAfcdGbkC7utHLhJg1FLrVEDM9NgWLwtznySA73wLXU6smn83UXCHFmRRhmg9og4AK9BYbVigK44JopUXR1aYpYXMrlBgdZKPJzbZzyYIJvLT5MM1ea4PaLZ1+HvjnThZXFHHhceO6vxnogvajmrK0O8FTosUsdAo8Dr68tJyXP65h71GL6mEsIpHBRT8UQlwihLhff1w0EIINdoxhRdPjWhTt3bOeQFu2Oj0WNNdTAhZFUY6TvGz7CLcoOnrGJyASh+jmejISEFJw1cVSFFbFKJxRvz0LZlIAmkVROFG7qGfZrcl8MpRC/viYd9NJYW7fYRCjg2wsvrREC2r/Y4MFbjUTD765m4aOLu64eE7Pm5E2rXVH+PPnj+uhLK8/bTJOWxaPrB6YSYOJksjgoh8DNwPb9MfNQoj70i3YYKfXjCfQ02Oj/OBOT4oFdzEqsyFhi0IIQXnJyJ2fHamhiFVsF8OisDkBYb1FYZXryRl1I+LMTT3rKRTSYhIFEzVrJX+8NZlPhpspb5x2o+MpTr0629y+w8BV2KdFATBvQgHHlxXw1AfWBbU/OdbO4+98wuWLymLP/g4rSz2QrRfdmRmdl80XTprIcxsOdWvdnmkSSY+9EDhHSvmYlPIx4HxgxFsVu2pbyY+X8QR6wV20ReFJ0aKI0esJ9GB2YhczrZZiZFoUcWsoILZFIUTqU+7M0+0MjCl3qVygutoiNRQGztzU6yjajmiFh4WTtOWCSRbFKGo0+YwK9bzxqVsUnbEsitgdZGPxxcWT2FXbZllK6r0vb8dpy+K7582MvYHhZsqPb1EA3HDmVAAeHURWRaJ1FObevDFU5cijqq6N6fEynkKh2MHsVLOeYqXHgqY4EnA9gRanqG704g+mOJJ1CBKpoYjheoplUYAWB7DcosjXmtelYl2ax6AaWOF6CtdQ6IqicKI1rqfWwxGXC+gXSYssim4xisRcTwAXzx9Pbradv1hQqf121TFWbq/lpk9Niz+PwxynAU1Zdhzr4Q2YUOjmsoUT+Nu6gxxtHRzDRBNRFD8GPhJCPCGEeBJYD9ybXrEGN31mPBl3p9HBbIc7tawnQxlExyjsroRcT6BZFIGQ5PAgMmsHikgNRYIWBeh/s1QUhTGBLcqigNTcT762nq3PrXA9GdaDEcgunKRd4AIpznduqYncSYN2sbQqRuGKCmb7WiDYd5ehnGw7ly4Yz8uba2juSD6oHQiGuOelrUwscnPdqZPjb9hyWPtfNSygfCP760iPTW88cyr+YIg/vP1J0nJZSSLB7L8CS4HngP8DTpZSPp1uwQYzCWU8QYxgdopZT3GD2f2xKPQusiMwTmHUUEyMaVEYBXexFEUK35WhDKLrKMzvJUNXnBhFoDOhi2RcmnVFYQwVKpiotfNoSbGS2Sg0M8gfr2UApaKAzNPtDMIdZBP7br+4ZBK+QIj/SyGo/dcPDrCrto3bPj2791kvRmqs4YXIjx/UnzI6l08fN44/v78/JSVmFQm5nqSUNVLKFfqjp/obYVSFezzFURThedkxXE+p+LvjBrMTK7iDSIrsSIxTGDUU+e4Y87riKQq7OzXXk69Fu4s0u7TMU+6SPm5b9xoKMHWQTSFO0XRQCzQbSshQGKm4n4wRqNEWBUQygZKhs0nLyjIrzATaeJiZO76A+WUF/DXJoHZzh5+f/2sXS6cUcd7csb1v3FITCWRDRHHGccHdtHwabb4AT763r99yWY3q9ZQEVcZUu96K7SA9BXdZdsiK+rMlmB4LWlaF22EbkbUUcWsoQFcGomeNisOVenqs2ZoAbSSq8V6ydLXHdj0Z7yVL04GI2wkisYpUMp86jmn1DtEWBaRWS+HVi+3Mf88+OsjG4otLJlFV18aH+/sf1P7lG1U0e/3ccdHc2L8rM62HuyvLXiwKgNnj8jl79hgee+cT2n2ZbditFEUS9JnxFD0v28Dp0f5hkjW3A76e1gTo6bGJ3fUKISgv9oxQiyJODQVExqBG/7NbEcx2ReV/pOp6klKzGnr8vvTlVIrumg9GlANAfhkgUst8Cldlx7AoUqnO9jZ2j09Anx1kY3Hx/PHkZdv73X58d10bf3xvH1ecNIk54/N731jKSPdcs6x2d69B/W8sn0ZTh39AW6PHoldFIYSwCSF2DJQwQ4Wq3no8Qc952QbhudlJXqSDvp6psaCnxyaufCqKc0ZcF1kpZXiyXUyix6AapJwemwZF4fdqcYMeWU+6KyrZgLaUerGdSVHYnZA3NjXXUzjbx2KLwty+w6CfricAj9POZ06YwMsf19DYnvj/0b0vb8PtsPH/zp3R98beRu3/N9/0HQjRZ/bXwkmjOGVqMY+u2UunP3PNPHtVFFLKILBTCDGpt+1GElJKdtW1xnc7Qc952QbhudlJun0CvtgXM3t2Qm3GDcpLPBxs8BIMDd6JWlbT7PXTFq+GArTMpuj4BKTJojBmUiTZlC56FoVBqjMpOuq17C+z6wm0ZastCvco7QYnVYvCHWVRJNBBNhZXLp5EVyDEcwm2H6/cWceqnUf51lnTKMmN41kwYyQDmC0KSKie5JvLp3G01cez662tIu8PibieRgFbhRBvmGdnW3FyIcT5QoidQojdQoj/ivF+thDiaf39tUKICivOmwrH2rpo6i3jCUwWRYwWHpB8Fk2wq6cPHfoVzAbNougKhqhpHjkpsnHbixsEvGmyKFoiisHAnq25HJKdchc9BtUg1XGoTfu158Ko+8LCFIvuWmu0WRk5YyLrwnfTFsQozLj6H6MAmDM+nwUTC3lq7f4+g9r+YIgfvrSNimIP15zSSzqsGXMLEzMJ1JOcPLWYBRMLeWT1nozVPyWiKH6AVol9D907yKaEEMIGPARcAMwBrhRCzIna7HqgUUo5DfgFkPHZGH1mPIEpPTZGCw9I/h854OuZGgv9So8FKA9nPo2cgHbc9uIG0fNDDNLhegJNeSTreooeg2qQ6jjUcLFdlEVROFG7Iw4l6fpoqYHc0u4NDCH16mxzi3EDu1O7IeunRQFaUHvP0XY++KSh1+3+/P5+9hxt57YL5+C0JxjmNSynHopivFZH0YtyEkLwzeXTqG70smKjRZMB+0mMPMHuSClXCyHKgelSypVCCA/QS7JwwiwGdksp9wIIIf4GXIrWT8rgUuAu/fWzwINCCCEHYgr5ut9DXc/wzKgjLdxtb2DhlpWwK87XUKd/hB4tPPSL1Jr7tTbO/eXwRz0zaEBTHn4vvPzdhA4zvyvA3fZqSt5aATvztLu9E6+DMbO6b1i1Ena91n85DRxuOPP7PV0k7z0MDXuTP27xNFh6Y/d1vlZ462dx3XoTa7S/2/QP34CNMf65j3ys+eKjsbs1F1GM73b6oUPQ/lLvsnob4iiKAtj3dsJ/s2601WrP8bKeNvwJqj/sv7zG7zaW6ykUgBe/3bMgMRH2vdXT5QLa3fTuN/r9HYQ/h6+5p0UB2ro9/T/uZSFJ0HWQlpdfhht/3j2lORSCNQ/Q2XQY90eHeLQ4m7M/WQV91MOFZa3ZCAhNYZrJG6+5jV+8Oba3QOcs4Ff5hwm99mfkkQl0i47O/QxUnNavz9pf+lQUQoivAjcARcBUYALwCJrsqTABMEfIqoEl8baRUgaEEM1AMXAsSsYbdBkpLS2lsrIyaaHa2tqoXPUmZ67+LqEsB6Gs7nfwZUEYa5PYt75Pb2UwnblT2bB2EzIrokyyO+tZ4BqDvSp5+Wpz5rFb/3xtbW1UVlZS0uBkhiMf8dHfEjqGA7jYJnEeFPgPgyPQysHDNeyZdn237Rauv5Xctr0EbUlcHAjhCLSztcnJ0TGnh+V9558rOPXdWwlmuQhlOfo4Rk+yQj5soS5Wd0xFmvYvql/P8R//koAtByl6KoJJQRhvk4iP4//davJPYm/Ub2dMi4dpWe6Y3+1oJP663lMipS2HXU0ejkUdd1r2dEpr34IE/2bRBFxj2FjVgO9g5LgiFGBh7lRchzbBoU1JydteMI+Nazd2W5fTZuO47GJsH7+QlKwAhwqWsi/qOxjrH8+UYCjh362B8Tmko5AdDdk0RB13pmcWJcfWQmP/v9tLRIic+nY+erqE5rLINIXCxk0s2PQjQsLDuTILT6cg8FHisgK0FC3k4zXvdHs/r8XGPGcRWZuf6/NYZ0voDEi8GwQO/c9oC3pp2fUuG09Ic59WKWWvD2Aj4AQ+Mq37uK/9Ejju54Dfm5avAh6M2mYLUGZa3gOU9HbcRYsWyVRYtWqVlN5mKe/Ml/LtX/Z4//LfvCs/+/A7KZ3DKlatWpX0vmc/UCm/+uQ6beHn86R87ms9N/rlAimfuS65E3R1SHlngZRv3hdetWrVKik/eVv7bnf9K7njvvNrbX9vU/f1W5/X1td8HHO365/4QJ73i9XJnTMOqXz/mWCoyRuPdH6O7Ycb5YEfTJUHf3le9zf+8XUZuHeCnH3rP+Tt/4j9G4uFlbIGgiG57Ger5Kd/+ZYMhULaypf+U8r7yqQMBlM+PvChjHNdTcTB5pNShh3gQgg7YIXr5xBgtnHL9HUxt9HPWwDUW3Du3omTVSLDGU+9xCeGCFoXWd1N447Tmtk8j7i/ONwwqhyO7ey+3lgenUBKYbzjQs+4QbzKah0tNTZOIFuh0Jk1rpD3cz/FuIa1SCMA3dWB3PYCbztOwe50851zkvztpogtS/D1M6ey9XALq3cd1VaOPV6r8G9Mb0+oRBTFaiHEfwNuIcQ5wDPAixacex0wXQgxWQjhBL4ARGdTrQCu1l9/DnhT13zpxUgvjFIUR9t8esZTL6mxQ4SKYg/7G9oJhWTsqWChUOyskv4wehYc3dV93dFdWrAxvyy5YyahKGRfNRQKhYm8JVdhI8T+t/6ordj5CqKrjd80nsTNZ8+gKCd+LCHdfOaECYwvcEXGpY6brz0f2ZzW8yaiKP4LOAp8DHwNeAW4PdUTSykDwDeB14HtwN+llFuFEPcIIS7RN/sDUCyE2A38py5L+gkriu6B4919DSsaQpQXe+j0h6hr9cVWFL5mQKamKEpmQH1V9yZ1R3dAyfSebUgSJd540vCsjp4prn3WUCgUJs48+RQ+Zir2j/8OQGjT36gVJRwtWsS/n1yeUdmc9ixuOGMK6/Y1snZvPYyZrbX1qekZk7KSRLrHhoAngR8CdwNPWnVXL6V8RUo5Q0o5VUp5r77uDinlCv11p5TycinlNCnlYqlnSKUdo1lblEWxK5waO/QtivJwF9l28BT1VBTGsqco+ZOMnqWl7Rr5+QDHdmnrkyUJi6LPGgqFwoTbaaO67GLKfLtp2fYG7HmT//Ofwu0XzcNhy3zXoy8snkRJrpMHV+3WMh7HzIaaDFsUQogL0YLIvwIeBHYLIS5Iq1SZJo7raVddGwVuB6Pj9XgaQhjtxvfXt0csCrP+j9XCub+M1id9HdXiErZAh5aPn2x8ApKyKMLtxYuURaFIjBlnXUNAZsE/vkaWDFJddjHLZ43pc7+BwOWwcf1pU1hTdYzN1U0wdr5mUaTRK5+IenwAWC6lXCalPBNYjlb8NnyJoyh217YxfUxu310ihwDjC13Ys4Q2l8I9SsuTN7d+6LBAUZRM156PavUong69BUFJnFGRidCbRWF39Wzqh7IoFP1n6uTJbMo+kXz/UbaEKrjussF1b/zlpZPId9m1WMW4+VqH3lQHQfVCIoqiVUq527S8F0hxMO8gJ4aiGE4ZTwB2WxYTizwRiwK6u5+ssChcBVpB0TEtoB1WFOlwPQXi9GpCn0PhslPg7n/dhmLkEph3OQDVEy9hWm8tezJAnsvBNadU8PrWWg5kT9NWpjFOEVdRCCEuE0JcBnwohHhFCHGNEOJqtIyndWmTaDAQQ1EYGU/DIT5hUF7s0eZSpEtRgOZm0l1POe0HterTURXJH8+oDI52Pfk74lYN99peXKGIw8ILruH9Obdz2pXfy7QoMbn21Ml4nDYe2u4CRFrjFL1ZFBfrDxdQC5wJLEPLgBrezl5fq+bGsEXuQKv0jKdemwEOMSqKc9hf346M1cPfeB3dS6e/lMzULAop8XQchKKpPXv+9AejrUIP11Nn95YLJlRqrCIZHA4nSz//PXJz+5g1kSFG5Tj50pJJPPtxE/7CKWm1KOL+x0opr03bWQc7vtYe8YmqYZTxZFBe7KG9K0gjeRSB1pfIwNuoTWJL5aIOWkC7qw1aDmkWxZSlqR0vnkUR6IxpURg1FCdPLU7tvArFIOQrp0/hyXf3s5XJLEhjLUUivZ4mA98CKszbSykvibfPkCeGohhOGU8GRubTgY5sXVFEWRTRvf6Twch8qtmMq7MuspwscS0Kb0yLIlJDoVxPiuFHab6Ly08s4/UNpSywrYSOhtRS2uOQyO3i82iFby8CmWmGPtDEsShmlA6PjCcDo9343jYHCyBKUTSkHp+ASIbTjpcRhLQivFTop0URyXhSrifF8OTGM6fy3x9WaD29azbB1OWWnyMRRdEppfyV5WcezPhau1VlSynZVdvGp4+L0Sp5CFM2ykOWgH1Nfr2Hv2nYSyp9nszklIC7CHa+rC2nkvEEmissy9Fz+JPfC56e7qU+51AoFEOciUUeyucthZ3QsX8DnjQoikTSY38phLhTCHGyEGKh8bBcksFElEVxtM1Hs3d4ZTyB1g5gwih3pJaih+vJAkUhhOZu8jYiydJmSaSKw60Fr83EcT0dbFA1FIrhzzVnnUC1LGH/1vfTcvxELIrj0FqAf4qI60nqy8MTX0s3RVE1jHo8RWNkPuEepfk3DaxSFKApigPv4XWX4omTmdQv7C5tdKmZgDeO66lD1VAohj3TxuSxMXcm2S2HkFJa7iJPRFFcDkwxtxof9nS1dVMURo+n6cPMepSA8QAAGmBJREFUogAtTvHiphqoMFkUoZD22qqgmB6n6PCUYcl9vcMVw6KInR6r2osrRgqTb3yavJz0xFETcT1tASxIfxlCRLmeqoyMp9zhk/FkUFGcQ7PXT5ezIKIoulpBhiyzKKQewG5zJ9laPBq7ux8WhaqhUIwMCvLyyMpKT7JNIoqiENghhHhdCLHCeKRFmkGACPm1jqfOiPUwHDOeDIwusi3kRRSFVVXZOo/vzcMrnbzVZdHAF4croYI7rYaiQykKhSJFEnE93Zl2KQYR9oCeTaNnPRkZTxceP7wyngwq9BTZhpCHEqODrBGrsEBRPLehmntWHeMB8Qjjmt38e8pHBBye7ooiFNIG1Du6u5iaOvy0dwWV60mhSJE+FYWUcvVACDJYsAUNRaG5no62ahlPw2GqXSwmFnkQAmr9HmaE/NDVbplFsabqKN9/djOnTC3mxPJR/OrN3dS2dFKan2JA2+6KjKuFiBsqqsW4qqFQKKwhkXkUrUKIFv3RKYQICiFaBkK4TGA3Ljq6oqiqG74ZT6D1th+X7+KwT7/IehssURRbDzfz9T9vYNqYXB65ahEXzx8PwOtbj6Qqcs/0WON1VPdYVUOhUFhDIhPu8qSU+VLKfLRmgJ8FHk67ZBki2qIYzhlPBuXFOXzSoc8B9jaaFEVyWU/VjR1c8/g68l12nrh2MfkuB9NL8xiXI3htiwWKIjo9tk+LQrmeFIpU6NdcP6nxPHBemuTJOJEYhaEo2ij0DM+MJ4OKEg+7W82KQq/QTqLXU1NHF1c/9gGd/iBPXLeYsQWRi/eiUjtrP2mgoT3FTOt+WBSqhkKhSJ1EmgJeZlrMAk4EOuNsPuSxBQ3XkxbM3l3XOmym2sWjvDiH9d5syCZiUTjzurVZT4ROf5Cv/vFDDjZ4+eP1i3u4604stfHSXj8rt9Xy+ZMmJi+ww929hUcg9rxsVUOhUFhDIhbFxabHeWjT7S5Np1CZxGxRGBlPw2WqXTwqij00Sd215m1MqiFgKCT5ztMbWbevkQc+P5+lU3r2XSrPz2JCoZvXUo1T2F3dmwIaFoU9lqJQ8QmFIlUSyXoaUXMpIhZFXjjjacYwzXgyKC/OoRmtnoKOhn63GJdS8sOXt/HqliPcfuHscOA6GiEE588r5U/v7ae100+eK0mXkMOtpcdKqfWSMqwLUx2FUUNxyjQ1h0KhSJW4ikIIcUcv+0kp5Q/TIE/GsQc6QGSBw82u/fUAw96iKC/24MOJPysbh+F66odF8fs1n/D4O/u47tTJfOX0Kb1ue8G8sfzh7U94c0cdly6YkJzAdhcgtcJIe3bEujBZFEYNxUTlelIoUqY311N7jAfA9cAtaZYrY9iCHVogWwiq6oZ/xhOAx2lnTF427Vn5WiC7H32eVmw6zL2vbOfC48Zx+4Wz+9x+4aRRjM7LTi37yYhFGEV3xrPJolA1FAqFdfQ2CvUB47UQIg+4GbgW+BvwQLz9hjr2gDccyB4JGU8GFcU5NB3LpbAfFsV7e+r57t83sXhyEQ98fn5CfWaysgTnzS3l/9YfwtsVxO209V9Yu2nKnbvQZFGYFYVRQ6EsCoUiVXoNZgshioQQPwI2oymVhVLKW6SUdQMiXQYIWxToPZ7G5A3rjCeD8mIPx4KeSMFdH4pix5EWbvjTh5QXe/jdVSficiR+wT9/7ji8/iCrdx1NTlijVUcg2qKIKAXDopigLAqFImXiKgohxM+AdWhZTsdJKe+SUjbG2364YA90hDOequramDbM3U4GFSU5HA14CDUdgFCgV0VR0+zlmsfW4XHaeOK6xRR4+heUXjKliEKPI/kq7fDcbN2SMCwKR3eLIl/VUCgUltCbRfH/gPHA7cBhUxuP1uHcwsMW9I6ojCeDcj1FNqvlkLYijqJo9vq55rF1tPkCPH7NYiYU9v+O3WHL4uzZpazcXktXIIkx7OG52YZF0dF9PaqGQqGwkriKQkqZJaV0m1t46I88vZ3HsMRQFLuG8VS7WFQU59CMSSnGUBS+QJCv/elD9h5r47dXLWLO+OR/BufPHUtrZ4B39xzr/87RFoW/ExBaBpSOqqFQKKyjXy08RgKG68no8TRSXE+Tij00SrOi6J71FApJvvfMZt7f28DPPjefU6eVpHS+06aXkOO0Jed+irYoAl4tkK3HkiJzKJRFoVBYgVIUUWjB7Hyq6kZOxhNAvstBwFkQWRFlUfzPaztYsekw3z9/Jp85Icn6BxMuh43ls8bwz621BEOyfzs7TFlP0GNoUWQOhbIoFAorUIrCTCiIPdgJztwRlfFk4MwzVTGbFMUT73zCb9/ay1VLy/n6mVMtO98F88ZR397Fun0N/dvRyG4KB7O93TKeDqr24gqFpShFYUYfhiOzc9lV2zrsC+2iyS0cHVnQW3i8+nENd7+0jXPnlHLXJXMtVZzLZo4m257V/+I7o14iYLIo7LGK7ZTrSaGwAqUozPi0uESrdNPSGRi2U+3iUVhcCoB05IA9m3X7Grj56Y2cMLGQX115AjaLB7fnZNs5Y8ZoXt96hFB/3E/hymwjmO3t1jnWKLZTNRQKhTUoRWFGVxSHvVru/UjJeDIoGaMpikB2AbvrWvnKkx9SVujmD1ef1K+Cuv5w/tyx1DR3svlQc+I7RVsURjBbp7rRq2ooFAoLUYrCjE9zPe1v0y6Kw70ZYDRjx2pB6laRz9WPrcNhy+LJ6xYzKseZtnOePbsUe5bg1S01ie/Uw6LojLIoVA2FQmElSlGY8Wl1hHtbBYUeByW56btADkbKS4volA52NNto7Oji8WtOYmJRei+4BR4HJ08t5vUtR5AyQfdTlg2yHJFCux4WRYcKZCsUFpIRRaH3kPqXEKJKf45ZBiyECAohNuqPFWkXTHc97WoSIy7jCaDQ46RF5NJMDg9/aSHHlRX0vZMFnD9vLPvqO9hxpDXxnRyeSOsOk0Wh1VAoi0KhsJJMWRT/BbwhpZwOvKEvx8IrpVygPy5Ju1S6othaL0dcxpPB7rk3U7zsJpbNHDNg5zx3zliEoH/ZTw5XpI4iEAlmN3b46VA1FAqFpWRKUVwKPKm/fhL4TIbk6I6uKI502kdcINvglMu/w+JPDeyfY3ReNieVF/WvSts8DtWUHlutaigUCsvpcxRqmiiVUhrRyyNAaZztXEKID4EA8BMp5fOxNhJC3ADcAFBaWkplZWVSQpXv28xkoB037TV7qKzcl9RxBoq2trakP2sm6E3eaS4/T+3r4m8vv8nYnL7vX07qCtFx+ABbKys5zdvKkdp6dldWsu5IAIAje7ZSeXSHleL3YDh9/0OJofQ5hpKsvZE2RSGEWAmMjfHWbeYFKaUUQsSLYpZLKQ8JIaYAbwohPpZS7oneSEr5KPAowIknniiXLVuWnNCv/4uu/dkEsXH5uacxOm9wt++orKwk6c+aAXqTd3qTl6d+8iaNOeV8YVkC1d87i8nJydWOt8ZPWcU0ypYtY9dbe2DjDi4954y0p8cOp+9/KDGUPsdQkrU30qYopJRnx3tPCFErhBgnpawRQowDYg5CklIe0p/3CiEqgROAHorCMnytdOBm1AjMeMo0EwrdzC8r4LUtNXw9EUXhcGuup1BQm52txyhUDYVCYT2ZilGsAK7WX18NvBC9gRBilBAiW39dApwKbEurVF1ttOJmeunIy3gaDJw3byybqps51OTte2OHWwtmh4cWRRRFulN6FYqRRqYUxU+Ac4QQVcDZ+jJCiBOFEL/Xt5kNfCiE2ASsQotRpFVRSF8rTSH3iGvdMVg4f67mqXw9kewnu25RGEV3dkNRqBoKhcJqMhLMllLWA2fFWP8h8BX99bvAcQMpl7+jmZaQe8RmPGWaKaNzmVmax2tbj3DdaZN739hIjzXaeDhc4RqK06eP7n1fhULRL1Rltomu9mbacI/YGorBwHnzxrJuXwNHW329bxi2KLzhZVVDoVCkB6UoTMjOFk1RjFEWRaa4YN5YpIR/bavtfUOHS2vh4Y9YFJEaChWjUCisRCkKEzZ/Gz7hUhlPGWTW2DzKiz281lfxncOtxSdMwezIHAplUSgUVqIUhYGUOIPtZDk9KuMpgwghOH/eWN7dfYzmDn/8De1uLT5hNAa0u9UcCoUiTShFoSP9XuwEsWfnZFqUEc/5c8cSCEne2NGL+8mYkd3ZEl6ubvRS4HaQ71I1FAqFlShFoXO0oR4Ap0v5tzPN/LJCxhW4eLW3NFk9HRZvQ3hZ6xqrrAmFwmqUotAZVTSGvZe9+v/bO/sgvar6jn9++5ZsXjYxr7skaAgBMYmIGFCDL8FBSFKtb9hKZ7R0xom1Te17S9sZpR2ZKlCqSJ0aEcHiwFRQajUQtQixVEsgJjHbDLBgIEvICyYh2bDZZHd//eOcZ/fuk+dl3ex97nPD9zPzzO5z7rn3fu+55znfe17uOTQvuCRrKa94GhqMK5a0s/HJ/Rzt6y8dqVCjePnA0He9QyFEOsgoIs0tE1h4/nJap87IWooArljSTl//IA8/ub90hKEaxUEAvGkiuw5oHQoh0kBGIeqSi8+awczJLeWbn5pHGsXB4030ntA7FEKkgYxC1CWNDca7F8/lwR17OXZi4OQIRUbR3RMmIFaNQojxR0Yh6paVS9s5enyAR7pePHljYY3s3kOAseulYCaqUQgx/sgoRN2y/OxZTJ3YVHqJ1ObEqKfmVrrjjLN6h0KI8UdGIeqWlqYGLnvdXH64Yy8nBgZHbmxKjHpq0jsUQqSJjELUNVcsaefQyyd49JcHRm5I9lE0t2porBApIqMQdc07z51Na3Pjyc1PBaMY6Bua50lGIUQ6yChEXdPa0siK185mQ+ceBgcTS6s3DZuCx6YnjXgSIh1kFKLuWbm0nX1H+vj5roPDgYU3s4H+hgl6h0KIFJFRiLrnXefNoaWxgft/kWh+StQojhGmhVeNQoh0kFGIumfqxGYuWTSTBzr34B6bnxoaoDEYRO9gwShUoxAiDWQUIhesWtpB98FeOncfHg6MtYqewbD0u4xCiHSQUYhccNniuTQYI0c/xZFPh/ubmT6pmal6h0KIVJBRiFwwY3ILbz5r5sglUmOH9qETjapNCJEiMgqRG1a9vp2ufT107TsSAmLT04HjDcyfro5sIdJCRiFyw+WL24FE81OsUbx4rEE1CiFSREYhckP7tIlc+Orpw2tUFDqzB5plFEKkiIxC5IqVS9vp3H2YXQdeHqpRHKNZ71AIkSIyCpErVi7pAGBD5x5oDubQywTmz1CNQoi0kFGIXPHqmZNY3NEWmp+aCjWKFuZNl1EIkRYyCpE7Vi1t5/FnD9Lr4b2JxpZWvUMhRIrIKETuWLk0jH569nBYzGjKlClZyhHitEdGIXLHojlTWDh7Ml0HwzrZbVPaMlYkxOmNjELkDjNj1dJ2nnkp1CimtckohEgTGYXIJSuXdAzNGjtjmoxCiDSRUYhcsnReGxNaw/DYWa+anrEaIU5vZBQil5gZi+bNAWDOzGkZqxHi9EZGIXLLmy6/ikfOuJoFZy/OWooQpzWZGIWZfdjMOs1s0MyWVYi30syeMLMuM7umlhpF/dMxbwGXrPkijY2NWUsR4rQmqxrFduCDwMZyEcysEfgXYBWwGLjKzPToKIQQNaYpi5O6+w4I7cwVuBjocvdnYty7gfcB/5e6QCGEEEPY0GL1WZzc7CHgL9z9sRLbrgRWuvvH4/ePAm9297Ul4q4B1gDMnTv3TXffffeYNfX09OTmTd88aYX86a1G3q4nb3rLkafryJPWSy+99HF3L9kVkFqNwsx+BLSX2PR37v4f43kud18HrANYtmyZr1ixYszHeuihhziV/WtJnrRC/vRWI2/Xkze95cjTdeRJayVSMwp3v+wUD/E8cGbi+/wYJoQQoobU8/DYTcA5ZnaWmbUAHwG+m7EmIYR4xZHV8NgPmFk38Fbg+2a2IYafYWbrAdy9H1gLbAB2AP/u7p1Z6BVCiFcyWY16+g7wnRLhu4HVie/rgfU1lCaEEKKITEc9pYGZ7QeePYVDzAJeHCc5aZMnrZA/vdXI2/XkTW858nQdedL6GnefXWrDaWcUp4qZPVZuiFi9kSetkD+91cjb9eRNbznydB150lqJeu7MFkIIUQfIKIQQQlRERnEy67IW8GuQJ62QP73VyNv15E1vOfJ0HXnSWhb1UQghhKiIahRCCCEqIqMQQghRGXev2w9hrqcfE6YW7wT+OIbPAH4IPBX/viqGnwf8FOgjzEqbPNZO4BfAFuCxCudcCTwBdAHXJMK/GcO3A7cBzWX0PgkcBxz424Tex4AB4EjU8emU9X4N2ApsA+4BppRJ22eAY8B+4OZE2r4A9ACDwLIstSbiXQfsAnqKwq+O+jtj+u7OOr8ktt9crLfoHmyK6d8HPAxY1Ls1hjlwaT3oLXUPEvnoeaAf6I4aPlXrNAduB34Z998CXFAmzX8KvBw1bAZaYpoX7sUg8Lv1oDfGWxv3dWBWInwF8FJi/0+X03Cqn1QOOm7ioAO4MP4/lVAILwauLyQ4cA3w+fj/HOCimJlL3dRZVc7XCDwNLIyZZyuwOG5bTfgRG3AX8Mkyeq8CFhBe+utK6F0HfK+GetsS8W6iqFAopC3wKPCumLYbgW9Fja8DbgSeIxhFZloT294SdZcyilvqKb/E7cuAfyvWW3QPtsfrmgocBT4R9f4T8FqCkd9RD3pL3YNEProa+EqWaU4oeK8cRZnyA8LccVOBQ8DfR72fB84nmMd99aA3xnsjoUwZcT6CUXyv2v7j8anrpid3f8HdN8f/jxDmfJpHWMDojhjtDuD9Mc4+d98EnBjjKYcWS3L340BhsSTcfb1HCIXr/DJ673L3nQT3fyqh94Ea6z0MYGF1qNaoZ4RWQq2hzd0fJKTtfwPvJhRMOwiF1aystSY0/yzqLkk95Ze4QuMNwF9VOUZTvK6C3vfGY9zo7k8Ae4B31ove4nuQTPOoK7M0HyV7CMZ2T0zzbcBvxGN8wd23EX63F9WJXtz957FMyYy6NookZraA4Kz/C8xNZNY9wNxRHMKBH5jZ43Gho1LMI1SrC3THsKSOZuCjDBf85WgCXl/QCxwgTIL4ALDQzJakrdfMvk5In/OAL5XZvzuRtg8Dk4vStqWKzlpprcaHzGybmd1jZmfWQX5ZC3y3krHFuN0wlL/PJOSbpN7jwMw60VuN3yIsXfyHQHtGv9HrYj74ZzObUGL/mcAhd++PaX42MImRad4LTK8TvdV4q5ltNbP7R1GmjJlcGIWZTQHuBf6k8PRZID7hj2aM79vc/UJiRjazd4xRzpeBje7+kyp6ZxMWaSro3UyYS+UNhHbQ+9LW6+6/B5xBeMr77TLRGolpS2i3Te5fs7QdpdZy/CewwN3PJ7SH30mG+cXMzgA+zCgNL5G/bya08xdTV3rL8CChEPwIcD+h8AVqmo/+hvCgcRGhz+Gvy0VMpPm1hD6JYupKbxmSZcqXqF6mjJm6N4r4BH8v8E13/3YM3mtmHXF7B7Cv2nHc/fn4dx9h5tqL45Pnlvj5faoslmRmnyEYwJ8lwjbE/W8t0nsU+H5BL+FJvSfq3Q00m9msNPXG/QcI1d0PmVljYv9/iLouYjht5wNHi9K2apW7Rlornf9X7t4Xv94OLCfb/PJGYBHQZWY7gUlm1lXimp6P+9xLGCzxTAwb0kuo0R2oE70liXn+q8CdMc1vBRpq/RuNzWAe88LXCc0+xb/RXxFqC98mpPl2Tk7zVkIncT3orXT+w+7eE/9fT5Uy5ZTwGnSEjPVD6Dj+BqHtMBl+AyM7yq4v2n4tiY4nYDIwNfH//xDW4y4+XxPhx3oWwx1PS+K2j8f9Wkejl0THU9T72bj9mhjnOYZfeBxXvfE8ixKabiS0eZfSuofQQWmEJ8F7itL2OWBZWmk7Gq0ljlXcmd2R2P/HwAtZ55dKeovuwYsEcyyk/+oivUOd2VnrLRUnkY/WJbZ9gPAwVOvfaDIffAH4XJk03wmsj9//FfiDojR/nNiZnbXeomPtZGRndjvDZcjFJMqU8f6kVsiPizh4G6EKuI3hIWCrCe2M/0XodPoRMCORcN3AYcJohm6gjTDiYGv8dBKahMqdczVh5MbTyXiEJoGnqTAULaG3MDz2BKFPYiZheFwfYfjmJsJTbyp6CTXFRwhD97YTnpzaymh9itAm20dowimk7W6Gh23uJRTAmWhN7H99PO9g/HttDP/HeO7CEMInss4vRXHKGUXhHhTSeX9C77aYfwYJT+MbstZb5h7cFq9hX8xHvVHHW2qd5oTmr0I+upMSw6wTaV4YHnsI+M2Y5o/GNB8g1OI6s9Yb430qnref8Lu8NYavjefeCvwMWJ5WWawpPIQQQlSk7vsohBBCZIuMQgghREVkFEIIISoioxBCCFERGYUQQoiKyCiEGANmNhBfiuqMUyj8uZlV/D2Z2QIz+51aaRRivJBRCDE2et39AndfQphIcRXwmSr7LABkFCJ3yCiEOEU8TOGwBlhrgQVm9hMz2xw/y2PUzwFvjzWRP41TZNxgZpvixHCfgDDlhZltjPG2m9nbs7o2IUBrZgsxJsysx92nFIUdIqwhcQQYdPdjZnYOcJe7LzOzFYRpIN4T468B5rj7Z+PMoY8QJuf7IDDR3a+zMP33JA9TYguRCU1ZCxDiNKQZuMXMLiBMB3FumXiXA+eb2ZXx+zTgHMIUL7fFyfbuc/ctaQsWohIyCiHGATNbSDCFfYS+ir3AGwjNu8fK7Qb8kbtvKHG8dxAW1LndzG5y92+kIlyIUaA+CiFOETObTZiF9BYPbbnTCDPYDhIWuWqMUY8Qlt8ssAH4ZKw5YGbnmtlkM3sNsNfdv0qYsvvCGl2KECVRjUKIsdFqZlsIzUz9hLWmb4rbvgzca2YfI8wefDSGbwMGzGwrYd2MLxJGQm02MyPMHvt+wlrIf2lmJ4Ae4GM1uB4hyqLObCGEEBVR05MQQoiKyCiEEEJUREYhhBCiIjIKIYQQFZFRCCGEqIiMQgghREVkFEIIISry/89SDrBCvk76AAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="merge-&#32454;&#33410;">merge &#32454;&#33410;<a class="anchor-link" href="#merge-&#32454;&#33410;">&#182;</a></h2><p>使用 merge 时，需要注意两个参数：</p>
+<ul>
+<li><code>suffixes</code> (str, str) tuple, 默认 (‘_x’, ‘_y’)，用于区分两个 DataFrame 中均存在的 columns</li>
+<li><code>indicator</code> 布尔值，默认 False。若为 True 则添加一列 _merge，展示该行来自于哪个 DataFrame</li>
+</ul>
+<p>相关的函数还有 <code>concat</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;lval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;rval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value</th>
+      <th>lval</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>foo</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>foo</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value</th>
+      <th>rval</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>foo</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>bar</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span>
+         <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;_left&quot;</span><span class="p">,</span> <span class="s2">&quot;_right&quot;</span><span class="p">),</span> <span class="n">indicator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value_left</th>
+      <th>lval</th>
+      <th>value_right</th>
+      <th>rval</th>
+      <th>_merge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>foo</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>4</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>foo</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>both</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span>
+         <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;_left&quot;</span><span class="p">,</span> <span class="s2">&quot;_right&quot;</span><span class="p">),</span> <span class="n">indicator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value_left</th>
+      <th>lval</th>
+      <th>value_right</th>
+      <th>rval</th>
+      <th>_merge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>foo</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>foo</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>bar</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+      <td>5</td>
+      <td>right_only</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21387;&#32553;&#23384;&#20648;-DataFrame">&#21387;&#32553;&#23384;&#20648; DataFrame<a class="anchor-link" href="#&#21387;&#32553;&#23384;&#20648;-DataFrame">&#182;</a></h2><p>DataFrame 较大时可节省磁盘空间</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/dataset.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> head - <span class="m">3</span> dataset.csv
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>head: dataset.csv: No such file or directory
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/dataset.gz&#39;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>保存为压缩文件不影响 csv 的读取，Pandas 可直接读取压缩文件</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/dataset.gz&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-02-15</td>
+      <td>-0.628081</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-02-22</td>
+      <td>0.800372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-03-01</td>
+      <td>1.216360</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-03-08</td>
+      <td>-0.479696</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-03-15</td>
+      <td>-0.210752</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2015-03-22</td>
+      <td>-0.951160</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2015-03-29</td>
+      <td>0.953215</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2015-04-05</td>
+      <td>0.552696</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2015-04-12</td>
+      <td>0.684407</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2015-04-19</td>
+      <td>0.278450</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2015-04-26</td>
+      <td>0.322685</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2015-05-03</td>
+      <td>0.499823</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2015-05-10</td>
+      <td>-0.094185</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2015-05-17</td>
+      <td>0.321307</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2015-05-24</td>
+      <td>-0.176026</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="//zodiac911.github.io/blog/20190706.html" title="Previous: 最高等级的孤独">最高等级的孤独</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2020-07-01T00:00:00+08:00"> 7 1, 2020</time>
+            <h4>Category</h4>
+            <a class="category-link" href="//zodiac911.github.io/blog/categories.html#posts-ref">posts</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="//zodiac911.github.io/blog/tags#pandas-ref">Pandas
+                    <span>2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="i" title="My g Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+    <a href="t" title="My h Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-t sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Zodiac Wang</span> - A Fantastic Learner</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>
